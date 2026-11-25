@@ -1041,25 +1041,37 @@ pOutGrid[z * 256 * 256 + y * 256 + x].w = den.w;</code></pre>
           </div>
         </div>
         <dl class="facts">
-          <div class="fact"><dt>내 역할</dt><dd>그래픽스 연구에 필요한 기하와 선형대수를 『Geometric Tools for Computer Graphics』 스터디로 공부하고, 배운 개념을 Qt 애플리케이션으로 직접 구현했습니다.</dd></div>
+          <div class="fact"><dt>내 역할</dt><dd>기하학·선형대수 학습 내용의 코드 구현, OpenGL 렌더링과 카메라 구성, Qt 기반 멀티뷰 GUI 개발</dd></div>
           <div class="fact"><dt>결과</dt><dd>점·선분·삼각형·큐브를 Top, Front, Side, Perspective 네 시점에서 동시에 확인하는 Qt 멀티뷰 뷰어</dd></div>
         </dl>
       </div>
       <div class="tabs" role="tablist" aria-label="QtGTCG 보고서">
         <button role="tab" aria-selected="true"><span class="n">1</span>개요</button>
-        <button role="tab" aria-selected="false"><span class="n">2</span>수학 공부</button>
-        <button role="tab" aria-selected="false"><span class="n">3</span>Qt GUI</button>
+        <button role="tab" aria-selected="false"><span class="n">2</span>그래픽스 수학</button>
+        <button role="tab" aria-selected="false"><span class="n">3</span>Qt · OpenGL 구조</button>
       </div>
       <div class="panel" role="tabpanel">
+        <div class="stat-row">
+          <div><b>4 Views</b><span>Top · Front · Side · Perspective</span></div>
+          <div><b>2</b><span>직교 투영 · 원근 투영</span></div>
+        </div>
         <div class="panel-grid">
           <figure>
             <img src="img/qtgtcg-multiview.png" alt="Top, Front, Side, Perspective 네 시점으로 같은 도형 장면을 그린 2×2 화면" loading="lazy" width="1280" height="800">
             <figcaption>같은 장면을 네 시점에서 그린 화면. 좌상단부터 Top, Front, Side, Perspective.</figcaption>
           </figure>
           <div>
-            <p>그래픽스 연구를 하려면 결국 벡터, 행렬, 기하 판정을 손으로 다룰 수 있어야 했습니다. 그래서 『Geometric Tools for Computer Graphics』(Schneider, Eberly)를 스터디로 함께 읽고, 책에서 배운 내용을 바로 코드로 옮겨 확인했습니다.</p>
-            <p>결과물은 같은 3D 장면을 네 개의 뷰로 나눠 보는 Qt 애플리케이션입니다. 도형의 정점과 법선 생성, 카메라와 투영 행렬, 화면 구성을 각각 모듈로 나눴습니다.</p>
-            <div class="callout" style="margin-top:18px">수학 개념을 이해한 데서 끝내지 않고 직접 구현해 눈으로 확인하는 습관, <br>그리고 Qt로 실제 사용할 수 있는 GUI를 구성하는 능력.</div>
+            <h3 class="alg-title">그래픽스 수학을 이해하고, 직접 구현해 검증하다</h3>
+            <p class="alg-lede">컴퓨터그래픽스 연구의 기반이 되는 기하학과 선형대수를 익히기 위해 『Geometric Tools for Computer Graphics』(Schneider, Eberly)를 스터디했습니다. 학습한 개념을 직접 구현하고 시각적으로 확인할 수 있는 Qt 기반 멀티뷰 기하 뷰어를 개발했습니다.</p>
+            <div class="alg-sub"><h4>주요 구현 경험</h4>
+              <ol class="flow-v">
+                <li><b>기하 데이터 구성</b>점·선분·삼각형·큐브의 정점과 법선을 구성하고 도형의 방향을 확인했습니다.</li>
+                <li><b>카메라와 좌표 변환</b>뷰 행렬, 직교 투영 및 원근 투영을 구성해 동일한 장면을 서로 다른 시점에서 표현했습니다.</li>
+                <li><b>OpenGL 렌더링</b>정점 버퍼와 셰이더를 활용해 기하 데이터와 조명을 화면에 표시했습니다.</li>
+                <li><b>Qt 멀티뷰 GUI</b>네 개의 렌더링 위젯과 카메라 입력 처리를 구성하고 장면 데이터와 뷰별 상태를 분리했습니다.</li>
+              </ol>
+            </div>
+            <p class="callout" style="margin-top:20px"><b>학습 방식</b>수학적 개념을 공부하고, 코드로 구현하고, 실제 화면에서 결과를 확인하는 과정을 반복했습니다.</p>
             <a class="btn notebtn" href="https://app.notion.com/p/CTGC-Study-45d57523f9ec45c79d89409dbbc9b786" target="_blank" rel="noopener">GTCG 학습 노트 보기 <span>Notion</span></a>
           </div>
         </div>
@@ -1106,7 +1118,7 @@ pOutGrid[z * 256 * 256 + y * 256 + x].w = den.w;</code></pre>
               </div>
               <div class="qm-status">QStatusBar · 조작 안내와 오류 메시지</div>
             </div>
-            <figcaption>화면 구성. 2×2 QGridLayout의 각 칸은 QFrame 안에 QVBoxLayout으로 이름표와 OpenGL 뷰를 쌓았습니다.</figcaption>
+            <figcaption>GUI 구조 모식도(실행 화면 아님). 2×2 QGridLayout의 각 칸에 이름표와 OpenGL 렌더링 위젯을 배치합니다.</figcaption>
           </figure>
           <ul class="uses one">
             <li><b>레이아웃</b>QMainWindow 중앙 위젯에 QGridLayout으로 네 뷰를 배치하고, 각 뷰는 QFrame과 QVBoxLayout으로 이름표와 렌더 영역을 묶었습니다.</li>
