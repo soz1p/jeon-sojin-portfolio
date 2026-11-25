@@ -417,6 +417,7 @@ details.tableview .tbl-wrap{margin-top:10px}
 .hero-text{word-break:keep-all;gap:20px}.who-row{align-items:center}.portrait{width:110px;height:auto;aspect-ratio:329/423}.hero-degree{font-size:.85rem;color:var(--ink-2)}.thesis{max-width:none}.cta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.cta .btn{justify-content:center}.cta .dl-msg{grid-column:1/-1}.core-skills{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:42px}.core-skills article{background:var(--bg-2);border-top:3px solid var(--accent);padding:20px 16px;word-break:keep-all}.core-skills small{font-size:.7rem;color:var(--accent-text);font-family:var(--f-display)}.core-skills h3{font-family:var(--f-display);font-size:1.8rem;margin:10px 0}.core-skills p{font-size:.86rem;color:var(--ink-2)}@media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:32px}.core-skills{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:380px){.core-skills,.cta{grid-template-columns:1fr}}
 .project-title-row{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px 14px}.repo-link{display:inline-flex;align-items:center;align-self:center;gap:5px;font:500 .76rem/1.2 var(--f-body);color:var(--ink-2);text-decoration:none;border:1px solid var(--line-2);border-radius:2px;padding:6px 8px;white-space:nowrap;transition:color .15s,border-color .15s}.repo-link:hover{color:var(--ink);border-color:var(--ink)}.repo-link svg{flex:none}.repo-link span:last-child{font-size:.8em;color:var(--ink-3)}@media(max-width:560px){.project-title-row{gap:8px}.repo-link{font-size:.7rem;padding:5px 7px}}
 .unity-contributions{margin:5px 0 0;padding-left:1.15em;display:grid;gap:5px}.unity-contributions li::marker{color:var(--accent)}.unity-contributions strong{font-weight:600}.minor .facts{flex:1}.minor .deck{margin-top:auto}
+.sec-head h2{overflow-wrap:normal}.about h3{font-family:var(--f-display);letter-spacing:-.015em}.steps .w{font-family:var(--f-display)}.bar nav a{white-space:nowrap}
 </style>
 
 <div id="page">
@@ -424,11 +425,11 @@ details.tableview .tbl-wrap{margin-top:10px}
   <div class="wrap">
     <a class="me" href="#top">Jeon Sojin</a>
     <nav aria-label="섹션">
-      <a href="#projects">프로젝트</a>
-      <a href="#skills">기술</a>
-      <a href="#about">나에 대해</a>
-      <a href="#history">이력</a>
-      <a href="#contact">연락</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#about">About</a>
+      <a href="#history">Experience</a>
+      <a href="#contact">Contact</a>
       <a href="files/jeon-sojin-cv.pdf" target="_blank" rel="noopener" class="nav-cv dl" data-file="files/jeon-sojin-cv.pdf" data-name="전소진_CV.pdf">CV</a>
     </nav>
   </div>
@@ -478,7 +479,7 @@ details.tableview .tbl-wrap{margin-top:10px}
   <!-- publications -->
   <section class="wrap" aria-labelledby="pub-h">
     <div class="sec-head">
-      <h2 id="pub-h">논문</h2>
+      <h2 id="pub-h">Publications</h2>
       <p>세 편 모두 같은 질문을 이어서 풀었습니다. 연성체 표면의 변형을 어떻게 표현할지, <br>그리고 그 연산을 얼마나 효율적으로 처리할지 함께 고민했습니다.</p>
     </div>
     <div class="pubs">
@@ -506,12 +507,12 @@ details.tableview .tbl-wrap{margin-top:10px}
   </section>
 
   <!-- skills -->
-  <section class="wrap" id="skills" aria-labelledby="s-h"><div class="sec-head"><h2 id="s-h">기술</h2><p>물리 시뮬레이션부터 GPU 연산, 3D 렌더링, GUI까지. 실제 구현 경험을 중심으로 정리했습니다.</p></div><div class="core-skills"><article><small>01 / CORE LANGUAGE</small><h3>C / C++</h3><p>연구용 시뮬레이션 엔진 및 그래픽스 소프트웨어 개발</p></article><article><small>02 / GPU COMPUTING</small><h3>CUDA</h3><p>제약 조건 병렬 계산, 3D 텍스처 샘플링 및 리샘플링</p></article><article><small>03 / GRAPHICS</small><h3>OpenGL</h3><p>3D 데이터 시각화와 렌더링 파이프라인 구현</p></article><article><small>04 / APPLICATION</small><h3>Qt</h3><p>GUI 구조 설계, 기능 모듈화 및 렌더링 연동</p></article></div><div class="skills"><div class="skill-group"><h3>01 · 물리 시뮬레이션</h3><ul><li><b>Position-Based Dynamics</b><span>거리·부피·이면각 제약 및 STC 설계</span></li><li><b>ChainMail</b><span>PBD와 결합한 하이브리드 솔버</span></li></ul></div><div class="skill-group"><h3>02 · GPU 병렬 연산</h3><ul><li><b>CUDA Kernels</b><span>제약 조건 투영 및 병렬 리샘플링</span></li><li><b>CUDA Memory & Textures</b><span>3D Texture, float4 RGBA 샘플링</span></li></ul></div><div class="skill-group"><h3>03 · 3D 그래픽스</h3><ul><li><b>Volume Rendering</b><span>CT 데이터 시각화, 레이 캐스팅</span></li><li><b>OpenGL / GLSL</b><span>셰이더, 멀티뷰 렌더링</span></li><li><b>NeRF 연동</b><span>RGBA 볼륨과 물리엔진 연결</span></li></ul></div><div class="skill-group"><h3>04 · GUI 및 응용 개발</h3><ul><li><b>Qt / C++</b><span>GUI 설계 및 기능 모듈화</span></li><li><b>Unity / C#</b><span>학부 팀 프로젝트 2건</span></li><li><b>GLFW / ImGui</b><span>변형 뷰어 프로젝트 활용</span></li></ul></div><div class="skill-group"><h3>05 · 개발 환경 및 협업</h3><ul><li><b>Visual Studio / CMake</b><span>프로젝트 빌드 구성 및 관리</span></li><li><b>Git / GitHub</b><span>버전 관리 및 문서화</span></li><li><b>HTML / CSS / JavaScript</b><span>프론트엔드 개발</span></li></ul></div><div class="skill-group"><h3>06 · 기초 학습 및 기타 경험</h3><ul><li><b>Python</b><span>기초 문법 및 스크립트 작성</span></li><li><b>DirectX</b><span>파이프라인 학습 및 실습</span></li><li><b>AWS / RunPod</b><span>계정 및 사용량 관리 경험</span></li></ul></div></div></section>
+  <section class="wrap" id="skills" aria-labelledby="s-h"><div class="sec-head"><h2 id="s-h">Technical Skills</h2><p>물리 시뮬레이션부터 GPU 연산, 3D 렌더링, GUI까지. 실제 구현 경험을 중심으로 정리했습니다.</p></div><div class="core-skills"><article><small>01 / CORE LANGUAGE</small><h3>C / C++</h3><p>연구용 시뮬레이션 엔진 및 그래픽스 소프트웨어 개발</p></article><article><small>02 / GPU COMPUTING</small><h3>CUDA</h3><p>제약 조건 병렬 계산, 3D 텍스처 샘플링 및 리샘플링</p></article><article><small>03 / GRAPHICS</small><h3>OpenGL</h3><p>3D 데이터 시각화와 렌더링 파이프라인 구현</p></article><article><small>04 / APPLICATION</small><h3>Qt</h3><p>GUI 구조 설계, 기능 모듈화 및 렌더링 연동</p></article></div><div class="skills"><div class="skill-group"><h3>01 · 물리 시뮬레이션</h3><ul><li><b>Position-Based Dynamics</b><span>거리·부피·이면각 제약 및 STC 설계</span></li><li><b>ChainMail</b><span>PBD와 결합한 하이브리드 솔버</span></li></ul></div><div class="skill-group"><h3>02 · GPU 병렬 연산</h3><ul><li><b>CUDA Kernels</b><span>제약 조건 투영 및 병렬 리샘플링</span></li><li><b>CUDA Memory & Textures</b><span>3D Texture, float4 RGBA 샘플링</span></li></ul></div><div class="skill-group"><h3>03 · 3D 그래픽스</h3><ul><li><b>Volume Rendering</b><span>CT 데이터 시각화, 레이 캐스팅</span></li><li><b>OpenGL / GLSL</b><span>셰이더, 멀티뷰 렌더링</span></li><li><b>NeRF 연동</b><span>RGBA 볼륨과 물리엔진 연결</span></li></ul></div><div class="skill-group"><h3>04 · GUI 및 응용 개발</h3><ul><li><b>Qt / C++</b><span>GUI 설계 및 기능 모듈화</span></li><li><b>Unity / C#</b><span>학부 팀 프로젝트 2건</span></li><li><b>GLFW / ImGui</b><span>변형 뷰어 프로젝트 활용</span></li></ul></div><div class="skill-group"><h3>05 · 개발 환경 및 협업</h3><ul><li><b>Visual Studio / CMake</b><span>프로젝트 빌드 구성 및 관리</span></li><li><b>Git / GitHub</b><span>버전 관리 및 문서화</span></li><li><b>HTML / CSS / JavaScript</b><span>프론트엔드 개발</span></li></ul></div><div class="skill-group"><h3>06 · 기초 학습 및 기타 경험</h3><ul><li><b>Python</b><span>기초 문법 및 스크립트 작성</span></li><li><b>DirectX</b><span>파이프라인 학습 및 실습</span></li><li><b>AWS / RunPod</b><span>계정 및 사용량 관리 경험</span></li></ul></div></div></section>
 
   <!-- projects -->
   <section class="wrap" id="projects" aria-labelledby="p-h">
     <div class="sec-head">
-      <h2 id="p-h">프로젝트</h2>
+      <h2 id="p-h">Projects</h2>
     </div>
 
     <!-- STC -->
@@ -1168,29 +1169,38 @@ pOutGrid[z * 256 * 256 + y * 256 + x].w = den.w;</code></pre>
   <!-- about -->
   <section class="wrap" id="about" aria-labelledby="a-h">
     <div class="sec-head">
-      <h2 id="a-h">나에 대해</h2>
-      <p>잘하는 것과 부족한 것을 실제 작업으로 설명합니다.</p>
+      <h2 id="a-h">About Me</h2>
+      <p>코드를 이해하는 연구생에서, 문제를 정의하고 해결하는 개발자로.</p>
     </div>
     <div class="about">
       <article class="growth">
-        <h3>같은 문제를 세 번 다시 풀었습니다</h3>
-        <p>피부 표면 장력이라는 한 가지 문제를 3년 동안 이어서 다뤘습니다. 매번 이전 결과의 한계에서 다음 질문이 나왔습니다.</p>
+        <h3>My Journey</h3>
+        <p>학부연구생으로 처음 받은 과제는 일주일 동안 약 6,000줄의 연구 코드를 분석하는 일이었습니다. 기존 코드의 흐름을 이해하는 것부터 시작해, 점차 직접 문제를 정의하고 알고리즘을 설계하는 연구자로 성장했습니다.</p>
         <div class="steps">
-          <div><span class="y">2024</span><p class="w">중심점 방향 수축</p><p>캡스톤에서 표면을 중심 쪽으로 당기는 프로토타입을 만들었습니다. 보기에는 그럴듯했지만 물리적 기준이 없었습니다.</p></div>
-          <div><span class="y">2025</span><p class="w">기준 면적 제약 STC</p><p>기준 면적과의 차이로 제약을 다시 정의해 제1저자 논문으로 냈습니다. 비용을 해상도별로 측정했습니다.</p></div>
-          <div><span class="y">2026</span><p class="w">방향성 ASTC</p><p>등방성의 한계를 넘기 위해 방향장을 더했습니다. 성능을 유지하며 방향 정렬 변형을 11.2% 높였습니다.</p></div>
+          <div><span class="y">2023–2024</span><p class="w">Understand &amp; Implement</p><p>기존 그래픽스 코드를 분석하고 기하학과 선형대수를 공부했습니다. NeRF와 PBD를 결합하는 캡스톤 프로젝트에서 배운 내용을 실제 시스템에 적용했습니다.</p></div>
+          <div><span class="y">2025</span><p class="w">Design &amp; Experiment</p><p>기존 PBD의 한계를 분석하고 피부 인장 제약 STC를 제안했습니다. 알고리즘 설계부터 CUDA 구현, 실험, 제1저자 논문 작성까지 경험했습니다.</p></div>
+          <div><span class="y">2026</span><p class="w">Integrate &amp; Optimize</p><p>ChainMail과 PBD를 결합한 하이브리드 프레임워크를 설계하고 활성 블록 기반 보정과 Qt 실험 환경을 구성하며 석사 연구를 마무리했습니다.</p></div>
         </div>
-        <p style="margin-top:6px">이 과정에서 <strong>그럴듯해 보이는 결과와 맞는 결과는 다르다</strong>는 것을 배웠습니다. 그래서 결과마다 무엇으로 확인했는지 함께 적습니다.</p>
+        <p style="margin-top:6px">처음에는 주어진 코드를 이해하는 것이 목표였지만, 이제는 <strong>문제에 맞는 구조를 직접 설계하고 구현하는 것</strong>을 목표로 합니다.</p>
       </article>
       <article>
-        <h3>잘하는 것</h3>
-        <p><strong>복잡한 문제를 작은 검사로 쪼개는 것.</strong> NeuralDynaRender의 화면 깨짐을 복셀 쓰기 경쟁, 경계 인덱스, ray-box 교차 오타로 나눠 하나씩 재현하고 고쳤습니다.</p>
-        <p><strong>끝까지 붙잡는 끈기와 책임감.</strong> 학부연구생 약 1년 6개월부터 석사 졸업까지 같은 연구 주제를 놓지 않았고, 졸업 후에도 모든 저장소를 다시 점검했습니다.</p>
+        <h3>Strengths</h3>
+        <p><strong>기존 기술을 이해하고 새로운 해결책으로 연결합니다.</strong> STC와 VDR 연구에서 기존 알고리즘의 한계를 분석하고 새로운 제약 조건과 혼합형 계산 구조를 설계했습니다.</p>
+        <p><strong>맡은 일의 맥락과 결과에 책임을 갖습니다.</strong> 연구뿐 아니라 학생조교와 학생연구원 활동을 통해 여러 사람의 요구를 조율하고 프로젝트 운영을 지원하는 경험을 쌓았습니다.</p>
       </article>
       <article>
-        <h3>부족한 것</h3>
-        <p><strong>세부 완성도에 오래 머무는 편입니다.</strong> 그래서 실험 전에 "무엇이 확인되면 끝인가"를 먼저 적습니다. STC 후속 실험 계획도 판단 기준부터 정했습니다.</p>
-        <p><strong>하드웨어 GPU 프로파일링 경험이 아직 적습니다.</strong> Nsight 같은 도구로 커널과 프레임을 깊게 분석하는 경험을 가장 먼저 채우고 싶습니다.</p>
+        <h3>Areas for Growth</h3>
+        <p><strong>AI 모델 학습 및 시스템 통합 역량을 넓히고 싶습니다.</strong> 데이터마다 달라지는 물리 파라미터를 반복적으로 조정하면서 데이터 기반 보정의 필요성을 느꼈습니다. 물리 시뮬레이션과 AI를 연결하는 기술을 앞으로의 학습 과제로 삼고 있습니다.</p>
+        <p>연구용 구현 경험을 바탕으로 더 다양한 개발 환경에서 협업하고, 유지보수 가능한 소프트웨어를 만드는 역량도 키우고자 합니다.</p>
+      </article>
+      <article>
+        <h3>How I Learn</h3>
+        <p><strong>Understand → Implement → Verify</strong></p>
+        <p>먼저 수학적 원리와 기존 코드의 흐름을 이해하고, 직접 구현한 뒤 시각화와 실험으로 결과를 확인합니다. GTCG 스터디에서 학습한 기하 개념을 Qt 멀티뷰 뷰어로 구현한 것이 대표적인 사례입니다.</p>
+      </article>
+      <article>
+        <h3>What I Value</h3>
+        <p><strong>스스로 이해하고, 함께 성장하는 개발.</strong> 학부연구생 시절 선배에게 배운 책임감을 바탕으로, 다른 사람이 이해하고 이어갈 수 있는 코드를 작성하고 지식을 공유하는 개발자가 되고 싶습니다.</p>
       </article>
     </div>
   </section>
@@ -1198,7 +1208,7 @@ pOutGrid[z * 256 * 256 + y * 256 + x].w = den.w;</code></pre>
   <!-- history -->
   <section class="wrap" id="history" aria-labelledby="h-h">
     <div class="sec-head">
-      <h2 id="h-h">이력</h2>
+      <h2 id="h-h">Experience &amp; Education</h2>
       <p>경력과 활동은 최근 순서입니다.</p>
     </div>
     <div class="xp">
@@ -1255,7 +1265,7 @@ pOutGrid[z * 256 * 256 + y * 256 + x].w = den.w;</code></pre>
 
     <div class="history">
       <div class="hist">
-        <h3>학력</h3>
+        <h3>Education</h3>
         <dl>
           <div class="row"><dt>2025.03 – 2026.08</dt><dd>한성대학교 일반대학원 컴퓨터공학과 석사<small>학점 4.38 / 4.5</small></dd></div>
           <div class="row"><dt>2021.03 – 2025.02</dt><dd>한성대학교 컴퓨터공학부 학사<small>학점 3.83 / 4.5</small></dd></div>
@@ -1263,14 +1273,14 @@ pOutGrid[z * 256 * 256 + y * 256 + x].w = den.w;</code></pre>
         </dl>
       </div>
       <div class="hist">
-        <h3>수상</h3>
+        <h3>Awards</h3>
         <dl>
           <div class="row"><dt>2024</dt><dd>한성대학교 캡스톤디자인 장려상<small>한성대학교 컴퓨터그래픽스 연구실</small></dd></div>
           <div class="row"><dt>2023</dt><dd>한성공학경진대회 장려상<small>학술 소모임 POCS</small></dd></div>
         </dl>
       </div>
       <div class="hist">
-        <h3>자격·어학</h3>
+        <h3>Certifications &amp; Languages</h3>
         <dl>
           <div class="row"><dt>필기 합격</dt><dd>정보처리기사<small>실기 최종 발표 대기</small></dd></div>
           <div class="row"><dt>2025.03</dt><dd>2종 자동 운전면허</dd></div>
