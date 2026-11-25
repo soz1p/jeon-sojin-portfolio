@@ -416,6 +416,7 @@ details.tableview .tbl-wrap{margin-top:10px}
 .hero-grid{grid-template-columns:minmax(0,6fr) minmax(0,7fr);gap:36px}
 .hero-text{word-break:keep-all;gap:20px}.who-row{align-items:center}.portrait{width:110px;height:auto;aspect-ratio:329/423}.hero-degree{font-size:.85rem;color:var(--ink-2)}.thesis{max-width:none}.cta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.cta .btn{justify-content:center}.cta .dl-msg{grid-column:1/-1}.core-skills{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:42px}.core-skills article{background:var(--bg-2);border-top:3px solid var(--accent);padding:20px 16px;word-break:keep-all}.core-skills small{font-size:.7rem;color:var(--accent-text);font-family:var(--f-display)}.core-skills h3{font-family:var(--f-display);font-size:1.8rem;margin:10px 0}.core-skills p{font-size:.86rem;color:var(--ink-2)}@media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:32px}.core-skills{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:380px){.core-skills,.cta{grid-template-columns:1fr}}
 .project-title-row{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px 14px}.repo-link{display:inline-flex;align-items:center;align-self:center;gap:5px;font:500 .76rem/1.2 var(--f-body);color:var(--ink-2);text-decoration:none;border:1px solid var(--line-2);border-radius:2px;padding:6px 8px;white-space:nowrap;transition:color .15s,border-color .15s}.repo-link:hover{color:var(--ink);border-color:var(--ink)}.repo-link svg{flex:none}.repo-link span:last-child{font-size:.8em;color:var(--ink-3)}@media(max-width:560px){.project-title-row{gap:8px}.repo-link{font-size:.7rem;padding:5px 7px}}
+.unity-contributions{margin:5px 0 0;padding-left:1.15em;display:grid;gap:5px}.unity-contributions li::marker{color:var(--accent)}.unity-contributions strong{font-weight:600}.minor .facts{flex:1}.minor .deck{margin-top:auto}
 </style>
 
 <div id="page">
@@ -1131,14 +1132,15 @@ pOutGrid[z * 256 * 256 + y * 256 + x].w = den.w;</code></pre>
       </div>
     </article>
 
+    <div class="alg-sub" style="margin-bottom:24px"><h3 class="alg-title">Unity · C# 팀 프로젝트</h3><p class="alg-lede">시뮬레이션 연구 외에도 3D 환경 구성, 사용자 입력, 이벤트 처리와 UI를 연결하는 응용 소프트웨어 개발을 경험했습니다.</p></div>
     <div class="minor">
       <article>
         <div class="project-title-row"><h3>Edge of Survival</h3><a class="repo-link" href="https://github.com/soz1p/Edge-of-Survival-Portfolio" target="_blank" rel="noopener noreferrer" aria-label="Edge of Survival GitHub repository"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.49c-2.23.49-2.7-.95-2.7-.95-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82A7.7 7.7 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.49v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg><span>GitHub</span><span aria-hidden="true">↗</span></a></div>
         <p class="who">2024.03 · Unity 2022.3, C#, Photon PUN 2 · 2인 팀 (권상민, 전소진)</p>
-        <p>열대 섬과 설원에서 위험 요소를 피해 나침반을 찾고 탈출하는 싱글·멀티플레이 대피 시뮬레이션입니다.</p>
+        <p>열대 섬과 설원에서 위험 요소를 피해 나침반을 찾고 탈출하는 싱글·멀티플레이 생존 시뮬레이션입니다.</p>
         <dl class="facts">
-          <div class="fact"><dt>내 역할</dt><dd>Photon 에셋으로 멀티플레이 환경을 구축하고, 무인도 맵의 조난 시나리오 설계부터 적 생성·자원 수집·탈출까지 게임 로직과 이벤트를 프로그래밍했습니다. 체력 바, 타이머, 나침반 등 게임 UI를 디자인하고 구현했으며, 스토리보드 작성과 일정 관리, 발표 자료 작성으로 프로젝트를 구체화하고 이끌었습니다.</dd></div>
-          <div class="fact"><dt>정리하며 고친 것</dt><dd>방장만 방 소유 탈출문을 생성하도록 변경, 로컬 소유권 검사로 다른 플레이어의 나침반 소모 방지, 이동 속도와 중력 분리</dd></div>
+          <div class="fact"><dt>개인 담당 기능 · 학부 프로젝트</dt><dd><ul class="unity-contributions"><li><strong>멀티플레이 환경:</strong> Photon PUN 2 기반 네트워크 연동</li><li><strong>게임 로직:</strong> 무인도 조난 시나리오, 적 생성, 자원 수집 및 탈출 이벤트 구현</li><li><strong>UI:</strong> 체력 바, 타이머, 나침반 디자인 및 구현</li><li><strong>협업:</strong> 스토리보드, 일정 관리 및 발표자료 작성</li></ul></dd></div>
+          <div class="fact"><dt>졸업 후 공개 저장소 정비 · 2026</dt><dd>방장만 방 소유 탈출문을 생성하도록 수정하고, 로컬 소유권 검사로 다른 플레이어의 나침반 소모를 방지했습니다. 이동 속도와 중력 처리도 분리했습니다.</dd></div>
         </dl>
         <div class="deck" data-deck>
           <figure class="deck-main"><img src="img/eos-1.jpg" alt="표지 슬라이드" loading="lazy" width="1333" height="750"><figcaption>표지</figcaption></figure>
@@ -1149,10 +1151,10 @@ pOutGrid[z * 256 * 256 + y * 256 + x].w = den.w;</code></pre>
       <article>
         <div class="project-title-row"><h3>Fire Evacuation</h3><a class="repo-link" href="https://github.com/soz1p/Fire-Evacuation-Portfolio" target="_blank" rel="noopener noreferrer" aria-label="Fire Evacuation GitHub repository"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.49c-2.23.49-2.7-.95-2.7-.95-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82A7.7 7.7 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.49v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg><span>GitHub</span><span aria-hidden="true">↗</span></a></div>
         <p class="who">2023.09 · 가상현실 과목 · Unity 2022.3, C# · 2인 팀 (이영재, 전소진)</p>
-        <p>실내·야외 화재 상황에서 이동과 대피 행동을 체력 변화에 연결한 대피 시뮬레이터입니다.</p>
+        <p>실내·야외 화재 상황에서 이동, 신고 및 대피 행동을 체력 변화와 연결한 교육용 대피 시뮬레이터입니다.</p>
         <dl class="facts">
-          <div class="fact"><dt>내 역할</dt><dd>야외(Outdoor) 장면 전체와 장면 흐름 담당. 산악 지형과 환경 조성, 확산하는 야외 화재 스크립트, 플레이어 높이 좌표에 따라 119 신고 지점(CallBox)이 생기는 행동 스크립트를 만들었습니다. 실내·야외 장면 전환과 사망 시 장면 처리, 야외 체력 감소와 그라데이션 체력 바, 화재 행동 강령 안내판도 구현했습니다.</dd></div>
-          <div class="fact"><dt>정리하며 고친 것</dt><dd>화재 오브젝트가 생성기를 재귀 복제하던 문제, 성공 후에도 체력이 줄던 상태 처리, 신고 지점 높이와 트리거 물리 구성</dd></div>
+          <div class="fact"><dt>개인 담당 기능 · 학부 프로젝트</dt><dd><ul class="unity-contributions"><li><strong>3D 환경:</strong> 야외 산악 지형 및 대피 시나리오 구성</li><li><strong>이벤트 로직:</strong> 화재 확산, 플레이어 높이에 따른 119 신고 지점(CallBox) 생성</li><li><strong>상태 및 장면 관리:</strong> 실내·야외 전환, 사망 시 장면 처리, 체력 감소</li><li><strong>UI:</strong> 그라데이션 체력 바, 화재 행동 강령 안내판 구현</li></ul></dd></div>
+          <div class="fact"><dt>졸업 후 공개 저장소 정비 · 2026</dt><dd>화재 오브젝트의 생성기 재귀 복제와 대피 성공 후 체력 감소 문제를 수정하고, 신고 지점 높이 및 트리거 물리 구성을 정비했습니다.</dd></div>
         </dl>
         <div class="deck" data-deck>
           <figure class="deck-main"><img src="img/fire-1.jpg" alt="표지 슬라이드" loading="lazy" width="1333" height="750"><figcaption>표지</figcaption></figure>
