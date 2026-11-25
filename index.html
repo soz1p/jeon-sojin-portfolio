@@ -700,7 +700,8 @@ p,li,dd,dt,h1,h2,h3,h4,figcaption,td,th,.fact dd,.pi-d{word-break:keep-all;overf
             <li><b>제약 초기화</b>등록한 삼각형마다 세 정점 인덱스, 기준 면적, 정점 밀도 평균으로 정규화한 강성 계수를 저장합니다.</li>
           </ol>
           <div>
-            <pre class="pseudo"><code>for tet in tetrahedra:
+            <pre class="pseudo"><code># 논문 알고리즘 설명용 의사코드
+for tet in tetrahedra:
     air = [v for v in tet if alpha[density(v)] == 0]
     if len(air) == 1:
         tri = tet − air          # 나머지 세 정점
@@ -1066,15 +1067,11 @@ p,li,dd,dt,h1,h2,h3,h4,figcaption,td,th,.fact dd,.pi-d{word-break:keep-all;overf
           <div class="panel-grid">
             <div>
               <p>기존 단일 채널 볼륨과 달리 NeRF 볼륨은 색상 정보도 보존해야 합니다. CUDA 3D 텍스처에서 float4 값을 읽어 보간된 네 채널을 출력 격자에 저장하도록 수정했습니다.</p>
-              <p class="muted">아래는 당시 구현의 핵심 코드 발췌입니다. inPos는 리샘플링 과정에서 계산된 원본 볼륨의 샘플링 위치입니다.</p>
+              <p class="muted">아래는 데이터 흐름을 설명하기 위한 의사코드입니다. 실제 연구실 구현은 공개하지 않습니다. 샘플링 위치는 변형된 사면체의 보간으로 원본 볼륨 좌표계에서 계산합니다.</p>
             </div>
-            <pre class="pseudo"><code>float4 den = tex3D&lt;float4&gt;(
-    voltexObj, inPos.x, inPos.y, inPos.z);
-
-pOutGrid[z * 256 * 256 + y * 256 + x].x = den.x;
-pOutGrid[z * 256 * 256 + y * 256 + x].y = den.y;
-pOutGrid[z * 256 * 256 + y * 256 + x].z = den.z;
-pOutGrid[z * 256 * 256 + y * 256 + x].w = den.w;</code></pre>
+            <pre class="pseudo"><code>원본 위치 ← 변형 사면체의 보간으로 계산
+RGBA ← 원본 볼륨을 삼선형 보간해 샘플링
+출력 복셀 ← 색상 3채널과 불투명도를 함께 저장</code></pre>
           </div>
         </div>
         <div class="alg-sub">
