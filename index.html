@@ -412,6 +412,9 @@ details.tableview .tbl-wrap{margin-top:10px}
 .editing .media-slot{display:grid;min-height:0}
 .editing .media-add{display:flex;align-items:center;justify-content:center;gap:8px;min-height:120px;border:1px dashed var(--accent);border-radius:2px;background:transparent;color:var(--accent-text);font:500 var(--s-1)/1.4 var(--f-body);cursor:pointer;padding:16px;text-align:center}
 .editing .media-add:hover{background:rgba(242,85,29,.05)}
+
+.hero-grid{grid-template-columns:minmax(0,6fr) minmax(0,7fr);gap:36px}
+.hero-text{word-break:keep-all;gap:20px}.who-row{align-items:center}.portrait{width:110px;height:auto;aspect-ratio:329/423}.hero-degree{font-size:.85rem;color:var(--ink-2)}.thesis{max-width:none}.cta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.cta .btn{justify-content:center}.cta .dl-msg{grid-column:1/-1}.core-skills{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:42px}.core-skills article{background:var(--bg-2);border-top:3px solid var(--accent);padding:20px 16px;word-break:keep-all}.core-skills small{font-size:.7rem;color:var(--accent-text);font-family:var(--f-display)}.core-skills h3{font-family:var(--f-display);font-size:1.8rem;margin:10px 0}.core-skills p{font-size:.86rem;color:var(--ink-2)}@media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:32px}.core-skills{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:380px){.core-skills,.cta{grid-template-columns:1fr}}
 </style>
 
 <div id="page">
@@ -442,8 +445,9 @@ details.tableview .tbl-wrap{margin-top:10px}
             <span class="en">Jeon Sojin, Graphics Engineer</span>
           </div>
         </div>
-        <p class="thesis">늘어나고 접히는 것을 GPU로 계산하고, 그 결과를 숫자로 확인합니다.</p>
-        <p class="lede">위치 기반 동역학(PBD) 연성체 변형과 CUDA 볼륨 렌더링을 연구했습니다. 한성대학교 컴퓨터공학 석사(2026.08)를 마쳤고, 한국컴퓨터그래픽스학회에 논문 2편(제1저자 1편)과 포스터 1편을 냈습니다. 물리 기반 시뮬레이션, GPU 병렬 처리, 실시간 렌더링이 만나는 곳에서 일하고 싶습니다.</p>
+        <p class="thesis">데이터에서 시뮬레이션으로,<br>시뮬레이션에서 시각화로.</p>
+        <p class="lede">C/C++와 CUDA를 기반으로 물리 시뮬레이션과 볼륨 렌더링을 연구해 온 그래픽스 개발자입니다. 3D 데이터 처리부터 GPU 병렬 연산, 렌더링, Qt GUI까지 하나의 소프트웨어로 연결합니다.</p>
+<p class="hero-degree">한성대학교 컴퓨터공학 석사 · 2026.08</p>
         <div class="cta">
           <a class="btn primary" href="#projects">프로젝트 보기</a>
           <a class="btn" href="https://github.com/soz1p" target="_blank" rel="noopener">GitHub 열기</a>
@@ -500,62 +504,7 @@ details.tableview .tbl-wrap{margin-top:10px}
   </section>
 
   <!-- skills -->
-  <section class="wrap" id="skills" aria-labelledby="s-h">
-    <div class="sec-head">
-      <h2 id="s-h">기술</h2>
-      <p>주로 쓰는 언어와 API, 그리고 실제로 쓴 프로젝트입니다.</p>
-    </div>
-    <div class="skills">
-      <div class="skill-group">
-        <h3>언어</h3>
-        <ul>
-          <li><b>C / C++</b><span>C++17. STC, VDR, NeuralDynaRender, QtGTCG</span></li>
-          <li><b>C#</b><span>Unity 게임 로직과 네트워크. Edge of Survival, Fire Evacuation</span></li>
-          <li><b>JavaScript, HTML, CSS</b><span>웹 프론트엔드. Cockpybara</span></li>
-        </ul>
-      </div>
-      <div class="skill-group">
-        <h3>그래픽스 API와 셰이더</h3>
-        <ul>
-          <li><b>OpenGL</b><span>3.3 Core, VAO/VBO/EBO, 멀티뷰 렌더링. QtGTCG, VDR</span></li>
-          <li><b>GLSL</b><span>조명, 볼륨 결과 표시. QtGTCG, NeuralDynaRender</span></li>
-          <li><b>DirectX</b><span>그래픽스 파이프라인 학습과 실습</span></li>
-        </ul>
-      </div>
-      <div class="skill-group">
-        <h3>GPU 컴퓨팅</h3>
-        <ul>
-          <li><b>CUDA</b><span>제약 투영 커널, 병렬 그룹 실행, 3D 텍스처 샘플링, 경쟁 상태 해결</span></li>
-          <li><b>GPU 메모리 관리</b><span>객체별 디바이스 버퍼 소유권, 오류 전달 경로 설계</span></li>
-        </ul>
-      </div>
-      <div class="skill-group">
-        <h3>시뮬레이션과 렌더링</h3>
-        <ul>
-          <li><b>Position-Based Dynamics</b><span>거리·부피·면적 제약, 피부 인장 제약(STC) 제안</span></li>
-          <li><b>ChainMail</b><span>PBD와 결합한 하이브리드 변형 엔진</span></li>
-          <li><b>볼륨 렌더링</b><span>레이 캐스팅, 변형 격자 리샘플링, 절단면</span></li>
-          <li><b>NeRF</b><span>instant-ngp 볼륨 추출과 변형 연결</span></li>
-        </ul>
-      </div>
-      <div class="skill-group">
-        <h3>프레임워크와 엔진</h3>
-        <ul>
-          <li><b>Qt 6</b><span>Widgets, QOpenGLWidget 기반 3D 시뮬레이션 툴</span></li>
-          <li><b>Unity</b><span>Photon PUN 2 멀티플레이, NavMesh, UI</span></li>
-          <li><b>GLFW, ImGui</b><span>NeuralDynaRender 변형 뷰어</span></li>
-        </ul>
-      </div>
-      <div class="skill-group">
-        <h3>도구와 환경</h3>
-        <ul>
-          <li><b>CMake, Visual Studio</b><span>Windows·Linux 크로스 빌드 구성</span></li>
-          <li><b>Git, GitHub</b><span>연구 코드 관리와 문서화</span></li>
-          <li><b>AWS, RunPod</b><span>GPU 클라우드 계정·사용량 관리</span></li>
-        </ul>
-      </div>
-    </div>
-  </section>
+  <section class="wrap" id="skills" aria-labelledby="s-h"><div class="sec-head"><h2 id="s-h">기술</h2><p>물리 시뮬레이션부터 GPU 연산, 3D 렌더링, GUI까지. 실제 구현 경험을 중심으로 정리했습니다.</p></div><div class="core-skills"><article><small>01 / CORE LANGUAGE</small><h3>C / C++</h3><p>연구용 시뮬레이션 엔진 및 그래픽스 소프트웨어 개발</p></article><article><small>02 / GPU COMPUTING</small><h3>CUDA</h3><p>제약 조건 병렬 계산, 3D 텍스처 샘플링 및 리샘플링</p></article><article><small>03 / GRAPHICS</small><h3>OpenGL</h3><p>3D 데이터 시각화와 렌더링 파이프라인 구현</p></article><article><small>04 / APPLICATION</small><h3>Qt</h3><p>GUI 구조 설계, 기능 모듈화 및 렌더링 연동</p></article></div><div class="skills"><div class="skill-group"><h3>01 · 물리 시뮬레이션</h3><ul><li><b>Position-Based Dynamics</b><span>거리·부피·이면각 제약 및 STC 설계</span></li><li><b>ChainMail</b><span>PBD와 결합한 하이브리드 솔버</span></li></ul></div><div class="skill-group"><h3>02 · GPU 병렬 연산</h3><ul><li><b>CUDA Kernels</b><span>제약 조건 투영 및 병렬 리샘플링</span></li><li><b>CUDA Memory & Textures</b><span>3D Texture, float4 RGBA 샘플링</span></li></ul></div><div class="skill-group"><h3>03 · 3D 그래픽스</h3><ul><li><b>Volume Rendering</b><span>CT 데이터 시각화, 레이 캐스팅</span></li><li><b>OpenGL / GLSL</b><span>셰이더, 멀티뷰 렌더링</span></li><li><b>NeRF 연동</b><span>RGBA 볼륨과 물리엔진 연결</span></li></ul></div><div class="skill-group"><h3>04 · GUI 및 응용 개발</h3><ul><li><b>Qt / C++</b><span>GUI 설계 및 기능 모듈화</span></li><li><b>Unity / C#</b><span>학부 팀 프로젝트 2건</span></li><li><b>GLFW / ImGui</b><span>변형 뷰어 프로젝트 활용</span></li></ul></div><div class="skill-group"><h3>05 · 개발 환경 및 협업</h3><ul><li><b>Visual Studio / CMake</b><span>프로젝트 빌드 구성 및 관리</span></li><li><b>Git / GitHub</b><span>버전 관리 및 문서화</span></li><li><b>HTML / CSS / JavaScript</b><span>프론트엔드 개발</span></li></ul></div><div class="skill-group"><h3>06 · 기초 학습 및 기타 경험</h3><ul><li><b>Python</b><span>기초 문법 및 스크립트 작성</span></li><li><b>DirectX</b><span>파이프라인 학습 및 실습</span></li><li><b>AWS / RunPod</b><span>계정 및 사용량 관리 경험</span></li></ul></div></div></section>
 
   <!-- projects -->
   <section class="wrap" id="projects" aria-labelledby="p-h">
