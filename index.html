@@ -696,13 +696,13 @@ details.tableview .tbl-wrap{margin-top:10px}
           <div class="code-name">VDR</div>
           <p class="full">CT 영상 기반 변형 시뮬레이션을 위한 혼합형 프레임워크: HP-ChainMail·PBD 활성 블록 기반 제한 보정</p>
           <div class="meta">
-            <span class="chip k">석사 학위논문 2026</span><span class="chip k">논문 진행 중</span><span class="chip k">연구실 코드베이스</span>
+            <span class="chip k">석사 학위논문 2026</span><span class="chip k">후속 논문 진행 중</span><span class="chip k">연구실 코드베이스</span>
             <span class="chip">C++</span><span class="chip">CUDA 12.6</span><span class="chip">HP-ChainMail</span><span class="chip">PBD</span><span class="chip">Qt 6</span><span class="chip">Volume rendering</span>
           </div>
         </div>
         <dl class="facts">
-          <div class="fact"><dt>내 역할</dt><dd>학위논문 저자. HP-ChainMail과 PBD의 직렬 혼합 구조, Active Block Restricted Solve를 설계·구현하고, 연구 코드를 Qt 기반 실험 도구로 모듈화</dd></div>
-          <div class="fact"><dt>결과</dt><dd>국부 변형에서 전체 도메인 PBD 보정 대비 보정 시간 10.77배(Small), 7.96배(Medium) 단축. 한성대학교 석사학위논문(2026)</dd></div>
+          <div class="fact"><dt>내 역할</dt><dd>학위논문 저자 · 하이브리드 솔버 설계, 활성 블록 기반 제약 평가 및 GPU 자료구조 구현, Qt 실험 도구 모듈화</dd></div>
+          <div class="fact"><dt>결과</dt><dd>동일 warm-start 조건의 전체 도메인 PBD 보정 대비 보정 단계 속도 10.77배(Small), 7.96배(Medium) 향상. 한성대학교 석사학위논문(2026)</dd></div>
         </dl>
       </div>
       <div class="tabs" role="tablist" aria-label="VDR 보고서">
@@ -710,29 +710,40 @@ details.tableview .tbl-wrap{margin-top:10px}
         <button role="tab" aria-selected="false"><span class="n">2</span>알고리즘</button>
         <button role="tab" aria-selected="false"><span class="n">3</span>Qt 모듈화</button>
         <button role="tab" aria-selected="false"><span class="n">4</span>성능</button>
-        <button role="tab" aria-selected="false"><span class="n">5</span>개선</button>
+        <button role="tab" aria-selected="false"><span class="n">5</span>한계 및 개선</button>
       </div>
       <div class="panel" role="tabpanel">
+        <div class="stat-row">
+          <div><b>10.77×</b><span>Small · PBD 보정 속도 향상</span></div>
+          <div><b>7.96×</b><span>Medium · PBD 보정 속도 향상</span></div>
+          <div><b>0.59%</b><span>Small · 전체 대비 활성 블록 비율</span></div>
+        </div>
         <div class="panel-grid">
           <div>
-            <p>CT 볼륨으로 가상 수술 환경을 만들면 피부, 지방, 근육, 뼈가 실제 인체 구조 그대로 들어옵니다. 대신 해상도를 100³ 정도로 낮춰도 격자 요소가 백만 개 규모라, 사용자가 조직을 당기거나 누를 때 빠르게 반응하면서 체적 구조도 무너지지 않게 하는 계산 구조가 필요합니다.</p>
-            <p>ChainMail은 입력을 빠르게 퍼뜨리지만 부피 같은 구조 제약을 지키지 못하고, PBD는 안정적이지만 한 점에 준 변위가 주변으로 잘 퍼지지 않습니다. 그래서 한 기법으로 해결하지 않고 역할을 나눴습니다.</p>
+            <h3 class="alg-title">변형을 빠르게 전파하고, 필요한 영역만 보정하다</h3>
+            <p class="alg-lede">고해상도 CT 볼륨의 변형 시뮬레이션에서는 사용자 입력을 주변 조직으로 전달하는 속도와 조직의 구조적 안정성을 함께 고려해야 합니다. ChainMail의 빠른 변형 전파와 PBD의 제약 보정을 결합하고, 전체 영역을 반복적으로 계산하는 대신 활성 영역에 연결된 제약만 평가하는 혼합형 프레임워크를 설계했습니다.</p>
+            <div class="alg-sub"><h4>문제 해결 과정 및 개인 기여</h4>
+            <ol class="flow-v">
+              <li><b>기존 솔버의 한계 분석</b>ChainMail의 구조 제약 한계와 Pure PBD의 국소 입력 전파 및 반복 비용 문제를 분석했습니다.</li>
+              <li><b>Hybrid Warm-start 설계</b>HP-ChainMail의 변형 결과를 PBD 초기 상태로 사용해 변형 전파와 제약 보정의 역할을 분리했습니다.</li>
+              <li><b>Active Block Restricted Solve 구현</b>전파 과정에서 기록한 활성 블록과 블록별 제약 참조 테이블을 이용해 보정 범위를 제한하고 중복 투영을 방지했습니다.</li>
+              <li><b>실험용 소프트웨어 구성 및 검증</b>볼륨·변형·렌더링 모듈을 분리하고 Qt 인터페이스로 동일 입력에 대한 비교 실험을 수행할 수 있도록 구성했습니다.</li>
+            </ol></div>
           </div>
-          <ol class="flow-v">
-            <li><b>사용자 입력</b>조작을 epiCenter 위치와 입력 방향 벡터 g로 바꿉니다.</li>
-            <li><b>HP-ChainMail 구조 예측</b>변형을 주변으로 빠르게 전파해 중간 변형 상태 x<sub>prop</sub>와 활성 블록 집합 B<sub>active</sub>를 만듭니다.</li>
-            <li><b>PBD 제약 보정</b>x<sub>prop</sub>에서 출발해(warm-start) B<sub>active</sub>에 연결된 거리·부피·이면각 제약만 보정합니다.</li>
-            <li><b>시각화</b>최종 변형 결과를 GPU 볼륨 렌더링으로 그립니다.</li>
-          </ol>
+          <div>
+            <figure class="shot shot-diag"><img src="img/vdr-pipeline.png" alt="사용자 입력, HP-ChainMail 구조 예측, PBD 제약 보정, 가시화로 이어지는 파이프라인" loading="lazy" width="1672" height="941"><figcaption>학위논문 그림 3-1. 제안 혼합형 변형 프레임워크</figcaption></figure>
+            <figure class="shot shot-diag" style="margin-top:22px"><img src="img/vdr-active.png" alt="활성 블록 기반 제한 보정 영역" loading="lazy" width="1149" height="424"><figcaption>학위논문 그림 4-1. 변형 전파에 따른 활성 블록 집합</figcaption></figure>
+            <p class="callout" style="margin-top:24px"><b>핵심 성과</b>동일한 warm-start 조건에서 전체 도메인 보정(M4) 대비 활성 블록 보정(M3)의 PBD 보정 속도가 Small 10.77배, Medium 7.96배 향상되었습니다. 전체 프레임 속도나 전체 시뮬레이션 시간의 향상률은 아닙니다.</p>
+          </div>
         </div>
-        <figure class="shot shot-diag" style="margin-top:28px"><img src="img/vdr-pipeline.png" alt="사용자 입력, HP-ChainMail 구조 예측, PBD 제약 보정, 가시화로 이어지는 4단계 파이프라인 도식" loading="lazy" width="1672" height="941"><figcaption>학위논문 그림 3-1. 제안 혼합형 변형 프레임워크의 전체 흐름</figcaption></figure>
-        <div class="alg-sub">
-          <h4>구성 요소의 역할</h4>
-          <ul class="uses">
-            <li><b>HP-ChainMail: 구조 예측자</b>정밀한 평형해가 아니라, 사용자가 의도한 변형의 대략적인 구조를 빠르게 만듭니다. 최종 해석기가 아닙니다.</li>
-            <li><b>PBD: 제약 보정자</b>변형을 처음부터 만들지 않고, ChainMail이 만든 구조에 남은 거리·부피·이면각 제약 위반을 줄여 안정화합니다.</li>
-            <li><b>Active Block Restricted Solve</b>ChainMail 전파가 지나간 블록 정보를 PBD 보정 범위로 재사용해, 변형이 일어난 곳만 보정합니다.</li>
-          </ul>
+        <div class="alg-sub"><h4>구성 요소의 역할</h4>
+          <ol class="flow-v">
+            <li><b>사용자 입력</b>epiCenter와 입력 방향 벡터 g를 설정합니다.</li>
+            <li><b>HP-ChainMail 구조 예측</b>변형 상태 x<sub>prop</sub>와 활성 블록 집합 B<sub>active</sub>를 생성합니다. 최종 평형 해석 단계는 아닙니다.</li>
+            <li><b>PBD 제약 보정</b>x<sub>prop</sub>에서 시작해 활성 블록과 연결된 거리·부피·이면각 제약을 평가합니다.</li>
+            <li><b>GPU 볼륨 렌더링</b>최종 변형 결과를 시각화합니다.</li>
+          </ol>
+          <a class="btn notebtn" href="https://github.com/soz1p/VDR-Portfolio" target="_blank" rel="noopener">GitHub · VDR 소스 코드</a>
         </div>
       </div>
       <div class="panel" role="tabpanel" hidden>
@@ -771,8 +782,8 @@ details.tableview .tbl-wrap{margin-top:10px}
         </div>
       </div>
       <div class="panel" role="tabpanel" hidden>
-        <h3 class="alg-title">연구 코드를 Qt 실험 도구로 모듈화</h3>
-        <p class="alg-lede">논문에는 쓰지 않은 부분입니다. 같은 CT 볼륨과 같은 입력에서 ChainMail과 PBD 조합을 바꿔 가며 비교해야 했기 때문에, 볼륨·변형·렌더링을 갈아 끼울 수 있는 모듈로 나누고 그 위에 Qt로 실험 화면을 만들었습니다.</p>
+        <h3 class="alg-title">연구 알고리즘을 재현 가능한 Qt 실험 소프트웨어로</h3>
+        <p class="alg-lede">연구 알고리즘을 구현하는 것뿐 아니라 동일한 CT 볼륨과 입력에서 여러 솔버를 비교할 수 있는 실험 환경을 구성했습니다. 볼륨·변형·렌더링의 책임을 분리하고 Qt 인터페이스를 통해 조작과 결과 확인을 연결했습니다. 아래에는 연구용 구조와 공개 저장소 정비 과정의 구현이 함께 포함되어 있습니다.</p>
         <div class="panel-grid" style="margin-top:24px">
           <figure class="qtmock" aria-label="QMainWindow 왼쪽에 GLWidget과 InfoPanel, 오른쪽 QScrollArea 안에 ControlPanel의 그룹 상자들이 쌓인 구조">
             <div class="qm-win">
@@ -787,7 +798,7 @@ details.tableview .tbl-wrap{margin-top:10px}
                 </div>
               </div>
             </div>
-            <figcaption>화면 구성. 왼쪽에 렌더링과 측정, 오른쪽에 QGroupBox 단위로 나눈 실험 조작부를 두었습니다.</figcaption>
+            <figcaption>GUI 구조를 설명하기 위한 모식도(실행 화면 아님). 왼쪽은 렌더링과 측정, 오른쪽은 실험 조작부입니다.</figcaption>
           </figure>
           <ul class="uses one">
             <li><b>인터페이스와 팩토리</b>Volume, Deformer, Renderer 세 인터페이스를 두고 VolumeFactory, DeformerFactory, RendererFactory가 CTVolume, ChainMail·PBD, CUDA VolumeRenderer를 만듭니다. 변형기나 렌더러를 바꿔도 화면 코드는 그대로입니다.</li>
