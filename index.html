@@ -1,0 +1,1762 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+</head>
+<body>
+<title>전소진 그래픽스 포트폴리오</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,400..900&family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style id="app-css">
+/* Layout: white technical sheet. Hairline rules, generous whitespace, left-aligned.
+   Signature: a mass-spring chain (point masses on a hairline) opens every section;
+   the hero cloth is drawn like a solver's debug view — white fabric, fine mesh, orange pins. */
+:root{
+  --bg:#ffffff;        /* sheet */
+  --bg-2:#f6f7f8;      /* quiet panels */
+  --ink:#15181b;       /* text */
+  --ink-2:#5b636b;     /* secondary text */
+  --ink-3:#8b9299;     /* tertiary, axis labels */
+  --line:#e4e7ea;      /* hairlines */
+  --line-2:#cdd2d7;    /* stronger rules */
+  --accent:#f2551d;    /* signal orange: pins, marks, active states */
+  --accent-text:#c2410c; /* orange that reads as text on white */
+  --accent-ink:#ffffff;
+  --chart-base:#3d6ad6; --chart-on:#f2551d;
+  /* cloth mesh gradient, traditional Japanese colours: 撫子 nadeshiko, 藤 fuji, 浅葱 asagi, 柑子 kouji */
+  --g1:#e8a0b8; --g2:#8b81c3; --g3:#4fb3c4; --g4:#f6a04a;
+  --cloth-front:#f8f9fb; --cloth-back:#dcdde6; --cloth-mesh:rgba(21,24,27,.09);
+  --f-display:"Archivo","IBM Plex Sans KR",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --f-code:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --s-1:.8125rem; --s0:1rem; --s1:1.1875rem; --s2:1.5rem; --s3:2.25rem; --s4:3.5rem;
+  --gutter-l:max(20px, env(safe-area-inset-left, 0px));
+  --gutter-r:max(20px, env(safe-area-inset-right, 0px));
+  --wrap:1160px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:var(--s0);line-height:1.75;-webkit-font-smoothing:antialiased;letter-spacing:-.003em}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+a{color:inherit}
+::selection{background:#ffe2d4}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--gutter-l);padding-right:var(--gutter-r)}
+h1,h2,h3{font-family:var(--f-body);text-wrap:balance;margin:0;line-height:1.25}
+h2{font-size:var(--s3);font-weight:600;letter-spacing:-.03em}
+h3{font-size:var(--s2);font-weight:600;letter-spacing:-.02em}
+p{margin:0}
+code,.code{font-family:var(--f-code);font-size:.86em;color:var(--ink)}
+.num{font-variant-numeric:tabular-nums}
+
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.bar .me{font-family:var(--f-display);font-weight:700;text-decoration:none;font-size:.98rem;letter-spacing:-.01em;white-space:nowrap;display:flex;align-items:center;gap:10px}
+.bar .me::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:14px 0 0 -1px var(--ink),28px 0 0 -2px var(--ink-3);margin-right:28px}
+.bar nav{display:flex;gap:2px;flex-wrap:wrap}
+.bar nav a{text-decoration:none;font-size:var(--s-1);padding:4px 10px;color:var(--ink-2);border-radius:2px}
+.bar nav a:hover{color:var(--ink)}
+.bar nav a.nav-cv{color:var(--ink);font-weight:600;box-shadow:inset 0 0 0 1px var(--ink)}
+.bar nav a.nav-cv:hover{background:var(--ink);color:#fff}
+@media (max-width:560px){.bar nav a:nth-child(n+3):not(.nav-cv){display:none}}
+
+/* hero */
+.hero{position:relative;border-bottom:1px solid var(--line);overflow:hidden;background:#fff}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0;pointer-events:none;filter:blur(28px);transform:scale(1.12)}
+.hero .hero-grid{position:relative;z-index:2}
+.ruler,.pin-rail{display:none}
+.hero-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:48px;align-items:center;padding-block:72px 56px}
+.hero-text{display:flex;flex-direction:column;gap:24px;min-width:0}
+.name{display:flex;flex-direction:column;gap:6px}
+.name .ko{font-size:clamp(3rem,6.4vw,4.75rem);font-weight:600;letter-spacing:-.05em;line-height:1}
+.name .en{font-family:var(--f-display);font-size:clamp(1rem,1.6vw,1.15rem);font-weight:500;color:var(--ink-2);letter-spacing:.01em}
+.thesis{font-weight:500;font-size:clamp(1.3rem,2.2vw,1.6rem);line-height:1.5;letter-spacing:-.025em;max-width:22em;padding-left:18px;border-left:2px solid var(--accent)}
+.lede{color:var(--ink-2);max-width:34em;font-size:.97rem}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.btn{display:inline-flex;align-items:center;gap:8px;font:500 var(--s-1)/1 var(--f-body);padding:13px 20px;border-radius:2px;border:1px solid var(--line-2);text-decoration:none;cursor:pointer;background:var(--bg);color:var(--ink);transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--ink)}
+.btn.primary{background:var(--ink);border-color:var(--ink);color:#fff}
+.btn.primary:hover{background:#000}
+.stage{position:relative;min-width:0;aspect-ratio:7/5.4;max-height:560px;width:100%;overflow:hidden;touch-action:none;background:transparent;
+  --c:var(--ink-3);}
+.stage::before{content:"";position:absolute;inset:0;pointer-events:none;background:
+  linear-gradient(var(--c),var(--c)) 0 0/14px 1px no-repeat,linear-gradient(var(--c),var(--c)) 0 0/1px 14px no-repeat,
+  linear-gradient(var(--c),var(--c)) 100% 0/14px 1px no-repeat,linear-gradient(var(--c),var(--c)) 100% 0/1px 14px no-repeat,
+  linear-gradient(var(--c),var(--c)) 0 100%/14px 1px no-repeat,linear-gradient(var(--c),var(--c)) 0 100%/1px 14px no-repeat,
+  linear-gradient(var(--c),var(--c)) 100% 100%/14px 1px no-repeat,linear-gradient(var(--c),var(--c)) 100% 100%/1px 14px no-repeat;z-index:1}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;opacity:.2;mix-blend-mode:multiply;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.stage canvas{position:absolute;inset:0;width:100%;height:100%;cursor:grab;display:block}
+.stage canvas.dragging{cursor:grabbing}
+.readout{position:absolute;left:18px;right:18px;bottom:14px;display:flex;flex-wrap:wrap;gap:4px 20px;font-size:.75rem;color:var(--ink-3);pointer-events:none;z-index:2}
+.readout b{color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums;margin-left:6px;font-family:var(--f-display)}
+.hint{position:absolute;right:18px;top:16px;font-size:.75rem;color:var(--ink-2);pointer-events:none;transition:opacity .4s;z-index:2;display:flex;align-items:center;gap:8px}
+.hint::before{content:"";width:6px;height:6px;border-radius:50%;background:conic-gradient(var(--g1),var(--g2),var(--g3),var(--g4),var(--g1));animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.25}}
+@media (prefers-reduced-motion: reduce){.hint::before{animation:none}}
+.stage-note{font-size:.78rem;color:var(--ink-3);margin-top:10px}
+@media (max-width:860px){
+  .hero-grid{grid-template-columns:minmax(0,1fr);padding-block:40px 32px;gap:32px}
+  .stage{aspect-ratio:4/3.4}
+}
+
+/* sections: each opens with a mass-spring chain */
+section{padding-block:96px 0}
+.sec-head{position:relative;display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:24px;align-items:baseline;margin-bottom:40px;padding-top:36px}
+.sec-head::before{content:"";position:absolute;left:0;right:0;top:0;height:9px;background:
+  radial-gradient(circle,var(--accent) 3.5px,transparent 4px) 0 50%/9px 9px no-repeat,
+  radial-gradient(circle,var(--ink) 2px,transparent 2.5px) 4px 50%/56px 9px repeat-x,
+  linear-gradient(var(--line-2),var(--line-2)) 0 50%/100% 1px no-repeat}
+.sec-head p{color:var(--ink-2);max-width:40em;font-size:.97rem}
+@media (max-width:860px){.sec-head{grid-template-columns:minmax(0,1fr);gap:10px}section{padding-block:64px 0}}
+
+/* publications */
+.pubs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px}
+.pub{display:flex;flex-direction:column;gap:10px;min-width:0}
+.pub .kind{font-size:.75rem;font-weight:500;color:var(--accent-text);letter-spacing:.01em}
+.pub .t{font-weight:600;font-size:1.02rem;line-height:1.55;letter-spacing:-.015em}
+.pub .a{font-size:var(--s-1);color:var(--ink-2)}
+.pub .a u{text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:3px;color:var(--ink);font-weight:600}
+.pub .v{font-size:var(--s-1);color:var(--ink-3);margin-top:auto}
+.pub a{font-size:var(--s-1);font-weight:500;color:var(--ink);text-decoration-color:var(--line-2);text-underline-offset:4px}
+.pub a:hover{text-decoration-color:var(--ink)}
+@media (max-width:860px){.pubs{grid-template-columns:minmax(0,1fr);gap:28px}}
+
+/* method */
+.method{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px}
+.principle{display:flex;flex-direction:column;gap:10px;min-width:0;padding-top:20px;border-top:1px solid var(--ink)}
+.principle h3{font-size:1.08rem;font-weight:600}
+.principle p{color:var(--ink-2);font-size:.94rem}
+@media (max-width:860px){.method{grid-template-columns:minmax(0,1fr);gap:28px}}
+
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:48px 40px}
+.skill-group{min-width:0}
+.skill-group h3{font-size:.78rem;font-weight:500;color:var(--ink-3);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--line);letter-spacing:.01em}
+.skill-group ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.skill-group li{display:flex;flex-direction:column;gap:2px}
+.skill-group b{font-family:var(--f-display);font-weight:600;font-size:1.06rem;letter-spacing:-.01em}
+.skill-group span{font-size:.86rem;color:var(--ink-2);line-height:1.6}
+@media (max-width:960px){.skills{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.skills{grid-template-columns:minmax(0,1fr);gap:32px}}
+
+/* report */
+.report{border-top:1px solid var(--ink);margin-bottom:72px}
+.report-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:40px;padding:28px 0 24px}
+.code-name{font-family:var(--f-display);font-weight:700;font-size:clamp(2.4rem,5.4vw,3.6rem);line-height:1;letter-spacing:-.035em}
+.code-name.long{font-size:clamp(1.9rem,4.4vw,3rem)}
+.full{font-weight:500;margin-top:12px;font-size:1.05rem;color:var(--ink);letter-spacing:-.015em}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.chip{font-size:.75rem;padding:3px 9px;border-radius:2px;background:var(--bg-2);color:var(--ink-2);white-space:nowrap}
+.chip.k{background:transparent;box-shadow:inset 0 0 0 1px var(--ink);color:var(--ink);font-weight:500}
+.facts{display:grid;gap:16px;align-content:start;min-width:0;margin:0}
+.fact{padding-left:16px;border-left:1px solid var(--line-2);position:relative}
+.fact::before{content:"";position:absolute;left:-3.5px;top:7px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.fact dt{font-size:.75rem;font-weight:500;color:var(--ink-3)}
+.fact dd{margin:2px 0 0;font-size:.94rem;color:var(--ink)}
+.tabs{display:flex;gap:28px;overflow-x:auto;border-bottom:1px solid var(--line);scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:0 0 auto;font:500 .86rem/1 var(--f-body);color:var(--ink-3);background:none;border:0;padding:14px 0;cursor:pointer;display:flex;gap:7px;align-items:baseline;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs button .n{font-family:var(--f-display);font-size:.7rem;color:var(--ink-3)}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.tabs button[aria-selected="true"] .n{color:var(--accent-text)}
+.tabs button:hover{color:var(--ink)}
+.panel{padding:32px 0 8px}
+.panel-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:40px;align-items:start}
+.panel p + p{margin-top:12px}
+.panel .muted{color:var(--ink-2)}
+.panel ul.list{margin:0;padding-left:1.1em;display:grid;gap:6px}
+.panel ul.list li::marker{color:var(--accent)}
+.eq{font-family:var(--f-code);font-size:.88rem;background:var(--bg-2);padding:20px 22px;display:grid;gap:10px;overflow-x:auto;white-space:nowrap;border-left:2px solid var(--ink)}
+.eq span{color:var(--ink-3);margin-left:10px;font-family:var(--f-body);font-size:.8rem}
+.tbl-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.88rem}
+th,td{text-align:left;padding:11px 14px 11px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:500;color:var(--ink-3);font-size:.78rem;white-space:nowrap;border-bottom-color:var(--ink)}
+td.r,th.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;padding-right:0;padding-left:14px}
+figure{margin:0}
+figure img{display:block;width:100%;height:auto;background:#fff;border:1px solid var(--line)}
+figcaption{font-size:.78rem;color:var(--ink-3);margin-top:10px}
+.fig-tall img{max-height:520px;object-fit:contain;width:auto;margin:0 auto}
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;counter-reset:f;padding:0;margin:0 0 28px;position:relative}
+.flow::before{content:"";position:absolute;left:4px;right:4px;top:4px;height:1px;background:var(--line-2)}
+.flow li{list-style:none;padding:22px 16px 0 0;font-size:.88rem;position:relative;counter-increment:f;min-width:0;color:var(--ink)}
+.flow li::before{content:"";position:absolute;left:0;top:0;width:9px;height:9px;border-radius:50%;background:var(--bg);box-shadow:inset 0 0 0 2px var(--ink)}
+.flow li:first-child::before{background:var(--accent);box-shadow:none}
+.flow li::after{content:counter(f);position:absolute;left:18px;top:-4px;font-family:var(--f-display);font-size:.72rem;color:var(--ink-3)}
+.flow.six{grid-template-columns:repeat(6,minmax(0,1fr))}
+.callout{background:var(--bg-2);padding:16px 18px;font-size:.93rem;border-left:2px solid var(--accent)}
+.callout b{color:var(--ink);font-weight:600;margin-right:6px}
+.stat-row{display:flex;flex-wrap:wrap;gap:36px;margin:4px 0 24px}
+.stat-row div{display:flex;flex-direction:column;gap:2px}
+.stat-row b{font-family:var(--f-display);font-weight:600;font-size:2rem;line-height:1.1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.stat-row span{font-size:.78rem;color:var(--ink-3)}
+@media (max-width:860px){
+  .report-head,.panel-grid{grid-template-columns:minmax(0,1fr);gap:24px}
+  .flow,.flow.six{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:22px}
+  .flow::before{display:none}
+}
+
+/* STC algorithm */
+.alg-title{font-size:1.2rem;font-weight:600;letter-spacing:-.02em}
+.alg-lede{color:var(--ink-2);max-width:46em;margin-top:8px!important}
+.tet-cases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:28px;padding:28px 24px 20px;background:var(--bg-2)}
+.tet{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.tet svg{width:min(150px,100%);height:auto;overflow:visible}
+.tet .e{fill:none;stroke:var(--ink-3);stroke-width:1.2;stroke-linejoin:round}
+.tet .s{fill:var(--ink)}
+.tet .a{fill:#fff;stroke:var(--ink);stroke-width:1.5}
+.tet .tri{fill:rgba(242,85,29,.2);stroke:var(--accent);stroke-width:2;stroke-linejoin:round}
+.tet.off{opacity:.55}
+.tet figcaption{margin:0;font-size:.84rem;color:var(--ink-2)}
+.tet figcaption b{display:block;color:var(--ink);font-weight:600;font-size:.92rem}
+.tet.on figcaption b{color:var(--accent-text)}
+.tet-key{grid-column:1/-1;display:flex;justify-content:center;gap:8px 18px;flex-wrap:wrap;align-items:center;font-size:.76rem;color:var(--ink-3);margin-top:4px!important}
+.tet-key span{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:-10px}
+.tet-key .k-a{background:#fff;box-shadow:inset 0 0 0 1.5px var(--ink)}
+.tet-key .k-s{background:var(--ink)}
+.flow-v{list-style:none;margin:0;padding:0;display:grid;gap:18px;counter-reset:fv;position:relative}
+.flow-v li{position:relative;padding-left:30px;counter-increment:fv;font-size:.93rem;color:var(--ink-2)}
+.flow-v li::before{content:counter(fv);position:absolute;left:0;top:1px;width:20px;height:20px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--ink);font:600 .72rem/20px var(--f-display);text-align:center;color:var(--ink)}
+.flow-v li b{display:block;color:var(--ink);font-weight:600;margin-bottom:2px}
+.pseudo{margin:0;background:var(--ink);color:#e8eaed;padding:18px 20px;font:400 .8rem/1.7 var(--f-code);overflow-x:auto;border-radius:2px}
+.pseudo code{color:inherit;font-size:inherit}
+.alg-sub{margin-top:36px;padding-top:24px;border-top:1px solid var(--line)}
+.alg-sub h4{margin:0 0 14px;font-size:.98rem;font-weight:600}
+@media (max-width:600px){.tet-cases{grid-template-columns:minmax(0,1fr);gap:20px}}
+
+.alg-full{color:var(--ink-2);font-size:.95rem;margin-top:6px!important}
+.alg-full span{display:block;font-size:.78rem;color:var(--ink-3);margin-top:2px}
+h4.mini{margin:0 0 8px;font-size:.95rem;font-weight:600}
+.dirfield{margin:0;background:var(--bg-2);padding:18px 16px 12px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.dirfield svg{width:100%;max-width:320px;height:auto}
+.dirfield .tris path{fill:#fff;stroke:#8b9299;stroke-width:1;stroke-linejoin:round}
+.dirfield .arr line{stroke:#f2551d;stroke-width:1.6;marker-end:url(#ah)}
+.dirfield .cut{stroke:#15181b;stroke-width:2.5;stroke-linecap:round}
+.dirfield text{font:500 9px var(--f-body);fill:#5b636b}
+.dirfield figcaption{margin:0}
+.eq-inline{display:block;margin-top:8px;font-family:var(--f-code);font-size:.82rem;color:var(--ink);background:var(--bg-2);padding:8px 12px;overflow-x:auto;white-space:nowrap}
+.uses{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 32px}
+.uses li{font-size:.92rem;color:var(--ink-2);padding-left:16px;border-left:1px solid var(--line-2);position:relative}
+.uses li::before{content:"";position:absolute;left:-3.5px;top:8px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.uses li b{display:block;color:var(--ink);font-weight:600;margin-bottom:2px}
+@media (max-width:700px){.uses{grid-template-columns:minmax(0,1fr)}}
+
+.shots{display:grid;gap:12px}
+.shots.s2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.shots.s3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.shots.s4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.shot{margin:0;min-width:0}
+.alg-sub > .shots.s2{max-width:480px}
+.alg-sub > .shots.s3{max-width:720px}
+.alg-sub > .shots.s4{max-width:880px}
+.shot img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;background:#000;border:0}
+.shot figcaption{margin-top:6px;font-size:.76rem;color:var(--ink-2)}
+.shot-diag img{aspect-ratio:auto;object-fit:contain;background:#fff;border:1px solid var(--line);padding:14px}
+.shots.tall3 .shot img{aspect-ratio:3/5}
+.shots.land .shot img{aspect-ratio:5/4}
+.shot-flow img{aspect-ratio:auto;object-fit:contain;background:#fff;border:1px solid var(--line);padding:12px}
+.figsrc{font-size:.74rem;color:var(--ink-3);margin-top:10px!important}
+@media (max-width:700px){.shots.s3,.shots.s4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* slide decks */
+.deck{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.deck-main{margin:0}
+.deck-main img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border:1px solid var(--line);background:var(--bg-2)}
+.deck-main figcaption{margin-top:8px}
+.deck-thumbs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.thumb{padding:0;border:1px solid var(--line);background:none;cursor:pointer;opacity:.6;transition:opacity .15s,border-color .15s;border-radius:0}
+.thumb img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+.thumb:hover{opacity:1}
+.thumb.on{opacity:1;border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.deck-dl{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:6px}
+.btn.dl span{color:var(--ink-3);font-weight:400;margin-left:2px}
+.dl-msg{font-size:.78rem;color:var(--ink-3)}
+
+.study{display:grid;gap:0;margin-top:24px;border-top:1px solid var(--ink)}
+.study-row{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,8fr);gap:28px;padding:18px 0;border-bottom:1px solid var(--line)}
+.study-k b{display:block;font-weight:600;font-size:1rem;color:var(--ink)}
+.study-k{font-size:.82rem;color:var(--ink-3)}
+.study-v{font-size:.93rem;color:var(--ink-2)}
+@media (max-width:700px){.study-row{grid-template-columns:minmax(0,1fr);gap:6px}}
+.qtmock{margin:0}
+.qm-win{border:1px solid var(--ink);background:#fff;font-size:.74rem}
+.qm-title{padding:7px 10px;border-bottom:1px solid var(--line);font-weight:600;display:flex;gap:6px;align-items:center}
+.qm-title::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:12px 0 0 var(--line-2),24px 0 0 var(--line-2);margin-right:26px}
+.qm-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;padding:8px}
+.qm-cell{border:1px solid var(--line-2);display:flex;flex-direction:column;min-height:92px}
+.qm-cell span{padding:4px 7px;border-bottom:1px solid var(--line);color:var(--ink-2)}
+.qm-cell i{flex:1;display:flex;align-items:center;justify-content:center;font-style:normal;font-family:var(--f-code);color:var(--ink-3);background:repeating-linear-gradient(45deg,var(--bg-2) 0 6px,#fff 6px 12px)}
+.qm-vdr{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:6px;padding:8px}
+.qm-left{display:grid;gap:6px;grid-template-rows:1fr auto}
+.qm-gl{min-height:150px}
+.qm-info{min-height:0}.qm-info i{padding:6px 0}
+.qm-ctrl ul{list-style:none;margin:0;padding:6px;display:grid;gap:4px}
+.qm-ctrl li{border:1px solid var(--line);padding:3px 6px;color:var(--ink-2);font-size:.7rem}
+.qm-gl i{text-align:center;line-height:1.5}
+.qm-status{padding:6px 10px;border-top:1px solid var(--line);color:var(--ink-3)}
+.notebtn{margin-top:18px}
+.notebtn span{color:var(--ink-3);font-weight:400}
+.alg-lede a{color:var(--ink);text-decoration-color:var(--accent);text-underline-offset:3px}
+.uses.one{grid-template-columns:minmax(0,1fr);gap:16px}
+
+.who-row{display:flex;align-items:flex-end;gap:22px}
+.portrait{width:104px;height:134px;object-fit:cover;display:block;flex:none;box-shadow:0 0 0 1px rgba(21,24,27,.08)}
+.cta .dl-msg{align-self:center}
+.contact .dl-msg{color:#9aa1a8;font-size:.74rem;margin-left:8px}
+@media (max-width:560px){.portrait{width:80px;height:103px}.who-row{gap:16px}}
+
+/* chart */
+.chart-legend{display:flex;gap:18px;font-size:.78rem;color:var(--ink-2);margin-bottom:8px;flex-wrap:wrap}
+.chart-legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.chart{position:relative}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart text{fill:var(--ink-3);font-family:var(--f-body);font-size:12px}
+.chart text.v{fill:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+.chart line{stroke:var(--line)!important}
+.chart .tip{position:absolute;pointer-events:none;background:var(--ink);color:#fff;font-size:.78rem;padding:6px 9px;border-radius:2px;white-space:nowrap;transform:translate(-50%,-110%)}
+details.tableview{margin-top:14px;font-size:var(--s-1)}
+details.tableview summary{cursor:pointer;color:var(--ink);font-weight:500;text-decoration:underline;text-decoration-color:var(--line-2);text-underline-offset:4px}
+details.tableview .tbl-wrap{margin-top:10px}
+
+/* minor projects */
+.minor{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px}
+.minor article{border-top:1px solid var(--ink);padding-top:24px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.minor h3{font-family:var(--f-display);font-size:1.5rem;font-weight:700;letter-spacing:-.03em}
+.minor .who{font-size:.8rem;color:var(--ink-3)}
+@media (max-width:860px){.minor{grid-template-columns:minmax(0,1fr)}}
+
+/* about */
+.about{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px 48px}
+.about article{min-width:0;display:flex;flex-direction:column;gap:12px}
+.about h3{font-size:1.12rem;font-weight:600}
+.about p{color:var(--ink-2);font-size:.96rem}
+.about p strong{color:var(--ink);font-weight:600}
+.growth{grid-column:1/-1;background:var(--bg-2);padding:36px}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:12px 0 8px;position:relative}
+.steps::before{content:"";position:absolute;left:5px;right:5px;top:5px;height:1px;background:var(--line-2)}
+.steps div{padding:28px 28px 4px 0;position:relative;min-width:0}
+.steps div::before{content:"";position:absolute;left:0;top:0;width:11px;height:11px;border-radius:50%;background:var(--bg-2);box-shadow:inset 0 0 0 2px var(--ink)}
+.steps div:last-child::before{background:var(--accent);box-shadow:none}
+.steps .y{font-family:var(--f-display);font-weight:600;font-size:1.4rem;letter-spacing:-.02em}
+.steps .w{font-weight:600;margin:2px 0 6px;color:var(--ink)!important}
+.steps p{font-size:.9rem}
+@media (max-width:860px){.about{grid-template-columns:minmax(0,1fr);gap:36px}.growth{padding:24px 20px}.steps{grid-template-columns:minmax(0,1fr)}.steps::before{left:5px;right:auto;top:5px;bottom:5px;width:1px;height:auto}.steps div{padding:0 0 18px 28px}.steps div::before{top:6px}}
+
+/* experience */
+.xp{display:grid;gap:0;margin-bottom:64px;border-top:1px solid var(--ink)}
+.xp-item{display:grid;grid-template-columns:200px minmax(0,1fr);gap:32px;padding:26px 0;border-bottom:1px solid var(--line)}
+.xp-when{font-family:var(--f-display);font-variant-numeric:tabular-nums;color:var(--ink-2);font-size:.88rem;font-weight:500}
+.xp-when small{display:block;font-family:var(--f-body);font-size:.76rem;color:var(--ink-3);margin-top:2px;font-weight:400}
+.xp-body h3{font-size:1.08rem;font-weight:600}
+.xp-role{color:var(--accent-text);font-weight:500;font-size:.88rem;margin:2px 0 12px}
+.xp-body ul{margin:0;padding-left:1.1em;display:grid;gap:4px;color:var(--ink-2);font-size:.94rem;max-width:60em}
+.xp-body li::marker{color:var(--line-2)}
+@media (max-width:700px){.xp-item{grid-template-columns:minmax(0,1fr);gap:6px}}
+
+/* history */
+.history{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 40px}
+.hist h3{font-size:.78rem;font-weight:500;color:var(--ink-3);padding-bottom:10px;border-bottom:1px solid var(--ink);margin-bottom:2px}
+.hist dl{margin:0}
+.hist .row{display:grid;grid-template-columns:110px minmax(0,1fr);gap:14px;padding:12px 0;border-bottom:1px solid var(--line);font-size:.93rem}
+.hist dt{color:var(--ink-3);font-variant-numeric:tabular-nums;font-size:.82rem}
+.hist dd{margin:0;font-weight:500}
+.hist dd small{display:block;color:var(--ink-3);font-weight:400;font-size:.8rem}
+@media (max-width:960px){.history{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:420px){.hist .row{grid-template-columns:minmax(0,1fr);gap:2px}}
+
+/* contact */
+.contact{margin-top:120px;background:var(--ink);color:#fff;padding-block:72px 80px}
+.contact-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:48px;align-items:start}
+.contact .big{font-weight:500;font-size:clamp(1.6rem,3.2vw,2.3rem);line-height:1.35;letter-spacing:-.035em}
+.contact .big::before{content:"";display:block;width:56px;height:9px;margin-bottom:24px;background:radial-gradient(circle,var(--accent) 3.5px,transparent 4px) 0 50%/9px 9px no-repeat,radial-gradient(circle,#fff 2px,transparent 2.5px) 47px 50%/9px 9px no-repeat,linear-gradient(#5b636b,#5b636b) 0 50%/100% 1px no-repeat}
+.contact ul{list-style:none;margin:0;padding:0;display:grid;gap:0;border-top:1px solid #3a4046}
+.contact li{display:grid;grid-template-columns:80px minmax(0,1fr) auto;gap:12px;align-items:center;padding:16px 0;border-bottom:1px solid #3a4046}
+.contact li span:first-child{color:#9aa1a8;font-size:.8rem}
+.contact .val{font-weight:500;font-variant-numeric:tabular-nums;user-select:all;overflow-wrap:anywhere;color:#fff}
+.copy{font:500 .75rem/1 var(--f-body);border:1px solid var(--line-2);background:transparent;color:var(--ink);padding:7px 10px;border-radius:2px;cursor:pointer}
+.copy:hover{border-color:var(--ink)}
+.contact .copy{border-color:#4a5157;color:#fff}
+.contact .copy:hover{border-color:#fff}
+.foot{font-size:.78rem;color:#9aa1a8;margin-top:28px}
+.foot.credit{font-family:"Archivo",system-ui,sans-serif;font-style:italic;font-size:.9rem;letter-spacing:.005em;color:#b9bfc5}
+@media (max-width:860px){.contact-grid{grid-template-columns:minmax(0,1fr)}}
+
+/* media galleries */
+.media-slot{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:20px}
+.media-slot:empty{display:none}
+.report > .media-slot{padding:28px 0 0}
+.minor article > .media-slot{margin-top:4px}
+.about-media{margin-top:32px}
+.media-item{display:flex;flex-direction:column;gap:8px;min-width:0}
+.media-item img,.media-item video{display:block;width:100%;max-width:100%;height:auto;border:1px solid var(--line);background:var(--bg-2)}
+.media-item figcaption{margin:0}
+.media-tools{display:flex;gap:6px;flex-wrap:wrap}
+.media-tools input{flex:1 1 160px;min-width:0;font:inherit;font-size:var(--s-1);padding:6px 8px;border:1px solid var(--line-2);border-radius:2px;background:var(--bg);color:var(--ink)}
+.media-add{display:none}
+
+/* edit mode */
+.editbar{position:fixed;z-index:20;right:max(16px,calc(env(safe-area-inset-right,0px) + 12px));bottom:calc(env(safe-area-inset-bottom,0px) + 16px);display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;max-width:calc(100vw - 32px);background:var(--bg);border:1px solid var(--ink);border-radius:2px;padding:8px;box-shadow:0 8px 28px rgba(21,24,27,.14)}
+.editbar[hidden]{display:none}
+.editbar .msg{font-size:var(--s-1);color:var(--ink-2);padding:0 6px;max-width:260px}
+.editbar .btn{padding:9px 14px}
+.editing [data-ek]{outline:1px dashed rgba(242,85,29,.55);outline-offset:2px;border-radius:1px;cursor:text}
+.editing [data-ek]:hover{background:rgba(242,85,29,.05)}
+.editing [data-ek]:focus{outline:2px solid var(--accent);background:rgba(242,85,29,.07)}
+.editing .contact [data-ek]:hover,.editing .contact [data-ek]:focus{background:rgba(255,255,255,.08)}
+.editing .media-slot{display:grid;min-height:0}
+.editing .media-add{display:flex;align-items:center;justify-content:center;gap:8px;min-height:120px;border:1px dashed var(--accent);border-radius:2px;background:transparent;color:var(--accent-text);font:500 var(--s-1)/1.4 var(--f-body);cursor:pointer;padding:16px;text-align:center}
+.editing .media-add:hover{background:rgba(242,85,29,.05)}
+</style>
+
+<div id="page">
+<header class="bar">
+  <div class="wrap">
+    <a class="me" href="#top">Jeon Sojin</a>
+    <nav aria-label="섹션">
+      <a href="#projects">프로젝트</a>
+      <a href="#skills">기술</a>
+      <a href="#about">나에 대해</a>
+      <a href="#history">이력</a>
+      <a href="#contact">연락</a>
+      <a href="files/jeon-sojin-cv.pdf" target="_blank" rel="noopener" class="nav-cv dl" data-file="files/jeon-sojin-cv.pdf" data-name="전소진_CV.pdf">CV</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <canvas class="hero-bg" id="hero-bg" aria-hidden="true"></canvas>
+    <div class="ruler" aria-hidden="true"></div>
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <div class="who-row">
+          <img class="portrait" src="img/profile.jpg" alt="전소진 프로필 사진" width="329" height="423">
+          <div class="name">
+            <h1 class="ko">전소진</h1>
+            <span class="en">Jeon Sojin, Graphics Engineer</span>
+          </div>
+        </div>
+        <p class="thesis">늘어나고 접히는 것을 GPU로 계산하고, 그 결과를 숫자로 확인합니다.</p>
+        <p class="lede">위치 기반 동역학(PBD) 연성체 변형과 CUDA 볼륨 렌더링을 연구했습니다. 한성대학교 컴퓨터공학 석사(2026.08)를 마쳤고, 한국컴퓨터그래픽스학회에 논문 2편(제1저자 1편)과 포스터 1편을 냈습니다. 물리 기반 시뮬레이션, GPU 병렬 처리, 실시간 렌더링이 만나는 곳에서 일하고 싶습니다.</p>
+        <div class="cta">
+          <a class="btn primary" href="#projects">프로젝트 보기</a>
+          <a class="btn" href="https://github.com/soz1p" target="_blank" rel="noopener">GitHub 열기</a>
+          <a class="btn dl" href="files/jeon-sojin-cv.pdf" target="_blank" rel="noopener" data-file="files/jeon-sojin-cv.pdf" data-name="전소진_CV.pdf">CV 국문 <span>PDF</span></a>
+          <a class="btn dl" href="files/jeon-sojin-cv-en.pdf" target="_blank" rel="noopener" data-file="files/jeon-sojin-cv-en.pdf" data-name="Jeon_Sojin_CV.pdf">CV English <span>PDF</span></a>
+          <span class="dl-msg" aria-live="polite"></span>
+        </div>
+      </div>
+      <div>
+        <div class="stage" id="stage">
+          <div class="pin-rail" aria-hidden="true"></div>
+          <canvas id="cloth" aria-label="마우스나 손가락으로 끌어당길 수 있는 천 시뮬레이션"></canvas>
+          <span class="hint" id="hint">천을 끌어당겨 보세요</span>
+          <div class="readout" aria-live="off">
+            <span>정점<b id="r-v">0</b></span>
+            <span>거리 제약<b id="r-c">0</b></span>
+            <span>반복<b id="r-i">0</b></span>
+            <span>계산 시간<b id="r-t">0.00 ms</b></span>
+          </div>
+        </div>
+        <p class="stage-note">이 페이지에서 실시간으로 계산하는 PBD 엔진 천 시뮬레이션입니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- publications -->
+  <section class="wrap" aria-labelledby="pub-h">
+    <div class="sec-head">
+      <h2 id="pub-h">논문</h2>
+      <p>세 편 모두 같은 질문을 이어서 풀었습니다. 연성체 표면의 변형을 어떻게 표현할지, <br>그리고 그 연산을 얼마나 효율적으로 처리할지 함께 고민했습니다.</p>
+    </div>
+    <div class="pubs">
+      <article class="pub">
+        <span class="kind">2024 · 학술지 · 공저</span>
+        <p class="t">NeRF, PBD 및 병렬 리샘플링을 결합한 실시간 3D 볼륨 변형체 시각화</p>
+        <p class="a">권상민, <u>전소진</u>, 박준이, 김다솔, 계희원</p>
+        <p class="v">한국컴퓨터그래픽스학회 논문지 30(3), 189–198</p>
+        <a href="https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003103457" target="_blank" rel="noopener">KCI 논문 정보</a>
+      </article>
+      <article class="pub">
+        <span class="kind">2025 · 학술지 · 제1저자</span>
+        <p class="t">STC: A Skin Tension Constraint Model for Position-Based Dynamics</p>
+        <p class="a"><u>전소진</u>, 서지완, 계희원</p>
+        <p class="v">한국컴퓨터그래픽스학회 논문지 31(4), 21–31</p>
+        <a href="https://doi.org/10.15701/kcgs.2025.31.4.21" target="_blank" rel="noopener">DOI 10.15701/kcgs.2025.31.4.21</a>
+      </article>
+      <article class="pub">
+        <span class="kind">2026 · 학술대회 포스터 · 공저</span>
+        <p class="t">이방성 피부 장력 제약(ASTC)을 이용한 PBD 기반 방향성 절개 반응</p>
+        <p class="a">김관중, <u>전소진</u>, 계희원</p>
+        <p class="v">2026 한국컴퓨터그래픽스학회 학술대회</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- skills -->
+  <section class="wrap" id="skills" aria-labelledby="s-h">
+    <div class="sec-head">
+      <h2 id="s-h">기술</h2>
+      <p>주로 쓰는 언어와 API, 그리고 실제로 쓴 프로젝트입니다.</p>
+    </div>
+    <div class="skills">
+      <div class="skill-group">
+        <h3>언어</h3>
+        <ul>
+          <li><b>C / C++</b><span>C++17. STC, VDR, NeuralDynaRender, QtGTCG</span></li>
+          <li><b>C#</b><span>Unity 게임 로직과 네트워크. Edge of Survival, Fire Evacuation</span></li>
+          <li><b>JavaScript, HTML, CSS</b><span>웹 프론트엔드. Cockpybara</span></li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>그래픽스 API와 셰이더</h3>
+        <ul>
+          <li><b>OpenGL</b><span>3.3 Core, VAO/VBO/EBO, 멀티뷰 렌더링. QtGTCG, VDR</span></li>
+          <li><b>GLSL</b><span>조명, 볼륨 결과 표시. QtGTCG, NeuralDynaRender</span></li>
+          <li><b>DirectX</b><span>그래픽스 파이프라인 학습과 실습</span></li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>GPU 컴퓨팅</h3>
+        <ul>
+          <li><b>CUDA</b><span>제약 투영 커널, 병렬 그룹 실행, 3D 텍스처 샘플링, 경쟁 상태 해결</span></li>
+          <li><b>GPU 메모리 관리</b><span>객체별 디바이스 버퍼 소유권, 오류 전달 경로 설계</span></li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>시뮬레이션과 렌더링</h3>
+        <ul>
+          <li><b>Position-Based Dynamics</b><span>거리·부피·면적 제약, 피부 인장 제약(STC) 제안</span></li>
+          <li><b>ChainMail</b><span>PBD와 결합한 하이브리드 변형 엔진</span></li>
+          <li><b>볼륨 렌더링</b><span>레이 캐스팅, 변형 격자 리샘플링, 절단면</span></li>
+          <li><b>NeRF</b><span>instant-ngp 볼륨 추출과 변형 연결</span></li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>프레임워크와 엔진</h3>
+        <ul>
+          <li><b>Qt 6</b><span>Widgets, QOpenGLWidget 기반 3D 시뮬레이션 툴</span></li>
+          <li><b>Unity</b><span>Photon PUN 2 멀티플레이, NavMesh, UI</span></li>
+          <li><b>GLFW, ImGui</b><span>NeuralDynaRender 변형 뷰어</span></li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>도구와 환경</h3>
+        <ul>
+          <li><b>CMake, Visual Studio</b><span>Windows·Linux 크로스 빌드 구성</span></li>
+          <li><b>Git, GitHub</b><span>연구 코드 관리와 문서화</span></li>
+          <li><b>AWS, RunPod</b><span>GPU 클라우드 계정·사용량 관리</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- projects -->
+  <section class="wrap" id="projects" aria-labelledby="p-h">
+    <div class="sec-head">
+      <h2 id="p-h">프로젝트</h2>
+    </div>
+
+    <!-- STC -->
+    <article class="report" data-report>
+      <div class="report-head">
+        <div>
+          <div class="code-name">STC</div>
+          <p class="full">Skin Tension Constraint: 삼각형 면적 기반 피부 인장 제약</p>
+          <div class="meta">
+            <span class="chip k">2025 석사 연구</span><span class="chip k">제1저자 논문</span>
+            <span class="chip">C++17</span><span class="chip">CUDA</span><span class="chip">PBD</span><span class="chip">Qt 6</span><span class="chip">OpenGL</span><span class="chip">CMake</span>
+          </div>
+        </div>
+        <dl class="facts">
+          <div class="fact"><dt>내 역할</dt><dd>제1저자. Skin Tension Constraint 구조 설계, 그리고 사면체의 네 정점 중 공기 정점이 하나뿐이면 나머지 세 정점을 피부 표면으로 보는 표면 탐지 알고리즘 제안과 구현</dd></div>
+          <div class="fact"><dt>결과</dt><dd>표면 장력 반응을 더하면서 병렬 리샘플링 시간 증가를 3.23–7.66%로 억제 (RTX 3090, 3개 해상도)</dd></div>
+        </dl>
+      </div>
+      <div class="tabs" role="tablist" aria-label="STC 보고서">
+        <button role="tab" aria-selected="true"><span class="n">1</span>개요</button>
+        <button role="tab" aria-selected="false"><span class="n">2</span>알고리즘</button>
+        <button role="tab" aria-selected="false"><span class="n">3</span>성능</button>
+        <button role="tab" aria-selected="false"><span class="n">4</span>개선</button>
+      </div>
+      <div class="panel" role="tabpanel">
+        <div class="panel-grid">
+          <div>
+            <p>정밀하고 실시간으로 동작하는 연부 조직 시뮬레이션은 가상 외과 수술 훈련 시스템의 핵심 요소입니다. 그런데 기존 PBD의 거리·부피 제약만으로는 절개된 피부가 벌어지는 표면 인장 반응을 표현하기 어렵습니다. 그래서 삼각형 면 단위의 장력 제약을 추가해 이 반응을 만들었습니다.</p>
+            <p>전체 볼륨에 제약을 걸면 비용이 커지고 내부 조직까지 당겨집니다. 그래서 사면체마다 공기와 맞닿은 면만 골라내는 피부 표면 탐지로 적용 대상을 외피로 좁혔고, 정점을 공유하지 않는 그룹으로 나눠 기존 GPU 실행 구조에 그대로 얹었습니다.</p>
+            <p>정적 절개 실험에서 STC를 적용하면 절개 부위가 더 뚜렷하게 분리되고, 주변 피부가 점진적으로 퍼지며 벌어지는 움직임이 나타났습니다. 오른쪽 그림은 세 데이터셋에서 적용 전후를 비교한 결과입니다.</p>
+          </div>
+          <figure class="fig-tall">
+            <img src="img/stc-figure5.jpg" alt="세 데이터셋에서 STC 적용 전후 절개 부위 비교. 오른쪽 열에서 절개면이 더 벌어진다." loading="lazy" width="673" height="1125">
+            <figcaption>게재 논문 Figure 5. 세 데이터셋의 STC 미적용(왼쪽)과 적용(오른쪽) 비교.</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="panel" role="tabpanel" hidden>
+        <h3 class="alg-title">피부 표면 탐지: 공기 정점이 하나뿐인 사면체</h3>
+        <p class="alg-lede">피부는 몸이 외부 공기와 맞닿는 경계에서 생깁니다. 이 점에 착안해, 사면체의 네 정점 중 공기로 분류되는 정점이 정확히 하나일 때만 나머지 세 정점이 이루는 면을 피부 표면으로 등록했습니다.</p>
+        <div class="tet-cases" role="img" aria-label="공기 정점 수에 따른 사면체 판정. 0개는 내부 조직으로 제외, 1개는 나머지 세 정점의 삼각형을 피부 표면으로 등록, 2개 이상은 경계 불명확으로 제외">
+          <figure class="tet off">
+            <svg viewBox="0 0 120 104" aria-hidden="true"><path class="e" d="M60 10 L14 88 L106 88 Z M60 10 L72 64 M14 88 L72 64 L106 88"/><circle class="s" cx="60" cy="10" r="5"/><circle class="s" cx="14" cy="88" r="5"/><circle class="s" cx="106" cy="88" r="5"/><circle class="s" cx="72" cy="64" r="5"/></svg>
+            <figcaption><b>공기 0개</b>내부 조직. 제외</figcaption>
+          </figure>
+          <figure class="tet on">
+            <svg viewBox="0 0 120 104" aria-hidden="true"><path class="tri" d="M14 88 L106 88 L72 64 Z"/><path class="e" d="M60 10 L14 88 L106 88 Z M60 10 L72 64 M14 88 L72 64 L106 88"/><circle class="a" cx="60" cy="10" r="5"/><circle class="s" cx="14" cy="88" r="5"/><circle class="s" cx="106" cy="88" r="5"/><circle class="s" cx="72" cy="64" r="5"/></svg>
+            <figcaption><b>공기 1개</b>나머지 세 정점의 면을 피부 표면으로 등록</figcaption>
+          </figure>
+          <figure class="tet off">
+            <svg viewBox="0 0 120 104" aria-hidden="true"><path class="e" d="M60 10 L14 88 L106 88 Z M60 10 L72 64 M14 88 L72 64 L106 88"/><circle class="a" cx="60" cy="10" r="5"/><circle class="s" cx="14" cy="88" r="5"/><circle class="s" cx="106" cy="88" r="5"/><circle class="a" cx="72" cy="64" r="5"/></svg>
+            <figcaption><b>공기 2개 이상</b>경계가 불명확. 제외</figcaption>
+          </figure>
+          <p class="tet-key"><span class="k-a"></span>공기 정점 (α = 0)<span class="k-s"></span>피부 정점 (α &gt; 0)</p>
+        </div>
+        <div class="panel-grid" style="margin-top:32px">
+          <ol class="flow-v">
+            <li><b>밀도를 불투명도로</b>CT의 HU 값을 AlphaTable 전달 함수로 바꿉니다. −449 HU 미만은 공기(α = 0), −449~6 HU는 선형 증가, 6 HU 초과는 완전 불투명입니다.</li>
+            <li><b>정점 분류</b>각 정점의 α가 0이면 공기, 0보다 크면 피부로 봅니다. 임곗값은 데이터에 맞춰 조정할 수 있습니다.</li>
+            <li><b>사면체 판정</b>네 정점 중 공기 정점 수를 셉니다. 정확히 1개일 때만 나머지 세 정점으로 삼각형을 만듭니다.</li>
+            <li><b>제약 초기화</b>등록한 삼각형마다 세 정점 인덱스, 기준 면적, 정점 밀도 평균으로 정규화한 강성 계수를 저장합니다.</li>
+          </ol>
+          <div>
+            <pre class="pseudo"><code>for tet in tetrahedra:
+    air = [v for v in tet if alpha[density(v)] == 0]
+    if len(air) == 1:
+        tri = tet − air          # 나머지 세 정점
+        register_skin(tri,
+            rest_area = area(tri),
+            stiffness = normalize(mean_density(tri)))</code></pre>
+            <p class="muted" style="margin-top:14px">공기 정점이 없으면 내부 조직, 둘 이상이면 경계가 불명확한 영역이라 제외합니다. 연속된 외피만 활성화되므로 내부 구조에는 장력이 걸리지 않고, 제약 수도 표면 삼각형 수로 줄어듭니다.</p>
+          </div>
+        </div>
+        <div class="alg-sub">
+          <h4>등록한 면에 거는 장력 제약</h4>
+          <div class="panel-grid">
+            <div class="eq">
+              <div>A = ½ ‖(p₂ − p₁) × (p₃ − p₁)‖ <span>현재 면적</span></div>
+              <div>C = A − A<sub>rest</sub> <span>제약 위반량</span></div>
+              <div>s = 1 + β · max(0, C / A<sub>rest</sub>) <span>인장 시에만 증폭</span></div>
+              <div>∇<sub>pᵢ</sub>A = ½ (e<sub>opp</sub> × n̂) <span>면적 그래디언트</span></div>
+            </div>
+            <p class="muted">면적이 기준보다 커질 때만 복원 계수를 키워, 늘어난 피부가 원래 크기로 당겨지는 반응을 만듭니다. 보정량은 역질량과 면적 그래디언트로 세 정점에 나눕니다.</p>
+          </div>
+        </div>
+      </div>
+      <div class="panel" role="tabpanel" hidden>
+        <div class="panel-grid">
+          <div style="min-width:0">
+            <h3 style="font-size:1.05rem;font-family:var(--f-body);margin-bottom:10px">병렬 리샘플링 시간, STC 미적용 대비 적용</h3>
+            <div class="chart-legend"><span><i style="background:var(--chart-base)"></i>STC 미적용</span><span><i style="background:var(--chart-on)"></i>STC 적용</span></div>
+            <div class="chart" id="stc-chart"></div>
+            <details class="tableview">
+              <summary>표로 보기</summary>
+              <div class="tbl-wrap"><table>
+                <thead><tr><th>데이터셋 · PBD 해상도</th><th class="r">그룹핑 (ms)</th><th class="r">증가</th><th class="r">리샘플링 (ms)</th><th class="r">증가</th></tr></thead>
+                <tbody>
+                  <tr><td>A · 129×129×76</td><td class="r">1447 → 1493</td><td class="r">3.18%</td><td class="r">74.06 → 79.73</td><td class="r">7.66%</td></tr>
+                  <tr><td>B · 129×129×138</td><td class="r">2753 → 2773</td><td class="r">0.73%</td><td class="r">126.52 → 131.89</td><td class="r">4.24%</td></tr>
+                  <tr><td>C · 129×129×289</td><td class="r">5384 → 5438</td><td class="r">1.00%</td><td class="r">257.75 → 266.08</td><td class="r">3.23%</td></tr>
+                </tbody>
+              </table></div>
+            </details>
+          </div>
+          <div>
+            <p>세 해상도의 데이터셋(A, B, C)에서 STC 적용 여부에 따른 전처리 그룹핑 시간과 PBD 병렬 리샘플링 시간을 비교했습니다. 한 프레임마다 거리 제약과 STC 순서로 제약 투영을 5회 반복했고, 각 단계는 CUDA로 병렬 처리했습니다. 리샘플링 시간은 연속 10프레임 평균이며, 실험 장비는 NVIDIA GeForce RTX 3090입니다.</p>
+            <p>STC를 추가해도 세 데이터 모두에서 그룹핑 시간과 커널 단위 병렬 처리 성능은 기존과 큰 차이가 없었습니다. STC가 삼각형 단위의 독립적인 제약이라 기존 병렬 그룹핑과 충돌 없이 통합되고, 피부 표면 경계에만 적용되어 연산 대상 요소 수가 전체 볼륨에 걸친 거리·부피 제약의 10% 이하이기 때문입니다.</p>
+            <p class="muted">출처: 게재 논문 5.4절, Table 4</p>
+          </div>
+        </div>
+      </div>
+      <div class="panel" role="tabpanel" hidden>
+        <h3 class="alg-title">후속 연구: ASTC</h3>
+        <p class="alg-full">Anisotropic Skin Tension Constraint, 이방성 피부 장력 제약<span>2026 한국컴퓨터그래픽스학회 포스터 · 공저</span></p>
+        <div class="panel-grid" style="margin-top:24px">
+          <div>
+            <h4 class="mini">등방성의 한계</h4>
+            <p>STC는 삼각형 면적이 늘어난 양만 보고, 어느 방향으로 늘어났든 하나의 계수로 똑같이 당깁니다. 방향과 무관하게 같은 세기로 반응하므로 <strong>등방성</strong>입니다.</p>
+            <p>실제 피부는 절개 방향에 따라 주름이 한쪽으로 정렬되고 비대칭으로 수축하는 <strong>이방성</strong> 거동을 보입니다. 등방성 STC는 절개 벌어짐은 안정적으로 근사하지만, 절개 주변 변형의 방향과 국소성을 따로 제어하기 어려웠습니다.</p>
+          </div>
+          <figure class="dirfield" aria-label="절개선 주변 삼각형마다 절개 중심에서 바깥으로 향하는 선호 방향 화살표">
+            <svg viewBox="0 0 240 150" aria-hidden="true">
+              <defs><marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#f2551d"/></marker></defs>
+              <g class="tris">
+                <path d="M30 30 L62 22 L50 50 Z"/><path d="M178 22 L210 30 L190 50 Z"/><path d="M28 112 L58 98 L60 128 Z"/><path d="M182 98 L212 112 L180 128 Z"/>
+                <path d="M100 18 L134 16 L118 40 Z"/><path d="M104 132 L138 134 L120 110 Z"/><path d="M14 66 L40 76 L16 90 Z"/><path d="M200 76 L226 66 L224 90 Z"/>
+              </g>
+              <g class="arr">
+                <line x1="47" y1="34" x2="34" y2="24"/><line x1="193" y1="34" x2="206" y2="24"/><line x1="49" y1="113" x2="36" y2="124"/><line x1="191" y1="113" x2="204" y2="124"/>
+                <line x1="117" y1="25" x2="117" y2="8"/><line x1="121" y1="125" x2="121" y2="142"/><line x1="23" y1="77" x2="6" y2="77"/><line x1="217" y1="77" x2="234" y2="77"/>
+              </g>
+              <line class="cut" x1="82" y1="75" x2="158" y2="75"/>
+              <circle cx="120" cy="75" r="3.5" fill="#15181b"/>
+              <text x="120" y="92" text-anchor="middle">절개 중심 c</text>
+            </svg>
+            <figcaption>절개 중심에서 각 표면 삼각형을 향하는 선호 방향 d</figcaption>
+          </figure>
+        </div>
+        <ol class="flow-v" style="margin-top:28px">
+          <li><b>선호 방향장</b>표면 삼각형마다 "이 방향의 변형이 중요하다"는 기준 방향 d를 둡니다. 절개 중심 c에서 삼각형 중심 p를 향하는 벡터 g = p − c를 삼각형 접평면에 사영해 정규화합니다. 실제 섬유 방향을 측정한 값이 아니라, 절개 위치와 표면 기하로 정한 모델 기반 방향입니다.
+            <span class="eq-inline">d = normalize(g − (g · n) n)</span></li>
+          <li><b>방향 의존 가중항</b>각 모서리가 d와 얼마나 나란한지 a<sub>ij</sub> = |ê<sub>ij</sub> · d|로 가중해 방향 정렬 변형률 S<sub>d</sub>를 구합니다. 선호 방향으로 늘어나거나 줄어든 만큼 보정 세기를 키우고, 그 배율을 기존 STC 보정량에 곱합니다. 면적 제약식 자체는 STC와 같습니다.
+            <span class="eq-inline">dirGain = γ<sub>T</sub> max(0, S<sub>d</sub>) + γ<sub>C</sub> max(0, −S<sub>d</sub>),&nbsp; Δx<sup>ASTC</sup> = dirGain · Δx<sup>STC</sup></span></li>
+          <li><b>국소 적용</b>절개 중심과의 거리 r에 따라 선형으로 줄어드는 가중치로 이방성 세기를 조절합니다. 절개 주변에서만 강하게 작동하고, 먼 조직은 과하게 비틀리지 않습니다.
+            <span class="eq-inline">α<sup>eff</sup> = α<sub>0</sub> · w<sub>local</sub>(r)</span></li>
+        </ol>
+        <div class="stat-row" style="margin-top:28px">
+          <div><b>153</b><span>FPS 유지 (6.5 ms 변형)</span></div>
+          <div><b>9.29</b><span>절개 벌어짐, 기존과 동일</span></div>
+          <div><b>+11.2%</b><span>방향 정렬 변형 비율 R<sub>dir</sub></span></div>
+          <div><b>2.25×</b><span>국소 반응성</span></div>
+        </div>
+        <p class="muted">같은 절개 시나리오에서 방향 항을 뺀 ISO-Baseline과 비교한 값입니다. 절개 형상과 실시간 성능은 그대로 두고, 절개 주변 변형의 방향 정렬과 국소 반응을 강화했습니다.</p>
+        <div class="alg-sub">
+          <h4>실제로 어떻게 쓰일 수 있나</h4>
+          <ul class="uses">
+            <li><b>가상 수술 훈련</b>절개 방향에 따라 피부가 다르게 벌어지고 주름이 정렬되는 반응을 153 FPS 수준의 실시간 환경에서 보여줄 수 있습니다. 어느 방향으로 절개할지 연습하는 훈련 시나리오에 쓸 수 있습니다.</li>
+            <li><b>해부학 데이터와 연결</b>지금의 방향장은 절개 위치로 정한 모델이지만, 같은 자리에 실제 섬유 배향이나 측정한 피부 장력 방향을 넣으면 해부학적 이방성을 그대로 반영할 수 있습니다.</li>
+            <li><b>결이 있는 다른 재질</b>삼각형 제약에 방향 가중을 곱하는 구조라 피부에 한정되지 않습니다. 방향마다 늘어나는 정도가 다른 직물이나 근육 같은 표면에도 같은 방식을 적용할 수 있습니다.</li>
+            <li><b>기존 파이프라인에 그대로</b>기존 STC 계산에 가중항을 곱할 뿐이라 병렬 그룹핑 구조를 바꾸지 않고 통합되며, 처리 시간도 거의 같습니다.</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- VDR -->
+    <article class="report" data-report>
+      <div class="report-head">
+        <div>
+          <div class="code-name">VDR</div>
+          <p class="full">CT 영상 기반 변형 시뮬레이션을 위한 혼합형 프레임워크: HP-ChainMail·PBD 활성 블록 기반 제한 보정</p>
+          <div class="meta">
+            <span class="chip k">석사 학위논문 2026</span><span class="chip k">논문 진행 중</span><span class="chip k">연구실 코드베이스</span>
+            <span class="chip">C++</span><span class="chip">CUDA 12.6</span><span class="chip">HP-ChainMail</span><span class="chip">PBD</span><span class="chip">Qt 6</span><span class="chip">Volume rendering</span>
+          </div>
+        </div>
+        <dl class="facts">
+          <div class="fact"><dt>내 역할</dt><dd>학위논문 저자. HP-ChainMail과 PBD의 직렬 혼합 구조, Active Block Restricted Solve를 설계·구현하고, 연구 코드를 Qt 기반 실험 도구로 모듈화</dd></div>
+          <div class="fact"><dt>결과</dt><dd>국부 변형에서 전체 도메인 PBD 보정 대비 보정 시간 10.77배(Small), 7.96배(Medium) 단축. 한성대학교 석사학위논문(2026)</dd></div>
+        </dl>
+      </div>
+      <div class="tabs" role="tablist" aria-label="VDR 보고서">
+        <button role="tab" aria-selected="true"><span class="n">1</span>개요</button>
+        <button role="tab" aria-selected="false"><span class="n">2</span>알고리즘</button>
+        <button role="tab" aria-selected="false"><span class="n">3</span>Qt 모듈화</button>
+        <button role="tab" aria-selected="false"><span class="n">4</span>성능</button>
+        <button role="tab" aria-selected="false"><span class="n">5</span>개선</button>
+      </div>
+      <div class="panel" role="tabpanel">
+        <div class="panel-grid">
+          <div>
+            <p>CT 볼륨으로 가상 수술 환경을 만들면 피부, 지방, 근육, 뼈가 실제 인체 구조 그대로 들어옵니다. 대신 해상도를 100³ 정도로 낮춰도 격자 요소가 백만 개 규모라, 사용자가 조직을 당기거나 누를 때 빠르게 반응하면서 체적 구조도 무너지지 않게 하는 계산 구조가 필요합니다.</p>
+            <p>ChainMail은 입력을 빠르게 퍼뜨리지만 부피 같은 구조 제약을 지키지 못하고, PBD는 안정적이지만 한 점에 준 변위가 주변으로 잘 퍼지지 않습니다. 그래서 한 기법으로 해결하지 않고 역할을 나눴습니다.</p>
+          </div>
+          <ol class="flow-v">
+            <li><b>사용자 입력</b>조작을 epiCenter 위치와 입력 방향 벡터 g로 바꿉니다.</li>
+            <li><b>HP-ChainMail 구조 예측</b>변형을 주변으로 빠르게 전파해 중간 변형 상태 x<sub>prop</sub>와 활성 블록 집합 B<sub>active</sub>를 만듭니다.</li>
+            <li><b>PBD 제약 보정</b>x<sub>prop</sub>에서 출발해(warm-start) B<sub>active</sub>에 연결된 거리·부피·이면각 제약만 보정합니다.</li>
+            <li><b>시각화</b>최종 변형 결과를 GPU 볼륨 렌더링으로 그립니다.</li>
+          </ol>
+        </div>
+        <figure class="shot shot-diag" style="margin-top:28px"><img src="img/vdr-pipeline.png" alt="사용자 입력, HP-ChainMail 구조 예측, PBD 제약 보정, 가시화로 이어지는 4단계 파이프라인 도식" loading="lazy" width="1672" height="941"><figcaption>학위논문 그림 3-1. 제안 혼합형 변형 프레임워크의 전체 흐름</figcaption></figure>
+        <div class="alg-sub">
+          <h4>구성 요소의 역할</h4>
+          <ul class="uses">
+            <li><b>HP-ChainMail: 구조 예측자</b>정밀한 평형해가 아니라, 사용자가 의도한 변형의 대략적인 구조를 빠르게 만듭니다. 최종 해석기가 아닙니다.</li>
+            <li><b>PBD: 제약 보정자</b>변형을 처음부터 만들지 않고, ChainMail이 만든 구조에 남은 거리·부피·이면각 제약 위반을 줄여 안정화합니다.</li>
+            <li><b>Active Block Restricted Solve</b>ChainMail 전파가 지나간 블록 정보를 PBD 보정 범위로 재사용해, 변형이 일어난 곳만 보정합니다.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="panel" role="tabpanel" hidden>
+        <h3 class="alg-title">ChainMail이 모양을 먼저 잡고, PBD는 움직인 곳만 고칩니다</h3>
+        <p class="alg-lede">기여는 HP-ChainMail이나 PBD를 새로 정의한 데 있지 않습니다. HP-ChainMail을 PBD 앞의 구조 예측 단계로 두고, 그 결과인 x<sub>prop</sub>와 B<sub>active</sub>를 PBD의 초기 상태와 제약 평가 범위로 다시 쓰는 구조입니다.</p>
+        <div class="alg-sub">
+          <h4>HP-ChainMail 전파와 PBD warm-start</h4>
+          <div class="panel-grid">
+            <div>
+              <p class="muted">이웃 요소의 상대 변위가 물성별 허용 범위를 벗어나면 그 범위 안으로 끌어오면서 변형을 퍼뜨립니다. 이렇게 만든 x<sub>prop</sub>에서 PBD를 시작하는 것을 warm-start, 변형 전 상태에서 시작하는 기존 방식을 cold-start로 구분했습니다.</p>
+              <p class="muted">반복 종료에는 정점 위치 변화량의 최댓값과 부피 제약 위반량의 개선율을 씁니다. ChainMail이 edge 구조는 먼저 잡아주지만 사면체 부피는 보장하지 않기 때문에, 거리 대신 부피 개선이 멈췄는지를 봅니다.</p>
+            </div>
+            <div class="eq">
+              <div>x<sub>prop</sub> = P(x<sub>0</sub>, u) <span>HP-ChainMail 구조 예측</span></div>
+              <div>x<sub>final</sub> = S(x<sub>prop</sub>) <span>PBD 제약 보정</span></div>
+              <div>d<sub>min</sub> ≤ x<sub>j</sub> − x<sub>i</sub> ≤ d<sub>max</sub> <span>상대 변위 허용 범위</span></div>
+              <div>C = C<sub>d</sub> ∪ C<sub>v</sub> ∪ C<sub>θ</sub> <span>거리·부피·이면각 제약</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="alg-sub">
+          <h4>Active Block Restricted Solve</h4>
+          <p class="muted" style="max-width:46em">볼륨을 8³ 블록으로 나누고, ChainMail 전파가 실제로 지나간 블록을 B<sub>active</sub>로 기록합니다. 원래 ChainMail에서 이 정보는 전파를 관리하는 용도였는데, 이를 PBD가 어디를 보정할지 정하는 범위로 재사용했습니다. 전파가 끝나면 B<sub>active</sub>는 고정되고, PBD는 전체 도메인 대신 이 블록에 연결된 제약만 평가합니다.</p>
+          <figure class="shot shot-diag" style="margin-top:18px;max-width:760px"><img src="img/vdr-active.png" alt="사용자 변형 입력이 전파되어 활성 블록 집합이 정해지고, PBD 보정이 그 영역에 제한되는 도식" loading="lazy" width="1149" height="424"><figcaption>학위논문 그림 4-1. 변형 전파에 따른 활성 블록 집합과 제한 보정 영역</figcaption></figure>
+        </div>
+        <div class="alg-sub">
+          <h4>BlockConstraintTable: 블록에서 제약을 바로 찾기</h4>
+          <div class="panel-grid">
+            <ol class="flow-v">
+              <li><b>모든 관련 블록에 등록</b>거리 제약은 edge의 두 정점, 부피 제약은 사면체의 네 정점이 속한 블록 모두에 등록합니다. 대표 블록 하나에만 넣으면 활성 영역 경계에 걸친 제약이 빠질 수 있어서입니다.</li>
+              <li><b>평탄화 배열과 구간 인덱스</b>초기화 때 CPU에서 한 번 만들어 제약 유형별 연속 배열과 블록별 시작 위치·개수로 GPU에 올립니다. 반복 중에는 활성 블록의 구간만 순회합니다.</li>
+              <li><b>중복 투영 방지</b>한 제약이 여러 블록에 있으면 같은 반복에서 두 번 투영될 수 있습니다. 제약별 정수 플래그를 매 반복 0으로 초기화하고, atomicCAS로 0을 1로 처음 바꾼 스레드만 투영합니다.</li>
+            </ol>
+            <figure class="shot shot-diag"><img src="img/vdr-bct.png" alt="블록별 제약 구간을 시작 위치와 개수로 표현한 BlockConstraintTable 예시" loading="lazy" width="1153" height="766"><figcaption>학위논문 그림 5-1. BlockConstraintTable을 이용한 블록별 제약 참조</figcaption></figure>
+          </div>
+        </div>
+      </div>
+      <div class="panel" role="tabpanel" hidden>
+        <h3 class="alg-title">연구 코드를 Qt 실험 도구로 모듈화</h3>
+        <p class="alg-lede">논문에는 쓰지 않은 부분입니다. 같은 CT 볼륨과 같은 입력에서 ChainMail과 PBD 조합을 바꿔 가며 비교해야 했기 때문에, 볼륨·변형·렌더링을 갈아 끼울 수 있는 모듈로 나누고 그 위에 Qt로 실험 화면을 만들었습니다.</p>
+        <div class="panel-grid" style="margin-top:24px">
+          <figure class="qtmock" aria-label="QMainWindow 왼쪽에 GLWidget과 InfoPanel, 오른쪽 QScrollArea 안에 ControlPanel의 그룹 상자들이 쌓인 구조">
+            <div class="qm-win">
+              <div class="qm-title">QMainWindow · Volume Deformation Research</div>
+              <div class="qm-vdr">
+                <div class="qm-left">
+                  <div class="qm-cell qm-gl"><span>GLWidget : QOpenGLWidget</span><i>CUDA 렌더 프레임<br>표면 선택 · 드래그</i></div>
+                  <div class="qm-cell qm-info"><span>InfoPanel</span><i>프레임 시간 · FPS</i></div>
+                </div>
+                <div class="qm-cell qm-ctrl"><span>QScrollArea › ControlPanel</span>
+                  <ul><li>밀도 구간 (Skin / Organ / Bone)</li><li>데이터셋 (Abdomen / Head / Lower)</li><li>고정 입력 On / Off</li><li>입력 방향 g</li><li>epiCenter</li><li>절단 범위</li><li>카메라</li><li>ChainMail 실험 프리셋</li><li>기준 벤치마크</li></ul>
+                </div>
+              </div>
+            </div>
+            <figcaption>화면 구성. 왼쪽에 렌더링과 측정, 오른쪽에 QGroupBox 단위로 나눈 실험 조작부를 두었습니다.</figcaption>
+          </figure>
+          <ul class="uses one">
+            <li><b>인터페이스와 팩토리</b>Volume, Deformer, Renderer 세 인터페이스를 두고 VolumeFactory, DeformerFactory, RendererFactory가 CTVolume, ChainMail·PBD, CUDA VolumeRenderer를 만듭니다. 변형기나 렌더러를 바꿔도 화면 코드는 그대로입니다.</li>
+            <li><b>명확한 소유권</b>모듈을 std::unique_ptr로 만들어 VDR에서 MainWindow, GLWidget으로 이동시켜 GPU 자원의 수명이 한곳에서 관리됩니다.</li>
+            <li><b>시그널과 슬롯</b>ControlPanel의 시그널 12개를 GLWidget 슬롯에 연결하고, GLWidget은 프레임 시간을 InfoPanel로, 볼륨 크기를 ControlPanel 슬라이더 범위로 돌려보냅니다. 패널끼리는 서로를 모릅니다.</li>
+          </ul>
+        </div>
+        <div class="alg-sub">
+          <h4>실험을 위한 UI</h4>
+          <div class="panel-grid">
+            <ul class="uses one">
+              <li><b>비교 방법을 버튼 하나로</b>Prop Only, Restricted Active, Global Solve, Pure ChainMail, Pure PBD, Cold Restricted 프리셋으로 논문의 비교 방법(M1~M4)과 추가 조건을 같은 입력에서 바로 실행합니다.</li>
+              <li><b>입력 재현</b>고정 입력 모드에서 epiCenter와 입력 방향 g를 슬라이더와 스핀박스로 지정해, 마우스 드래그 없이도 같은 변형을 반복할 수 있습니다.</li>
+              <li><b>자동 캡처</b>MainWindow가 QTimer로 프리셋을 차례로 실행하고 수렴을 기다린 뒤 같은 카메라로 화면을 저장해, 논문 그림을 같은 조건에서 다시 만들 수 있습니다.</li>
+              <li><b>빌드와 점검</b>CMake에서 vdr 정적 라이브러리와 실행 파일을 분리하고, --display-self-test로 CUDA 없이 QOpenGLWidget 표시만 따로 검사합니다.</li>
+            </ul>
+            <div class="eq">
+              <div>connect(_controlPanel, &amp;ControlPanel::runChainmailExperiment,</div>
+              <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_glWidget, &amp;GLWidget::runChainmailExperiment);</div>
+              <div>connect(_glWidget, &amp;GLWidget::updateFrameTime,</div>
+              <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_infoPanel, &amp;InfoPanel::showFrameTime);</div>
+              <div>connect(_glWidget, &amp;GLWidget::volumeBoundsChanged,</div>
+              <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_controlPanel, &amp;ControlPanel::setVolumeBounds);</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel" role="tabpanel" hidden>
+        <div class="stat-row">
+          <div><b>10.77×</b><span>Small, 활성 블록 0.59%</span></div>
+          <div><b>7.96×</b><span>Medium, 활성 블록 3.36%</span></div>
+          <div><b>2.54×</b><span>Large, 활성 블록 18.59%</span></div>
+          <div><b>0.79 ms</b><span>Small 조건 M3 보정 시간</span></div>
+        </div>
+        <div class="panel-grid">
+          <div>
+            <p>같은 warm-start에서 제약 평가 범위만 다르게 한 M3(활성 블록)와 M4(전체 도메인)의 PBD 보정 시간(relaxMs)입니다. 변형이 국소적일수록 이득이 크고, 활성 영역이 넓어지면 전체 보정 비용에 가까워집니다.</p>
+            <p class="muted">활성 비율과 시간 비율이 정확히 비례하지 않는 것은 커널 실행, 메모리 접근, atomic 연산 같은 고정 비용 때문입니다.</p>
+            <p class="muted">실험 환경: NVIDIA GeForce RTX 3090, AMD Ryzen 9 3900X, Windows 10, C++/CUDA 12.6. Abdomen 512×512×300, Head 512×512×544, Lower body 512×512×1152 CT를 4배 다운샘플링, 블록 크기 8³.</p>
+          </div>
+          <div class="tbl-wrap"><table>
+            <thead><tr><th>변형 규모</th><th class="r">활성 블록</th><th class="r">M4 (ms)</th><th class="r">M3 (ms)</th><th class="r">속도 향상</th></tr></thead>
+            <tbody>
+              <tr><td>Small</td><td class="r">15 / 2,560</td><td class="r">8.46</td><td class="r">0.79</td><td class="r">10.77×</td></tr>
+              <tr><td>Medium</td><td class="r">86 / 2,560</td><td class="r">8.53</td><td class="r">1.07</td><td class="r">7.96×</td></tr>
+              <tr><td>Large</td><td class="r">476 / 2,560</td><td class="r">10.04</td><td class="r">3.96</td><td class="r">2.54×</td></tr>
+            </tbody>
+          </table><p class="figsrc" style="padding:8px 0 0">학위논문 표 7-5. Abdomen, Hybrid Active(M3)와 Hybrid Global(M4)</p></div>
+        </div>
+        <div class="alg-sub">
+          <h4>ChainMail만, PBD만, 혼합형 비교</h4>
+          <div class="panel-grid">
+            <div>
+              <p class="muted">M1은 ChainMail만, M2는 ChainMail 전파 없이 PBD만(cold-start), M3가 제안 방식입니다. Abdomen에서 M2는 세 변형 규모 모두 반복 상한 300회 안에 종료 조건을 만족하지 못했고, M3는 Small 59회, Medium 68회에 종료했습니다. Large에서는 M3도 300회 안에 종료하지 못했습니다.</p>
+            </div>
+            <div class="tbl-wrap"><table>
+              <thead><tr><th>규모</th><th>방법</th><th class="r">relaxMs</th><th class="r">반복</th><th class="r">종료</th></tr></thead>
+              <tbody>
+                <tr><td>Small</td><td>M1</td><td class="r">0.98</td><td class="r">–</td><td class="r">–</td></tr>
+                <tr><td></td><td>M2</td><td class="r">8.11</td><td class="r">300</td><td class="r">✗</td></tr>
+                <tr><td></td><td>M3</td><td class="r">0.79</td><td class="r">59</td><td class="r">✓</td></tr>
+                <tr><td>Medium</td><td>M1</td><td class="r">0.92</td><td class="r">–</td><td class="r">–</td></tr>
+                <tr><td></td><td>M2</td><td class="r">8.17</td><td class="r">300</td><td class="r">✗</td></tr>
+                <tr><td></td><td>M3</td><td class="r">1.07</td><td class="r">68</td><td class="r">✓</td></tr>
+                <tr><td>Large</td><td>M1</td><td class="r">0.92</td><td class="r">–</td><td class="r">–</td></tr>
+                <tr><td></td><td>M2</td><td class="r">8.25</td><td class="r">300</td><td class="r">✗</td></tr>
+                <tr><td></td><td>M3</td><td class="r">3.96</td><td class="r">300</td><td class="r">✗</td></tr>
+              </tbody>
+            </table><p class="figsrc" style="padding:8px 0 0">학위논문 표 7-4. Abdomen 변형 규모별 비교</p></div>
+          </div>
+          <div class="panel-grid" style="margin-top:24px">
+            <div>
+              <div class="shots s3 tall3"><figure class="shot"><img src="img/vdr-twist-m1.jpg" alt="Lower Body Twist, M1 결과" loading="lazy"><figcaption>M1</figcaption></figure><figure class="shot"><img src="img/vdr-twist-m2.jpg" alt="Lower Body Twist, M2 결과" loading="lazy"><figcaption>M2</figcaption></figure><figure class="shot"><img src="img/vdr-twist-m3.jpg" alt="Lower Body Twist, M3 결과" loading="lazy"><figcaption>M3</figcaption></figure></div>
+              <p class="muted" style="margin-top:12px">비틀림 조건. M1은 비틀림이 몰린 부위가 가늘어지거나 과하게 늘어나고, M3는 PBD 보정으로 M2와 비슷한 구조적 변형을 보입니다.</p>
+              <p class="figsrc">학위논문 그림 7-1 중 Lower Body / Twist</p>
+            </div>
+            <div>
+              <div class="shots s3"><figure class="shot"><img src="img/vdr-push-m1.jpg" alt="Head epiCenter Push, M1 결과" loading="lazy"><figcaption>M1</figcaption></figure><figure class="shot"><img src="img/vdr-push-m2.jpg" alt="Head epiCenter Push, M2 결과" loading="lazy"><figcaption>M2</figcaption></figure><figure class="shot"><img src="img/vdr-push-m3.jpg" alt="Head epiCenter Push, M3 결과" loading="lazy"><figcaption>M3</figcaption></figure></div>
+              <p class="muted" style="margin-top:12px">단일점 강제 변위. M2는 입력이 한 점에 몰려 뾰족하게 함몰되고, ChainMail 전파를 먼저 거친 M3는 변위가 주변으로 넓게 분산됩니다.</p>
+              <p class="figsrc">학위논문 그림 7-2. Head / epiCenter Push</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel" role="tabpanel" hidden>
+        <ul class="list">
+          <li>변형이 넓게 퍼지면 활성 블록이 늘어 전체 보정에 가까운 비용이 듭니다. Large 조건에서는 속도 향상이 2.54배로 줄고 반복 상한 안에 종료하지 못했습니다. 큰 변형 뒤 남는 제약 불일치를 줄이는 방법이 필요합니다.</li>
+          <li>측정한 시간은 방법 간 비교를 위해 보수적인 종료 조건을 쓴 결과입니다. 실제 운용처럼 고정된 소수의 반복으로 돌리는 조건에서도 따로 재야 합니다.</li>
+          <li>변형 결과 평가가 정성 비교 중심입니다. 형상 오차 같은 정량 지표를 추가해야 합니다.</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- NeuralDynaRender -->
+    <article class="report" data-report>
+      <div class="report-head">
+        <div>
+          <div class="code-name long">NeuralDynaRender</div>
+          <p class="full">NeRF로 복원한 볼륨에 PBD 변형과 CUDA 병렬 리샘플링 연결</p>
+          <div class="meta">
+            <span class="chip k">2024 캡스톤디자인 장려상</span><span class="chip k">4인 팀</span><span class="chip k">공저 논문</span>
+            <span class="chip">C++</span><span class="chip">CUDA</span><span class="chip">NeRF (instant-ngp)</span><span class="chip">PBD</span><span class="chip">OpenGL / GLSL</span><span class="chip">GLFW / ImGui</span>
+          </div>
+        </div>
+        <dl class="facts">
+          <div class="fact"><dt>내 역할</dt><dd>NeRF 볼륨과 PBD 모델 결합, 볼륨 렌더링용 리샘플링, CUDA 병렬 리샘플링</dd></div>
+          <div class="fact"><dt>결과</dt><dd>스마트폰 영상으로 만든 256³ RGBA NeRF 볼륨을 64³ PBD로 변형하고, 병렬 리샘플링과 광선 투사로 실시간 가시화. 2024 한국컴퓨터그래픽스학회 논문 게재, 캡스톤디자인 장려상</dd></div>
+        </dl>
+      </div>
+      <div class="tabs" role="tablist" aria-label="NeuralDynaRender 보고서">
+        <button role="tab" aria-selected="true"><span class="n">1</span>개요</button>
+        <button role="tab" aria-selected="false"><span class="n">2</span>알고리즘</button>
+        <button role="tab" aria-selected="false"><span class="n">3</span>성능</button>
+        <button role="tab" aria-selected="false"><span class="n">4</span>개선</button>
+      </div>
+      <div class="panel" role="tabpanel">
+        <div class="panel-grid">
+          <div>
+            <p>CT나 MRI 없이 스마트폰 영상만으로 3D 볼륨을 만들고, 그 볼륨을 물리 법칙에 따라 실시간으로 변형해 보는 시스템입니다. NeRF가 2D 영상과 카메라 정보로 색과 밀도를 가진 볼륨을 만들고, PBD가 변형을 계산하고, 병렬 리샘플링이 변형된 볼륨을 다시 채운 뒤 광선 투사로 그립니다.</p>
+            <p>신경망 출력, 물리 격자, 볼륨 렌더러가 서로 다른 해상도와 표현을 쓰기 때문에, 좌표와 보간을 일관되게 잇는 일이 핵심이었습니다. 저는 NeRF 볼륨과 PBD를 결합하고 변형 볼륨을 만드는 병렬 리샘플링을 맡았습니다.</p>
+            <ol class="flow-v" style="margin-top:22px">
+              <li><b>볼륨 생성</b>Instant-NGP로 학습한 NeRF에서 256³ RGBA 볼륨을 추출하고, 밀도를 보정·정규화한 뒤 GPU 텍스처로 올립니다.</li>
+              <li><b>물리 변형</b>실시간성을 위해 64³ 해상도의 PBD로 정점 이동을 계산합니다.</li>
+              <li><b>병렬 리샘플링</b>이동 벡터를 보간해 256³ 볼륨의 사면체를 변형하고, 내부 값을 다시 채웁니다.</li>
+              <li><b>렌더링</b>광선 투사와 알파 블렌딩으로 변형된 볼륨을 화면에 그립니다.</li>
+            </ol>
+          </div>
+          <figure class="shot shot-flow"><img src="img/ndr-flow.png" alt="이미지에서 볼륨 생성, 병렬 리샘플링 안의 PBD 변형과 렌더링으로 이어지는 GPU 파이프라인 흐름도" loading="lazy" width="590" height="544"><figcaption>게재 논문 Figure 1. 전체 알고리즘 흐름도</figcaption></figure>
+        </div>
+      </div>
+      <div class="panel" role="tabpanel" hidden>
+        <h3 class="alg-title">병렬 리샘플링: 변형된 사면체 안을 다시 채우기</h3>
+        <p class="alg-lede">물리 계산은 64³에서 하고 화면은 256³으로 그리기 때문에, 성긴 변형 결과로 고해상도 볼륨을 다시 만들어야 합니다. 볼륨을 작은 사면체로 쪼개 모든 사면체를 GPU에서 동시에 처리했습니다.</p>
+        <div class="panel-grid" style="margin-top:24px">
+          <ol class="flow-v">
+            <li><b>5T 분해</b>256³ 볼륨의 인접한 8개 복셀을 하나의 셀로 묶어 255³개 육면체를 만들고, 셀마다 5개의 사면체로 나눕니다. 규칙적인 분해라 모든 사면체의 정점 좌표를 바로 계산할 수 있습니다.</li>
+            <li><b>변형 추정</b>PBD 결과의 이동 벡터를 보간해 각 사면체 꼭짓점이 얼마나 움직였는지 구합니다.</li>
+            <li><b>후보 복셀</b>변형된 사면체마다 축 정렬 경계 상자를 계산하고, 그 안의 복셀을 후보로 고릅니다.</li>
+            <li><b>보간</b>무게중심 좌표로 원래 위치를 찾아 색과 밀도를 선형 보간합니다. 기존 방법의 16-bit 단일 채널 대신 float4 RGBA를 다루도록 텍스처 샘플링 설정을 바꿨습니다.</li>
+          </ol>
+          <div class="eq">
+            <div>λ = M′⁻¹ (x − v₀′) <span>변형 사면체의 무게중심 좌표</span></div>
+            <div>x₀ = Σ λₖ vₖ <span>원래 볼륨 위치로 역매핑</span></div>
+            <div>RGBA(x) = tex3D(x₀) <span>하드웨어 삼선형 보간</span></div>
+            <div>α = 1 − e<sup>−τ</sup> <span>NeRF 밀도 τ를 불투명도로</span></div>
+          </div>
+        </div>
+        <div class="alg-sub">
+          <h4>NeRF 밀도 보정</h4>
+          <p class="muted" style="max-width:46em">NeRF는 촬영이 집중된 중심부는 정확하지만 바깥으로 갈수록 노이즈와 먼지 같은 저밀도 입자가 생깁니다. 볼륨 중심의 타원체 바깥 복셀을 0으로 만들고, 임계값보다 낮은 밀도는 완전히 투명하게 처리했습니다. 임계값 5, 20, 35를 비교해 형상과 세부 구조가 가장 잘 드러나는 20을 택했습니다.</p>
+          <div class="shots s2" style="margin-top:18px"><figure class="shot"><img src="img/ndr-th-raw.jpg" alt="임계값 처리 전 볼륨. 저밀도 영역이 덮여 형상이 보이지 않음" loading="lazy"><figcaption>보정 전</figcaption></figure><figure class="shot"><img src="img/ndr-th-proc.jpg" alt="임계값 처리 후 볼륨. 얼굴 형상이 드러남" loading="lazy"><figcaption>보정 후</figcaption></figure></div>
+          <div class="shots s3" style="margin-top:14px"><figure class="shot"><img src="img/ndr-th5.jpg" alt="임계값 5 결과" loading="lazy"><figcaption>임계값 5. 먼지 입자까지 남음</figcaption></figure><figure class="shot"><img src="img/ndr-th20.jpg" alt="임계값 20 결과" loading="lazy"><figcaption>임계값 20 (채택)</figcaption></figure><figure class="shot"><img src="img/ndr-th35.jpg" alt="임계값 35 결과" loading="lazy"><figcaption>임계값 35. 표면 일부가 사라짐</figcaption></figure></div>
+          <p class="figsrc">게재 논문 Figure 2, 3</p>
+        </div>
+        <div class="alg-sub">
+          <h4>밀도 정규화와 렌더링</h4>
+          <div class="panel-grid">
+            <div>
+              <p class="muted">NeRF의 밀도는 0에서 무한대 범위라 그대로 쓰면 색이 왜곡됩니다. α = 1 − e<sup>−τ</sup>로 0~1의 불투명도로 바꿔 실제 색에 가깝게 맞췄습니다.</p>
+              <p class="muted">렌더링은 광선 투사와 알파 블렌딩이며, 누적 불투명도가 0.99를 넘으면 광선을 조기 종료합니다. 볼륨을 GPU 텍스처로 옮겨 하드웨어 보간, 텍스처 캐시, 자동 경계 검사를 활용했습니다.</p>
+            </div>
+            <div class="shots s2"><figure class="shot"><img src="img/ndr-alpha-before.jpg" alt="알파 정규화 전. 색이 왜곡됨" loading="lazy"><figcaption>정규화 전</figcaption></figure><figure class="shot"><img src="img/ndr-alpha-after.jpg" alt="알파 정규화 후. 실제 색에 가까움" loading="lazy"><figcaption>정규화 후</figcaption></figure></div>
+          </div>
+          <p class="figsrc">게재 논문 Figure 5</p>
+        </div>
+      </div>
+      <div class="panel" role="tabpanel" hidden>
+        <div class="stat-row">
+          <div><b>43×</b><span>512³ 볼륨의 변형 시간 (256³ 대비)</span></div>
+          <div><b>26×</b><span>512³ 볼륨의 렌더링 시간 (256³ 대비)</span></div>
+          <div><b>~1 ms</b><span>GPU 텍스처 복사 비용</span></div>
+          <div><b>64³</b><span>물리 시뮬레이션 해상도</span></div>
+        </div>
+        <div class="panel-grid">
+          <div>
+            <p>512³ 볼륨(2GB)은 256³보다 변형 시간이 약 43배, 렌더링 시간이 약 26배 더 걸렸습니다. 메모리 접근 병목으로 보고 256³(256MB)을 택했습니다. float4 볼륨이라 메모리는 기존 방법의 8배지만, 해상도를 8배 줄여 실시간성을 지켰습니다.</p>
+            <p>볼륨을 GPU 텍스처로 한 번 더 복사하는 비용은 약 700GB/s 대역폭에서 1ms 정도라, 많은 삼선형 보간에서 얻는 이득이 더 큽니다.</p>
+            <p class="muted">실험 환경: AMD Ryzen 9 3900X, 64GB 메모리, NVIDIA GeForce RTX 3090. Instant-NGP 2,500~3,000 스텝 학습, iPhone 14 Pro로 1분 20초 촬영.</p>
+          </div>
+          <div class="tbl-wrap"><table>
+            <thead><tr><th>데이터</th><th>크기</th><th class="r">채널</th><th class="r">메모리</th></tr></thead>
+            <tbody>
+              <tr><td>볼륨</td><td>256×256×256</td><td class="r">4</td><td class="r">256 MB</td></tr>
+              <tr><td>텍스처</td><td>512×512</td><td class="r">3</td><td class="r">768 KB</td></tr>
+            </tbody>
+          </table><p class="figsrc" style="padding:8px 0 0">게재 논문 Table 1</p></div>
+        </div>
+        <div class="alg-sub">
+          <h4>강성 값 비교</h4>
+          <p class="muted" style="max-width:46em">NeRF 볼륨은 표면 밀도만 학습되어 내부 밀도가 정확하지 않습니다. 밀도 평균으로 강성을 정하면 물체가 지나치게 출렁여서 강성을 사용자 지정 값으로 두고 비교했습니다. 64³ 변형체에서 1.0 미만이면 내부가 과하게 출렁여 1.0으로 고정했습니다.</p>
+          <div class="shots s4" style="margin-top:18px"><figure class="shot"><img src="img/ndr-k10a.jpg" alt="강성 1.0 결과 1" loading="lazy"><figcaption>강성 1.0</figcaption></figure><figure class="shot"><img src="img/ndr-k08a.jpg" alt="강성 0.8 결과 1" loading="lazy"><figcaption>강성 0.8</figcaption></figure><figure class="shot"><img src="img/ndr-k10b.jpg" alt="강성 1.0 결과 2" loading="lazy"><figcaption>강성 1.0</figcaption></figure><figure class="shot"><img src="img/ndr-k08b.jpg" alt="강성 0.8 결과 2" loading="lazy"><figcaption>강성 0.8</figcaption></figure></div>
+          <p class="figsrc">게재 논문 Figure 6</p>
+        </div>
+        <div class="alg-sub">
+          <h4>수식 기반 변형 모드</h4>
+          <p class="muted" style="max-width:46em">PBD 외에도 축이나 중심점을 기준으로 한 수식 변형을 같은 파이프라인에 넣었습니다. Wave는 z좌표와 시간으로 y축 방향 주기 이동, Twist는 거리와 시간에 따른 z축 회전, Bubble은 중심점 기준 방사형 확장과 수축입니다.</p>
+          <div class="shots s3" style="margin-top:18px"><figure class="shot"><img src="img/ndr-wave.jpg" alt="Wave 변형 결과" loading="lazy"><figcaption>Wave</figcaption></figure><figure class="shot"><img src="img/ndr-twist.jpg" alt="Twist 변형 결과" loading="lazy"><figcaption>Twist</figcaption></figure><figure class="shot"><img src="img/ndr-bubble.jpg" alt="Bubble 변형 결과" loading="lazy"><figcaption>Bubble</figcaption></figure></div>
+          <p class="figsrc">게재 논문 Figure 7</p>
+        </div>
+      </div>
+      <div class="panel" role="tabpanel" hidden>
+        <ul class="uses">
+          <li><b>화질</b>새 시점 영상을 학습 루프 없이 바로 변형하기 때문에 화질이 떨어지는 한계가 있습니다. 대신 실시간 변형과 빠른 연산을 얻었습니다.</li>
+          <li><b>노이즈 자동 제거</b>지금은 타원체 마스크와 고정 임계값으로 노이즈를 지웁니다. 데이터마다 자동으로 제거하는 방법이 다음 과제입니다.</li>
+          <li><b>강성 자동 보정</b>NeRF는 내부 밀도가 부정확해 강성을 사람이 정했습니다. 볼륨 특성에서 강성을 자동으로 정하는 방법을 연구할 수 있습니다.</li>
+          <li><b>활용</b>비싼 장비 없이 3D 데이터를 만들고 변형할 수 있어 공학, 교육, 의료 시뮬레이션으로 넓힐 수 있습니다.</li>
+        </ul>
+        <p class="figsrc" style="margin-top:16px">게재 논문 6장 결론 기준</p>
+      </div>
+    </article>
+
+    <!-- QtGTCG -->
+    <article class="report" data-report>
+      <div class="report-head">
+        <div>
+          <div class="code-name">QtGTCG</div>
+          <p class="full">Geometric Tools for Computer Graphics 스터디를 Qt로 직접 구현한 멀티뷰 기하 뷰어</p>
+          <div class="meta">
+            <span class="chip k">GTCG 스터디</span><span class="chip k">수학 → 구현</span>
+            <span class="chip">C++17</span><span class="chip">Qt Widgets</span><span class="chip">QOpenGLWidget</span><span class="chip">OpenGL 3.3 Core</span><span class="chip">GLSL</span><span class="chip">CMake</span>
+          </div>
+        </div>
+        <dl class="facts">
+          <div class="fact"><dt>내 역할</dt><dd>그래픽스 연구에 필요한 기하와 선형대수를 『Geometric Tools for Computer Graphics』 스터디로 공부하고, 배운 개념을 Qt 애플리케이션으로 직접 구현했습니다.</dd></div>
+          <div class="fact"><dt>결과</dt><dd>점·선분·삼각형·큐브를 Top, Front, Side, Perspective 네 시점에서 동시에 확인하는 Qt 멀티뷰 뷰어</dd></div>
+        </dl>
+      </div>
+      <div class="tabs" role="tablist" aria-label="QtGTCG 보고서">
+        <button role="tab" aria-selected="true"><span class="n">1</span>개요</button>
+        <button role="tab" aria-selected="false"><span class="n">2</span>수학 공부</button>
+        <button role="tab" aria-selected="false"><span class="n">3</span>Qt GUI</button>
+      </div>
+      <div class="panel" role="tabpanel">
+        <div class="panel-grid">
+          <figure>
+            <img src="img/qtgtcg-multiview.png" alt="Top, Front, Side, Perspective 네 시점으로 같은 도형 장면을 그린 2×2 화면" loading="lazy" width="1280" height="800">
+            <figcaption>같은 장면을 네 시점에서 그린 화면. 좌상단부터 Top, Front, Side, Perspective.</figcaption>
+          </figure>
+          <div>
+            <p>그래픽스 연구를 하려면 결국 벡터, 행렬, 기하 판정을 손으로 다룰 수 있어야 했습니다. 그래서 『Geometric Tools for Computer Graphics』(Schneider, Eberly)를 스터디로 함께 읽고, 책에서 배운 내용을 바로 코드로 옮겨 확인했습니다.</p>
+            <p>결과물은 같은 3D 장면을 네 개의 뷰로 나눠 보는 Qt 애플리케이션입니다. 도형의 정점과 법선 생성, 카메라와 투영 행렬, 화면 구성을 각각 모듈로 나눴습니다.</p>
+            <div class="callout" style="margin-top:18px">수학 개념을 이해한 데서 끝내지 않고 직접 구현해 눈으로 확인하는 습관, <br>그리고 Qt로 실제 사용할 수 있는 GUI를 구성하는 능력.</div>
+            <a class="btn notebtn" href="https://app.notion.com/p/CTGC-Study-45d57523f9ec45c79d89409dbbc9b786" target="_blank" rel="noopener">GTCG 학습 노트 보기 <span>Notion</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="panel" role="tabpanel" hidden>
+        <h3 class="alg-title">책에서 배운 개념을 코드로</h3>
+        <p class="alg-lede">각 개념을 공부한 뒤 같은 내용을 Qt의 QVector3D, QMatrix4x4로 구현하고, 네 시점에서 결과가 맞는지 확인했습니다. 공부한 내용은 <a href="https://app.notion.com/p/CTGC-Study-45d57523f9ec45c79d89409dbbc9b786" target="_blank" rel="noopener">노션 학습 노트</a>에 정리했습니다.</p>
+        <div class="study">
+          <div class="study-row">
+            <div class="study-k"><b>기하 기본 요소</b>점, 선분, 삼각형, 다면체의 표현</div>
+            <div class="study-v">점·선분·삼각형·큐브를 위치, 색, 법선을 가진 정점 데이터로 표현하고, 장면 전체의 경계 상자로 카메라 초기 위치를 잡았습니다.</div>
+          </div>
+          <div class="study-row">
+            <div class="study-k"><b>외적과 법선</b>면의 방향과 퇴화 판정</div>
+            <div class="study-v">두 변의 외적으로 삼각형 법선을 구하고, 정점 순서를 반시계(CCW)로 통일해 큐브의 법선이 모두 바깥을 향하게 했습니다. 외적 길이가 0인 퇴화 삼각형은 걸러냅니다.
+              <span class="eq-inline">n = normalize((p₁ − p₀) × (p₂ − p₀))</span></div>
+          </div>
+          <div class="study-row">
+            <div class="study-k"><b>좌표 변환</b>뷰 행렬과 카메라</div>
+            <div class="study-v">시점마다 눈의 위치, 바라보는 점, 위쪽 방향으로 뷰 행렬을 만들고, Perspective 뷰는 장면 중심을 기준으로 궤도 회전합니다.
+              <span class="eq-inline">V = lookAt(eye, target, up)</span></div>
+          </div>
+          <div class="study-row">
+            <div class="study-k"><b>투영</b>직교 투영과 원근 투영</div>
+            <div class="study-v">Top, Front, Side는 축에 정렬된 직교 투영, Perspective는 원근 투영입니다. 화면 비율이 바뀌어도 도형이 찌그러지지 않도록 종횡비 a를 투영 범위에 반영했습니다.
+              <span class="eq-inline">P<sub>ortho</sub> = ortho(−h·a, h·a, −h, h, n, f),&nbsp; P<sub>persp</sub> = perspective(45°, a, n, f)</span></div>
+          </div>
+          <div class="study-row">
+            <div class="study-k"><b>조명</b>법선과 빛의 내적</div>
+            <div class="study-v">GLSL 셰이더에서 법선과 빛 방향의 내적으로 밝기를 정하는 양면 Lambert 조명을 넣어 면의 방향을 눈으로 확인했습니다.</div>
+          </div>
+        </div>
+      </div>
+      <div class="panel" role="tabpanel" hidden>
+        <div class="panel-grid">
+          <figure class="qtmock" aria-label="QMainWindow 안에 2×2 QGridLayout이 있고, 각 칸은 QFrame 안의 QLabel과 QOpenGLWidget, 아래에 상태 표시줄이 있는 구조">
+            <div class="qm-win">
+              <div class="qm-title">QMainWindow · QtGTCG</div>
+              <div class="qm-grid">
+                <div class="qm-cell"><span>QLabel "Top"</span><i>QOpenGLWidget</i></div>
+                <div class="qm-cell"><span>QLabel "Front"</span><i>QOpenGLWidget</i></div>
+                <div class="qm-cell"><span>QLabel "Side"</span><i>QOpenGLWidget</i></div>
+                <div class="qm-cell"><span>QLabel "Perspective"</span><i>QOpenGLWidget</i></div>
+              </div>
+              <div class="qm-status">QStatusBar · 조작 안내와 오류 메시지</div>
+            </div>
+            <figcaption>화면 구성. 2×2 QGridLayout의 각 칸은 QFrame 안에 QVBoxLayout으로 이름표와 OpenGL 뷰를 쌓았습니다.</figcaption>
+          </figure>
+          <ul class="uses one">
+            <li><b>레이아웃</b>QMainWindow 중앙 위젯에 QGridLayout으로 네 뷰를 배치하고, 각 뷰는 QFrame과 QVBoxLayout으로 이름표와 렌더 영역을 묶었습니다.</li>
+            <li><b>OpenGL 위젯</b>QOpenGLWidget을 상속해 컨텍스트 생성, 크기 변경, 그리기를 처리하고, QOpenGLShaderProgram과 VAO, 버퍼로 GPU 자원을 관리했습니다.</li>
+            <li><b>입력 처리</b>QMouseEvent로 드래그 회전, QWheelEvent로 줌, QKeyEvent로 R 키 카메라 초기화를 연결했습니다. 포커스를 가진 뷰만 반응합니다.</li>
+            <li><b>상태 표시와 리소스</b>QStatusBar에 조작 안내와 셰이더 오류를 띄우고, GLSL 파일은 Qt Resource(.qrc)에 넣어 실행 위치와 상관없이 불러옵니다.</li>
+            <li><b>구조</b>네 뷰가 하나의 CPU 장면을 공유하고 카메라와 GPU 자원만 뷰마다 따로 두어, 도형을 바꾸면 네 시점에 함께 반영됩니다.</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <div class="minor">
+      <article>
+        <h3>Edge of Survival</h3>
+        <p class="who">2024.03 · Unity 2022.3, C#, Photon PUN 2 · 2인 팀 (권상민, 전소진)</p>
+        <p>열대 섬과 설원에서 위험 요소를 피해 나침반을 찾고 탈출하는 싱글·멀티플레이 대피 시뮬레이션입니다.</p>
+        <dl class="facts">
+          <div class="fact"><dt>내 역할</dt><dd>Photon 에셋으로 멀티플레이 환경을 구축하고, 무인도 맵의 조난 시나리오 설계부터 적 생성·자원 수집·탈출까지 게임 로직과 이벤트를 프로그래밍했습니다. 체력 바, 타이머, 나침반 등 게임 UI를 디자인하고 구현했으며, 스토리보드 작성과 일정 관리, 발표 자료 작성으로 프로젝트를 구체화하고 이끌었습니다.</dd></div>
+          <div class="fact"><dt>정리하며 고친 것</dt><dd>방장만 방 소유 탈출문을 생성하도록 변경, 로컬 소유권 검사로 다른 플레이어의 나침반 소모 방지, 이동 속도와 중력 분리</dd></div>
+        </dl>
+        <div class="deck" data-deck>
+          <figure class="deck-main"><img src="img/eos-1.jpg" alt="표지 슬라이드" loading="lazy" width="1333" height="750"><figcaption>표지</figcaption></figure>
+          <div class="deck-thumbs"><button type="button" class="thumb on" data-src="img/eos-1.jpg" data-cap="표지" aria-label="표지 슬라이드 보기"><img src="img/eos-1.jpg" alt="" loading="lazy"></button><button type="button" class="thumb" data-src="img/eos-15.jpg" data-cap="구현 화면: 무인도와 설원 맵" aria-label="구현 화면: 무인도와 설원 맵 슬라이드 보기"><img src="img/eos-15.jpg" alt="" loading="lazy"></button><button type="button" class="thumb" data-src="img/eos-16.jpg" data-cap="핵심 기능: 멀티플레이와 위험 요소" aria-label="핵심 기능: 멀티플레이와 위험 요소 슬라이드 보기"><img src="img/eos-16.jpg" alt="" loading="lazy"></button><button type="button" class="thumb" data-src="img/eos-17.jpg" data-cap="핵심 기능: 체력 게이지와 실패" aria-label="핵심 기능: 체력 게이지와 실패 슬라이드 보기"><img src="img/eos-17.jpg" alt="" loading="lazy"></button><button type="button" class="thumb" data-src="img/eos-18.jpg" data-cap="핵심 기능: 나침반과 탈출" aria-label="핵심 기능: 나침반과 탈출 슬라이드 보기"><img src="img/eos-18.jpg" alt="" loading="lazy"></button></div>
+          <div class="deck-dl"><a class="btn dl" href="files/edge-of-survival.pdf" target="_blank" rel="noopener" data-file="files/edge-of-survival.pdf" data-name="Edge_of_Survival_발표자료.pdf">발표자료 받기 <span>PDF · 2.9MB</span></a><span class="dl-msg" aria-live="polite"></span></div>
+        </div>
+      </article>
+      <article>
+        <h3>Fire Evacuation</h3>
+        <p class="who">2023.09 · 가상현실 과목 · Unity 2022.3, C# · 2인 팀 (이영재, 전소진)</p>
+        <p>실내·야외 화재 상황에서 이동과 대피 행동을 체력 변화에 연결한 대피 시뮬레이터입니다.</p>
+        <dl class="facts">
+          <div class="fact"><dt>내 역할</dt><dd>야외(Outdoor) 장면 전체와 장면 흐름 담당. 산악 지형과 환경 조성, 확산하는 야외 화재 스크립트, 플레이어 높이 좌표에 따라 119 신고 지점(CallBox)이 생기는 행동 스크립트를 만들었습니다. 실내·야외 장면 전환과 사망 시 장면 처리, 야외 체력 감소와 그라데이션 체력 바, 화재 행동 강령 안내판도 구현했습니다.</dd></div>
+          <div class="fact"><dt>정리하며 고친 것</dt><dd>화재 오브젝트가 생성기를 재귀 복제하던 문제, 성공 후에도 체력이 줄던 상태 처리, 신고 지점 높이와 트리거 물리 구성</dd></div>
+        </dl>
+        <div class="deck" data-deck>
+          <figure class="deck-main"><img src="img/fire-1.jpg" alt="표지 슬라이드" loading="lazy" width="1333" height="750"><figcaption>표지</figcaption></figure>
+          <div class="deck-thumbs"><button type="button" class="thumb on" data-src="img/fire-1.jpg" data-cap="표지" aria-label="표지 슬라이드 보기"><img src="img/fire-1.jpg" alt="" loading="lazy"></button><button type="button" class="thumb" data-src="img/fire-18.jpg" data-cap="시작 화면: 실내·야외 선택" aria-label="시작 화면: 실내·야외 선택 슬라이드 보기"><img src="img/fire-18.jpg" alt="" loading="lazy"></button><button type="button" class="thumb" data-src="img/fire-19.jpg" data-cap="실내: 화재 발생과 체력 감소" aria-label="실내: 화재 발생과 체력 감소 슬라이드 보기"><img src="img/fire-19.jpg" alt="" loading="lazy"></button><button type="button" class="thumb" data-src="img/fire-23.jpg" data-cap="야외: 산불 속 대피" aria-label="야외: 산불 속 대피 슬라이드 보기"><img src="img/fire-23.jpg" alt="" loading="lazy"></button><button type="button" class="thumb" data-src="img/fire-24.jpg" data-cap="야외: 신고 후 생존" aria-label="야외: 신고 후 생존 슬라이드 보기"><img src="img/fire-24.jpg" alt="" loading="lazy"></button></div>
+          <div class="deck-dl"><a class="btn dl" href="files/fire-evacuation.pdf" target="_blank" rel="noopener" data-file="files/fire-evacuation.pdf" data-name="Fire_Evacuation_발표자료.pdf">발표자료 받기 <span>PDF · 3.0MB</span></a><span class="dl-msg" aria-live="polite"></span></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- about -->
+  <section class="wrap" id="about" aria-labelledby="a-h">
+    <div class="sec-head">
+      <h2 id="a-h">나에 대해</h2>
+      <p>잘하는 것과 부족한 것을 실제 작업으로 설명합니다.</p>
+    </div>
+    <div class="about">
+      <article class="growth">
+        <h3>같은 문제를 세 번 다시 풀었습니다</h3>
+        <p>피부 표면 장력이라는 한 가지 문제를 3년 동안 이어서 다뤘습니다. 매번 이전 결과의 한계에서 다음 질문이 나왔습니다.</p>
+        <div class="steps">
+          <div><span class="y">2024</span><p class="w">중심점 방향 수축</p><p>캡스톤에서 표면을 중심 쪽으로 당기는 프로토타입을 만들었습니다. 보기에는 그럴듯했지만 물리적 기준이 없었습니다.</p></div>
+          <div><span class="y">2025</span><p class="w">기준 면적 제약 STC</p><p>기준 면적과의 차이로 제약을 다시 정의해 제1저자 논문으로 냈습니다. 비용을 해상도별로 측정했습니다.</p></div>
+          <div><span class="y">2026</span><p class="w">방향성 ASTC</p><p>등방성의 한계를 넘기 위해 방향장을 더했습니다. 성능을 유지하며 방향 정렬 변형을 11.2% 높였습니다.</p></div>
+        </div>
+        <p style="margin-top:6px">이 과정에서 <strong>그럴듯해 보이는 결과와 맞는 결과는 다르다</strong>는 것을 배웠습니다. 그래서 결과마다 무엇으로 확인했는지 함께 적습니다.</p>
+      </article>
+      <article>
+        <h3>잘하는 것</h3>
+        <p><strong>복잡한 문제를 작은 검사로 쪼개는 것.</strong> NeuralDynaRender의 화면 깨짐을 복셀 쓰기 경쟁, 경계 인덱스, ray-box 교차 오타로 나눠 하나씩 재현하고 고쳤습니다.</p>
+        <p><strong>끝까지 붙잡는 끈기와 책임감.</strong> 학부연구생 약 1년 6개월부터 석사 졸업까지 같은 연구 주제를 놓지 않았고, 졸업 후에도 모든 저장소를 다시 점검했습니다.</p>
+      </article>
+      <article>
+        <h3>부족한 것</h3>
+        <p><strong>세부 완성도에 오래 머무는 편입니다.</strong> 그래서 실험 전에 "무엇이 확인되면 끝인가"를 먼저 적습니다. STC 후속 실험 계획도 판단 기준부터 정했습니다.</p>
+        <p><strong>하드웨어 GPU 프로파일링 경험이 아직 적습니다.</strong> Nsight 같은 도구로 커널과 프레임을 깊게 분석하는 경험을 가장 먼저 채우고 싶습니다.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- history -->
+  <section class="wrap" id="history" aria-labelledby="h-h">
+    <div class="sec-head">
+      <h2 id="h-h">이력</h2>
+      <p>경력과 활동은 최근 순서입니다.</p>
+    </div>
+    <div class="xp">
+      <article class="xp-item">
+        <div class="xp-when">2026.09 – 현재</div>
+        <div class="xp-body">
+          <h3>필즈더클래식 강동둔촌센터</h3><p class="xp-role">학습관리교사 보조</p>
+          <ul><li>초등 수학 개별 진도반 학습 지도와 관리</li><li>학생별 학습 수준 분석과 맞춤형 문제 제작</li><li>학습 진도, 과제, 평가 결과 관리와 학부모 대상 학습 보고서 작성</li><li>교재와 특강 학습자료 제작·검수</li></ul>
+        </div>
+      </article>
+      <article class="xp-item">
+        <div class="xp-when">2025.03 – 2026.08</div>
+        <div class="xp-body">
+          <h3>한성대학교 컴퓨터그래픽스 연구실</h3><p class="xp-role">석사과정</p>
+          <ul><li>CUDA 기반 실시간 연조직 변형 시뮬레이션과 볼륨 렌더링 연구</li><li>ChainMail과 PBD를 결합한 하이브리드 물리엔진 설계와 구현</li><li>피부 인장 제약 모델(STC) 제안과 구현</li><li>C/C++, CUDA, Qt, OpenGL 기반 3D 시뮬레이션 소프트웨어 개발</li><li>학술 논문 작성과 학회 발표</li></ul>
+        </div>
+      </article>
+      <article class="xp-item">
+        <div class="xp-when">2025.03 – 2026.07</div>
+        <div class="xp-body">
+          <h3>한성대학교 SW중심대학사업단</h3><p class="xp-role">학생연구원</p>
+          <ul><li>교내 SW·AI 교육과 프로젝트 운영 지원</li><li>GPU 클라우드와 AI API 서비스 관리. RunPod, AWS 계정·결제·사용량 관리</li><li>교수진과 학생 대상 서비스 이용 문의 대응</li><li>교육용 소프트웨어와 클라우드 환경 구축 지원</li></ul>
+        </div>
+      </article>
+      <article class="xp-item">
+        <div class="xp-when">2023.08 – 2025.02</div>
+        <div class="xp-body">
+          <h3>한성대학교 컴퓨터그래픽스 연구실</h3><p class="xp-role">학부연구생</p>
+          <ul><li>컴퓨터그래픽스와 물리 기반 시뮬레이션 연구</li><li>NeRF와 PBD를 결합한 실시간 3D 볼륨 변형 시스템 개발</li><li>CUDA 기반 병렬 리샘플링과 볼륨 렌더링 구현</li><li>4인 팀 캡스톤디자인 프로젝트 수행 (장려상)</li><li>2024 한국컴퓨터그래픽스학회 논문 작성 참여</li></ul>
+        </div>
+      </article>
+      <article class="xp-item">
+        <div class="xp-when">2024.03 – 2024.12</div>
+        <div class="xp-body">
+          <h3>한성대학교 컴퓨터공학부</h3><p class="xp-role">학생조교</p>
+          <ul><li>학과 행정 업무와 교육 운영 지원</li><li>실습실 PC와 장비 관리</li><li>학과 행사 준비와 운영, 교수진·재학생 업무 지원</li></ul>
+        </div>
+      </article>
+      <article class="xp-item">
+        <div class="xp-when">2022 – 2023</div>
+        <div class="xp-body">
+          <h3>한성대학교 창의융합대학 학생회</h3><p class="xp-role">2023 사무국장</p>
+          <ul><li>학생회 행정과 사무 업무 관리</li><li>교내 행사 기획과 운영</li><li>학생회 구성원 간 협업과 업무 조율</li></ul>
+        </div>
+      </article>
+      <article class="xp-item">
+        <div class="xp-when">2023</div>
+        <div class="xp-body">
+          <h3>컴퓨터공학부 학술 소모임 POCS</h3><p class="xp-role">팀 프로젝트와 개발 활동</p>
+          <ul><li>4인 팀 칵테일 레시피 검색·공유 웹서비스 Cockpybara 개발, 웹 프론트엔드 담당</li><li>2023 한성공학경진대회 참가, 장려상 수상</li></ul>
+        </div>
+      </article>
+    </div>
+
+    <div class="history">
+      <div class="hist">
+        <h3>학력</h3>
+        <dl>
+          <div class="row"><dt>2025.03 – 2026.08</dt><dd>한성대학교 일반대학원 컴퓨터공학과 석사<small>학점 4.38 / 4.5</small></dd></div>
+          <div class="row"><dt>2021.03 – 2025.02</dt><dd>한성대학교 컴퓨터공학부 학사<small>학점 3.83 / 4.5</small></dd></div>
+          <div class="row"><dt>2017.03 – 2020.01</dt><dd>목동고등학교</dd></div>
+        </dl>
+      </div>
+      <div class="hist">
+        <h3>수상</h3>
+        <dl>
+          <div class="row"><dt>2024</dt><dd>한성대학교 캡스톤디자인 장려상<small>한성대학교 컴퓨터그래픽스 연구실</small></dd></div>
+          <div class="row"><dt>2023</dt><dd>한성공학경진대회 장려상<small>학술 소모임 POCS</small></dd></div>
+        </dl>
+      </div>
+      <div class="hist">
+        <h3>자격·어학</h3>
+        <dl>
+          <div class="row"><dt>필기 합격</dt><dd>정보처리기사<small>실기 최종 발표 대기</small></dd></div>
+          <div class="row"><dt>2025.03</dt><dd>2종 자동 운전면허</dd></div>
+          <div class="row"><dt>어학</dt><dd>토익 스피킹 150점<small>TOEIC Speaking · IH</small></dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <footer class="contact" id="contact">
+    <div class="wrap contact-grid">
+      <p class="big">움직이는 것을 정확하고 빠르게 그리는 일을 함께하고싶습니다.</p>
+      <div>
+        <ul>
+          <li><span>이메일</span><span class="val" id="v-mail">soz1p@naver.com</span><button class="copy" data-copy="v-mail">복사</button></li>
+          <li><span>전화</span><span class="val" id="v-tel">010-3204-2972</span><button class="copy" data-copy="v-tel">복사</button></li>
+          <li><span>GitHub</span><a class="val" id="v-gh" href="https://github.com/soz1p" target="_blank" rel="noopener">github.com/soz1p</a><button class="copy" data-copy="v-gh">복사</button></li>
+          <li class="cv-row"><span>CV</span><span class="val">국문 · English, A4 2쪽</span><span class="dlwrap"><a class="copy dl" href="files/jeon-sojin-cv.pdf" target="_blank" rel="noopener" data-file="files/jeon-sojin-cv.pdf" data-name="전소진_CV.pdf">국문</a> <a class="copy dl" href="files/jeon-sojin-cv-en.pdf" target="_blank" rel="noopener" data-file="files/jeon-sojin-cv-en.pdf" data-name="Jeon_Sojin_CV.pdf">English</a><span class="dl-msg" aria-live="polite"></span></span></li>
+        </ul>
+        <p class="foot credit">This portfolio was built with the help of Claude, an AI assistant.</p>
+      </div>
+    </div>
+  </footer>
+</main>
+</div>
+<div class="editbar" id="editbar" hidden></div>
+<input type="file" id="media-input" accept="image/*,video/*" multiple hidden>
+<script type="application/json" id="page-data">{"text":{},"media":[]}</script>
+<script id="app-js">
+/* ---------- edit mode: text overrides + media, saved by republishing this page ---------- */
+const Edit=(()=>{
+  // 1. capture the untouched template before anything on the page changes it
+  const pageEl=document.getElementById('page');
+  const PRISTINE=pageEl.outerHTML;
+  const CSS=document.getElementById('app-css').textContent;
+  const JS=document.getElementById('app-js').textContent;
+  let data={text:{},media:[]};
+  try{const d=JSON.parse(document.getElementById('page-data').textContent);data={text:d.text||{},media:Array.isArray(d.media)?d.media:[]}}catch(e){}
+
+  // 2. key every editable text element by a hash of its original tag+text (stable across layout changes)
+  const SEL='h1,h2,h3,.en,p,li,dt,dd,td,th,.chip,.kind,.code-name,.stat-row b,.stat-row span,figcaption,.pill,.fit-row .req,.fit-row .ev,.fit-group,.steps .y,.callout,.eq > div,.contact span.val,h4,.alg-lede,.flow-v li b,.study-k,.study-v,.uses li b,.alg-full,.tet figcaption b,.skill-group b,.skill-group span,.xp-when,.xp-role,.xp-body li';
+  const SKIP='.ledger,.readout,.tabs,.chart,.bar,.hint,.media-slot,.editbar,.chart-legend,.deck';
+  const hash=s=>{let h=5381;for(let i=0;i<s.length;i++)h=((h<<5)+h+s.charCodeAt(i))|0;return(h>>>0).toString(36)};
+  const ALLOWED=new Set(['B','STRONG','U','CODE','SUB','SUP','SMALL','EM','I','BR']);
+  function clean(html){
+    const t=document.createElement('template');t.innerHTML=html;
+    const walk=(node,out)=>{
+      for(const n of [...node.childNodes]){
+        if(n.nodeType===3){out.appendChild(document.createTextNode(n.textContent))}
+        else if(n.nodeType===1){
+          if(ALLOWED.has(n.tagName)){const e=document.createElement(n.tagName.toLowerCase());walk(n,e);out.appendChild(e)}
+          else if(n.tagName==='DIV'||n.tagName==='P'){if(out.childNodes.length)out.appendChild(document.createElement('br'));walk(n,out)}
+          else walk(n,out);
+        }
+      }
+    };
+    const out=document.createElement('div');walk(t.content,out);return out.innerHTML;
+  }
+  // only elements whose markup is plain inline text can be edited whole; others are left to their children
+  const plain=e=>[...e.querySelectorAll('*')].every(c=>ALLOWED.has(c.tagName));
+  const els=[...pageEl.querySelectorAll(SEL)].filter(e=>!e.closest(SKIP)&&plain(e));
+  const set=new Set(els), editable=els.filter(e=>{let a=e.parentElement;while(a&&a!==pageEl){if(set.has(a))return false;a=a.parentElement}return true});
+  const original={}, raw={}, seen={};
+  editable.forEach(e=>{
+    const base=hash(e.tagName+'|'+e.textContent.trim());seen[base]=(seen[base]||0)+1;
+    const k=base+'.'+seen[base];e.dataset.ek=k;raw[k]=e.innerHTML;original[k]=clean(e.innerHTML);
+  });
+  const applyText=()=>editable.forEach(e=>{const k=e.dataset.ek;e.innerHTML=k in data.text?clean(data.text[k]):raw[k]});
+  applyText();
+
+  // 3. media slots: one gallery per project report, per small project, and under "나에 대해"
+  const slots={};
+  pageEl.querySelectorAll('.report').forEach(r=>{const n=r.querySelector('.code-name').textContent.trim();const d=document.createElement('div');d.className='media-slot';d.dataset.slot='report-'+n;r.appendChild(d);slots[d.dataset.slot]=d});
+  pageEl.querySelectorAll('.minor article').forEach(a=>{const n=a.querySelector('h3').textContent.trim();const d=document.createElement('div');d.className='media-slot';d.dataset.slot='minor-'+n;a.appendChild(d);slots[d.dataset.slot]=d});
+  {const about=pageEl.querySelector('.about');const d=document.createElement('div');d.className='media-slot about-media';d.dataset.slot='about';about.after(d);slots.about=d}
+
+  let editing=false, assets=null, artifact=null;
+  const safeUrl=u=>typeof u==='string'&&(u.startsWith('https://')||u.startsWith('/_blob/'))?u:'';
+  function renderMedia(){
+    for(const k in slots)slots[k].replaceChildren();
+    data.media.forEach((m,i)=>{
+      const slot=slots[m.slot];const url=safeUrl(m.url);if(!slot||!url)return;
+      const fig=document.createElement('figure');fig.className='media-item';
+      let el;
+      if(m.kind==='video'){el=document.createElement('video');el.controls=true;el.playsInline=true;el.preload='metadata'}
+      else{el=document.createElement('img');el.loading='lazy';el.alt=m.caption||''}
+      el.src=url;fig.appendChild(el);
+      if(editing){
+        const tools=document.createElement('div');tools.className='media-tools';
+        const cap=document.createElement('input');cap.type='text';cap.id='cap-'+m.id;cap.placeholder='설명 (선택)';cap.value=m.caption||'';
+        cap.addEventListener('input',()=>{m.caption=cap.value;dirty()});
+        const left=document.createElement('button');left.className='copy';left.type='button';left.textContent='앞으로';
+        left.addEventListener('click',()=>{let j=-1;for(let q=i-1;q>=0;q--)if(data.media[q].slot===m.slot){j=q;break}if(j>=0){[data.media[j],data.media[i]]=[data.media[i],data.media[j]];renderMedia();dirty()}});
+        const del=document.createElement('button');del.className='copy';del.type='button';del.textContent='삭제';
+        del.addEventListener('click',()=>{data.media.splice(i,1);renderMedia();dirty()});
+        tools.append(cap,left,del);fig.appendChild(tools);
+      }else if(m.caption){const fc=document.createElement('figcaption');fc.textContent=m.caption;fig.appendChild(fc)}
+      slot.appendChild(fig);
+    });
+    if(editing&&assets)for(const k in slots){
+      const b=document.createElement('button');b.type='button';b.className='media-add';b.textContent='＋ 사진·영상 추가';
+      b.addEventListener('click',()=>{pendingSlot=k;input.click()});slots[k].appendChild(b);
+    }
+  }
+  renderMedia();
+
+  // 4. edit UI
+  const bar=document.getElementById('editbar'), input=document.getElementById('media-input');
+  let pendingSlot=null, changed=false, busy=false;
+  const btn=(label,cls,fn)=>{const b=document.createElement('button');b.type='button';b.className='btn'+(cls?' '+cls:'');b.textContent=label;b.addEventListener('click',fn);return b};
+  const msg=document.createElement('span');msg.className='msg';msg.setAttribute('aria-live','polite');
+  const say=t=>{msg.textContent=t};
+  function dirty(){changed=true;say('저장하지 않은 변경이 있습니다')}
+  function drawBar(){
+    bar.replaceChildren();
+    if(!editing){bar.append(btn('편집','',start));return}
+    bar.append(msg,btn('취소','',cancel),btn('저장','primary',save));
+  }
+  function start(){
+    editing=true;document.documentElement.classList.add('editing');
+    editable.forEach(e=>{e.contentEditable='true';e.spellcheck=false});
+    say(assets?'글자를 눌러 고치고, 점선 상자로 사진·영상을 추가하세요':'글자를 눌러 고칠 수 있습니다');
+    renderMedia();drawBar();
+  }
+  function stop(){
+    editing=false;document.documentElement.classList.remove('editing');
+    editable.forEach(e=>e.removeAttribute('contenteditable'));renderMedia();drawBar();
+  }
+  let snapshot=null;
+  function cancel(){if(snapshot)data=JSON.parse(snapshot);applyText();changed=false;stop()}
+  pageEl.addEventListener('input',e=>{if(editing&&e.target.closest('[data-ek]'))dirty()});
+  pageEl.addEventListener('paste',e=>{if(!editing||!e.target.closest('[data-ek]'))return;e.preventDefault();const t=(e.clipboardData||window.clipboardData).getData('text/plain');document.execCommand('insertText',false,t)});
+  pageEl.addEventListener('keydown',e=>{if(editing&&e.key==='Enter'&&e.target.closest('[data-ek]')){e.preventDefault();if(e.shiftKey)document.execCommand('insertLineBreak')}});
+  pageEl.addEventListener('click',e=>{if(editing&&e.target.closest('a[data-ek], a [data-ek], [data-ek] a'))e.preventDefault()},true);
+
+  input.addEventListener('change',async()=>{
+    const files=[...input.files];input.value='';if(!files.length||!assets)return;
+    for(const f of files){
+      const kind=f.type.startsWith('video/')?'video':'image';
+      if(f.size>20*1024*1024){say(f.name+': 20MB를 넘는 파일은 올릴 수 없습니다. 영상은 압축하거나 짧게 잘라 주세요');continue}
+      say(f.name+' 올리는 중…');
+      try{const r=await assets.upload(f);data.media.push({id:r.id,slot:pendingSlot,kind,url:r.url,caption:''});renderMedia();dirty()}
+      catch(err){say(f.name+': 올리지 못했습니다 ('+(err&&err.code||'오류')+')')}
+    }
+  });
+
+  function buildDoc(){
+    const json=JSON.stringify(data).replace(/</g,'\\u003c');
+    const reset=':root{color-scheme:light;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}';
+    return '<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>'+reset+'</style></head><body>'
+      +'<title>'+document.title.replace(/</g,'&lt;')+'</title>\n<meta name="claude:viewport-fit-sides" content="cover">\n'
+      +'<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
+      +'<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,400..900&family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">\n'
+      +'<style id="app-css">'+CSS+'</style>\n'+PRISTINE+'\n'
+      +'<div class="editbar" id="editbar" hidden></div>\n<input type="file" id="media-input" accept="image/*,video/*" multiple hidden>\n'
+      +'<script type="application/json" id="page-data">'+json+'<\/script>\n'
+      +'<script id="app-js">'+JS+'<\/script>\n</body></html>';
+  }
+  async function save(){
+    if(busy)return;
+    editable.forEach(e=>{const k=e.dataset.ek,v=clean(e.innerHTML);if(v===original[k])delete data.text[k];else data.text[k]=v});
+    data.media.forEach(m=>{m.caption=(m.caption||'').slice(0,300)});
+    if(!changed&&snapshot===JSON.stringify(data)){stop();return}
+    busy=true;say('저장하는 중…');
+    try{await artifact.publish(buildDoc());say('저장했습니다. 새 버전으로 다시 불러옵니다');changed=false}
+    catch(err){
+      const c=err&&err.code;
+      if(c==='conflict')say('다른 곳에서 먼저 저장되어 최신 버전으로 다시 불러옵니다');
+      else if(c==='not_writer'||c==='not_granted'){say('이 화면에서는 저장할 권한이 없습니다');bar.hidden=true}
+      else if(c==='rate_limited')say('저장이 너무 잦습니다. 잠시 후 다시 저장하세요');
+      else say('저장하지 못했습니다 ('+(c||'오류')+'). 잠시 후 다시 시도하세요');
+    }
+    busy=false;
+  }
+  const origStart=start;
+  start=function(){snapshot=JSON.stringify(data);origStart()};
+
+  // 5. show the edit button only to people who can change the page
+  (async()=>{
+    try{
+      if(!window.claude||!claude.use)return;
+      artifact=await claude.use('artifact');if(!artifact)return;
+      const user=await claude.use('user');
+      if(user&&!(await user.canEdit()))return;
+      assets=await claude.use('assets');
+      drawBar();bar.hidden=false;
+    }catch(e){}
+  })();
+  return {};
+})();
+
+/* ---------- tabs ---------- */
+document.querySelectorAll('[data-report]').forEach(rep=>{
+  const tabs=[...rep.querySelectorAll('[role=tab]')];
+  const panels=[...rep.querySelectorAll('[role=tabpanel]')];
+  const select=i=>{
+    tabs.forEach((t,j)=>{t.setAttribute('aria-selected',j===i);t.tabIndex=j===i?0:-1});
+    panels.forEach((p,j)=>p.hidden=j!==i);
+    if(panels[i].querySelector('#stc-chart')) drawChart();
+  };
+  tabs.forEach((t,i)=>{
+    t.addEventListener('click',()=>select(i));
+    t.addEventListener('keydown',e=>{
+      if(e.key==='ArrowRight'||e.key==='ArrowLeft'){
+        const n=(i+(e.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;select(n);tabs[n].focus();e.preventDefault();
+      }
+    });
+  });
+  select(0);
+});
+
+/* ---------- copy ---------- */
+document.querySelectorAll('.copy').forEach(b=>{
+  b.addEventListener('click',()=>{
+    const el=document.getElementById(b.dataset.copy);
+    const text=el.textContent.trim();
+    const done=()=>{b.textContent='복사됨';setTimeout(()=>b.textContent='복사',1500)};
+    const fallback=()=>{const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='선택됨';setTimeout(()=>b.textContent='복사',1500)};
+    try{navigator.clipboard.writeText(text).then(done,fallback)}catch(e){fallback()}
+  });
+});
+
+/* ---------- slide decks: thumbnails and presentation download ---------- */
+document.querySelectorAll('[data-deck]').forEach(d=>{
+  const img=d.querySelector('.deck-main img'), cap=d.querySelector('.deck-main figcaption');
+  d.querySelectorAll('.thumb').forEach(t=>t.addEventListener('click',()=>{
+    d.querySelectorAll('.thumb').forEach(x=>x.classList.toggle('on',x===t));
+    img.src=t.dataset.src; img.alt=t.dataset.cap+' 슬라이드'; cap.textContent=t.dataset.cap;
+  }));
+});
+(async()=>{
+  let dl=null;
+  try{ if(window.claude&&claude.use) dl=await claude.use('downloads'); }catch(e){}
+  document.querySelectorAll('.dl[data-file]').forEach(b=>{
+    const msg=b.parentElement.querySelector('.dl-msg');
+    b.addEventListener('click',async ev=>{
+      if(!dl) return;            // no download capability here: the link opens the PDF in a new tab
+      ev.preventDefault();
+      if(msg) msg.textContent='준비하는 중…';
+      try{
+        const r=await fetch(b.dataset.file); if(!r.ok) throw {code:'fetch'};
+        await dl.save({filename:b.dataset.name,data:await r.blob()});
+        if(msg) msg.textContent='';
+      }catch(err){
+        const c=err&&err.code;
+        if(c==='declined'){ if(msg) msg.textContent=''; return; }
+        window.open(b.href,'_blank'); if(msg) msg.textContent='';
+      }
+    });
+  });
+})();
+
+/* ---------- chart: STC resampling time ---------- */
+function drawChart(){
+  const host=document.getElementById('stc-chart');
+  if(!host||host.dataset.done) return; host.dataset.done='1';
+  const data=[
+    {res:'A · 129×129×76',off:74.06,on:79.73,inc:7.66},
+    {res:'B · 129×129×138',off:126.52,on:131.89,inc:4.24},
+    {res:'C · 129×129×289',off:257.75,on:266.08,inc:3.23}];
+  const W=540,L=118,R=80,rowH=56,barH=16,gap=2,top=6,axisH=26;
+  const H=top+data.length*rowH+axisH, max=300, x=v=>L+(v/max)*(W-L-R);
+  const ns='http://www.w3.org/2000/svg';
+  const svg=document.createElementNS(ns,'svg');
+  svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.setAttribute('role','img');
+  svg.setAttribute('aria-label','해상도별 병렬 리샘플링 시간. STC 적용 시 3.23에서 7.66퍼센트 증가');
+  const el=(t,a,txt)=>{const e=document.createElementNS(ns,t);for(const k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;svg.appendChild(e);return e};
+  const base=top+data.length*rowH;
+  [0,100,200,300].forEach(t=>{
+    el('line',{x1:x(t),x2:x(t),y1:top,y2:base,stroke:'#e4e7ea','stroke-width':1});
+    el('text',{x:x(t),y:base+18,'text-anchor':'middle'},t===300?'300 ms':t);
+  });
+  const tip=document.createElement('div');tip.className='tip';tip.hidden=true;host.appendChild(tip);
+  const bar=(y,v,color,label,d)=>{
+    const w=x(v)-L, r=4;
+    const p=`M${L},${y} H${L+w-r} Q${L+w},${y} ${L+w},${y+r} V${y+barH-r} Q${L+w},${y+barH} ${L+w-r},${y+barH} H${L} Z`;
+    const path=el('path',{d:p,fill:color});
+    const hit=el('rect',{x:L,y:y-gap,width:Math.max(w,30),height:barH+gap*2,fill:'transparent'});
+    hit.style.cursor='default';
+    const show=()=>{tip.hidden=false;tip.textContent=`${d.res} ${label}: ${v.toFixed(2)} ms`;
+      const bb=host.getBoundingClientRect(),sc=bb.width/W;tip.style.left=(L+w/2)*sc+'px';tip.style.top=y*sc+'px'};
+    hit.addEventListener('pointerenter',show);hit.addEventListener('pointerleave',()=>tip.hidden=true);
+    return path;
+  };
+  data.forEach((d,i)=>{
+    const y=top+i*rowH+6;
+    el('text',{x:0,y:y+barH+4},d.res);
+    bar(y,d.off,'var(--chart-base)','미적용',d);
+    bar(y+barH+gap,d.on,'var(--chart-on)','적용',d);
+    el('text',{x:x(d.on)+8,y:y+barH+gap+12,class:'v'},`+${d.inc}%`);
+  });
+  host.prepend(svg);
+}
+
+/* ---------- hero background: drifting colour blobs (撫子, 藤, 浅葱, 柑子), rendered small and scaled up ---------- */
+(()=>{
+  const cv=document.getElementById('hero-bg'), hero=cv.parentElement, ctx=cv.getContext('2d');
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const css=getComputedStyle(document.documentElement);
+  const hex=h=>{h=h.trim();return[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)]};
+  const C=[1,2,3,4].map(n=>hex(css.getPropertyValue('--g'+n)));
+  const GW=96, GH=48; cv.width=GW; cv.height=GH;
+  const img=ctx.createImageData(GW,GH), PH=[0,1.7,3.4,5.1];
+  function paint(t){
+    const tt=t*.00009, cs=[];
+    for(let q=0;q<4;q++)cs.push([.58+.4*Math.cos(tt+PH[q]),.5+.48*Math.sin(tt*.8+PH[q]*1.3)]);
+    let o=0;
+    for(let y=0;y<GH;y++)for(let x=0;x<GW;x++){
+      const u=x/(GW-1), v=y/(GH-1);
+      let sw=0,r=0,g=0,b=0;
+      for(let q=0;q<4;q++){const du=(u-cs[q][0])*1.6,dv=v-cs[q][1],w=Math.exp(-(du*du+dv*dv)/.09)+1e-4;sw+=w;r+=w*C[q][0];g+=w*C[q][1];b+=w*C[q][2]}
+      // keep it pastel, and quieter behind the text on the left
+      const lift=.5+.28*Math.max(0,1-u*1.7);
+      img.data[o++]=r/sw*(1-lift)+255*lift; img.data[o++]=g/sw*(1-lift)+255*lift; img.data[o++]=b/sw*(1-lift)+255*lift; img.data[o++]=255;
+    }
+    ctx.putImageData(img,0,0);
+  }
+  let run=false;
+  const loop=t=>{if(!run)return;paint(t);requestAnimationFrame(loop)};
+  paint(performance.now());
+  if(!reduce)new IntersectionObserver(es=>{const v=es[0].isIntersecting;if(v&&!run){run=true;requestAnimationFrame(loop)}else if(!v)run=false}).observe(hero);
+})();
+
+/* ---------- PBD cloth ---------- */
+(()=>{
+  const cv=document.getElementById('cloth'), stage=document.getElementById('stage'), hint=document.getElementById('hint');
+  const ctx=cv.getContext('2d');
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const NX=34, NY=24, W=2.5, H=1.75, ITER=10, ITER_DRAG=18;
+  const N=NX*NY, pos=new Float32Array(N*3), prev=new Float32Array(N*3), inv=new Float32Array(N);
+  const idx=(i,j)=>j*NX+i;
+  for(let j=0;j<NY;j++)for(let i=0;i<NX;i++){
+    // top edge gathered to 72% of its rest width so the fabric falls into folds
+    const k=idx(i,j)*3; pos[k]=(i/(NX-1)-.5)*W*.72; pos[k+1]=.95-(j/(NY-1))*H*.55; pos[k+2]=(j/(NY-1))*H*.75+(j===0?0:Math.sin(i*.9)*.04);
+    prev.set([pos[k],pos[k+1],pos[k+2]],k);
+    inv[idx(i,j)]=(j===0&&(i%3===0||i===NX-1))?0:1;
+  }
+  const C=[];
+  const add=(a,b)=>{const dx=pos[a*3]-pos[b*3],dy=pos[a*3+1]-pos[b*3+1],dz=pos[a*3+2]-pos[b*3+2];C.push(a,b,Math.hypot(dx,dy,dz))};
+  // rest lengths from a flat sheet
+  const flat=(a,b,di,dj)=>{C.push(a,b,Math.hypot(di*W/(NX-1),dj*H/(NY-1)))};
+  for(let j=0;j<NY;j++)for(let i=0;i<NX;i++){
+    const a=idx(i,j);
+    if(i<NX-1)flat(a,idx(i+1,j),1,0);
+    if(j<NY-1)flat(a,idx(i,j+1),0,1);
+    if(i<NX-1&&j<NY-1){flat(a,idx(i+1,j+1),1,1);flat(idx(i+1,j),idx(i,j+1),1,1)}
+    if(i<NX-2)flat(a,idx(i+2,j),2,0);
+    if(j<NY-2)flat(a,idx(i,j+2),0,2);
+  }
+  const CA=new Int32Array(C.length/3*2), CL=new Float32Array(C.length/3);
+  for(let c=0;c<CL.length;c++){CA[c*2]=C[c*3];CA[c*2+1]=C[c*3+1];CL[c]=C[c*3+2]}
+  // long-range tethers: each particle stays within its rest (geodesic) distance of the nearest pin
+  const pins=[];for(let i=0;i<NX;i++)if(inv[idx(i,0)]===0)pins.push(i);
+  const tPin=new Int32Array(N), tLen=new Float32Array(N);
+  for(let j=0;j<NY;j++)for(let i=0;i<NX;i++){
+    let best=0,bd=1e9;for(const pi of pins){const d=Math.hypot((i-pi)*W/(NX-1),j*H/(NY-1));if(d<bd){bd=d;best=pi}}
+    tPin[idx(i,j)]=idx(best,0);tLen[idx(i,j)]=bd;
+  }
+  const TSLACK=1.04;
+  function tether(p,arr,o){
+    const q=tPin[p]*3,dx=arr[o]-pos[q],dy=arr[o+1]-pos[q+1],dz=arr[o+2]-pos[q+2],d=Math.hypot(dx,dy,dz),m=tLen[p]*TSLACK;
+    if(d>m&&d>0){const s=m/d;arr[o]=pos[q]+dx*s;arr[o+1]=pos[q+1]+dy*s;arr[o+2]=pos[q+2]+dz*s}
+  }
+  document.getElementById('r-v').textContent=N.toLocaleString();
+  document.getElementById('r-c').textContent=CL.length.toLocaleString();
+  document.getElementById('r-i').textContent=ITER+'–'+ITER_DRAG;
+
+  let drag=-1, dragZ=0, target=[0,0,0], t=0, avg=0;
+  const dt=1/60, g=-9.8;
+  function step(){
+    t+=dt;
+    const wind=Math.sin(t*.9)*1.4+Math.sin(t*2.3+1)*.6+.8;
+    for(let p=0;p<N;p++){
+      if(inv[p]===0||p===drag) continue;
+      const k=p*3;
+      for(let a=0;a<3;a++){
+        const v=(pos[k+a]-prev[k+a])*.992; prev[k+a]=pos[k+a];
+        let acc=a===1?g:0;
+        if(a===2) acc+=wind*(.6+.4*Math.sin(p*.37+t));
+        pos[k+a]+=v+acc*dt*dt;
+      }
+    }
+    if(drag>=0){
+      // move the grabbed point toward the cursor at a bounded speed, never past its tether
+      const k=drag*3;tether(drag,target,0);
+      const dx=target[0]-pos[k],dy=target[1]-pos[k+1],dz=target[2]-pos[k+2],d=Math.hypot(dx,dy,dz),MAXS=.06,s=d>MAXS?MAXS/d:1;
+      prev[k]=pos[k];prev[k+1]=pos[k+1];prev[k+2]=pos[k+2];pos[k]+=dx*s;pos[k+1]+=dy*s;pos[k+2]+=dz*s;
+    }
+    const iters=drag>=0?ITER_DRAG:ITER;
+    for(let it=0;it<iters;it++){
+      for(let c=0;c<CL.length;c++){
+        const a=CA[c*2],b=CA[c*2+1];
+        const wa=a===drag?0:inv[a], wb=b===drag?0:inv[b], w=wa+wb; if(w===0) continue;
+        const ka=a*3,kb=b*3, dx=pos[kb]-pos[ka],dy=pos[kb+1]-pos[ka+1],dz=pos[kb+2]-pos[ka+2];
+        const d=Math.sqrt(dx*dx+dy*dy+dz*dz)||1e-6, s=(d-CL[c])/(d*w);
+        pos[ka]+=dx*s*wa;pos[ka+1]+=dy*s*wa;pos[ka+2]+=dz*s*wa;
+        pos[kb]-=dx*s*wb;pos[kb+1]-=dy*s*wb;pos[kb+2]-=dz*s*wb;
+      }
+      for(let p=0;p<N;p++)if(inv[p]!==0&&p!==drag)tether(p,pos,p*3);
+    }
+  }
+  // camera
+  const yaw=-.42, cy=Math.cos(yaw), sy=Math.sin(yaw), D=4.2;
+  let Wp=0,Hp=0,f=0,ox=0,oy=0,dpr=1;
+  function resize(){
+    const r=stage.getBoundingClientRect(); dpr=Math.min(2,devicePixelRatio||1);
+    Wp=r.width;Hp=r.height;cv.width=Wp*dpr;cv.height=Hp*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+    f=Math.min(Wp*1.2,Hp*1.75);ox=Wp*.5;oy=Hp*.17;
+  }
+  const proj=new Float32Array(N*3);
+  function project(){
+    for(let p=0;p<N;p++){const k=p*3,x=pos[k],y=pos[k+1],z=pos[k+2];
+      const xv=x*cy-z*sy, zv=x*sy+z*cy+D; proj[k]=ox+xv*f/zv; proj[k+1]=oy-(y-.95)*f/zv; proj[k+2]=zv}
+  }
+  let col={};
+  const hex=h=>{h=h.trim();if(h.startsWith('#')){if(h.length===4)h='#'+[...h.slice(1)].map(c=>c+c).join('');return[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)]}return[200,200,200]};
+  function readColors(){const s=getComputedStyle(document.documentElement);col={g:[1,2,3,4].map(n=>hex(s.getPropertyValue('--g'+n))),front:hex(s.getPropertyValue('--cloth-front')),back:hex(s.getPropertyValue('--cloth-back')),mesh:s.getPropertyValue('--cloth-mesh').trim(),pin:s.getPropertyValue('--accent').trim(),ink:s.getPropertyValue('--ink').trim()}}
+  const tris=[];
+  for(let j=0;j<NY-1;j++)for(let i=0;i<NX-1;i++){const tone=(((i>>1)&1)+((j>>1)&1));tris.push([idx(i,j),idx(i+1,j),idx(i+1,j+1),tone],[idx(i,j),idx(i+1,j+1),idx(i,j+1),tone])}
+  const order=new Array(tris.length).fill(0).map((_,i)=>i), depth=new Float32Array(tris.length);
+  const L=(()=>{const v=[-.35,.55,-.76],m=Math.hypot(...v);return v.map(x=>x/m)})();
+  function draw(){
+    project();
+    ctx.clearRect(0,0,Wp,Hp);
+    {let by=0,bx0=1e9,bx1=-1e9;for(let p=0;p<N;p++){by=Math.max(by,proj[p*3+1]);bx0=Math.min(bx0,proj[p*3]);bx1=Math.max(bx1,proj[p*3])}
+     const cx=(bx0+bx1)/2,rx=(bx1-bx0)*.55,sy=Math.min(Hp-40,by+28);
+     const g=ctx.createRadialGradient(cx,sy,0,cx,sy,rx);g.addColorStop(0,'rgba(21,24,27,.10)');g.addColorStop(1,'rgba(21,24,27,0)');
+     ctx.save();ctx.translate(cx,sy);ctx.scale(1,.12);ctx.translate(-cx,-sy);ctx.fillStyle=g;ctx.beginPath();ctx.arc(cx,sy,rx,0,7);ctx.fill();ctx.restore()}
+    for(let i=0;i<tris.length;i++){const [a,b,c]=tris[i];depth[i]=proj[a*3+2]+proj[b*3+2]+proj[c*3+2]}
+    order.sort((p,q)=>depth[q]-depth[p]);
+    for(const ti of order){
+      const [a,b,c,tone]=tris[ti];
+      const ka=a*3,kb=b*3,kc=c*3;
+      // normal in view space
+      const ax=pos[ka]*cy-pos[ka+2]*sy, az=pos[ka]*sy+pos[ka+2]*cy, ay=pos[ka+1];
+      const bx=pos[kb]*cy-pos[kb+2]*sy, bz=pos[kb]*sy+pos[kb+2]*cy, by=pos[kb+1];
+      const cx=pos[kc]*cy-pos[kc+2]*sy, cz=pos[kc]*sy+pos[kc+2]*cy, cyy=pos[kc+1];
+      const ux=bx-ax,uy=by-ay,uz=bz-az,vx=cx-ax,vy=cyy-ay,vz=cz-az;
+      let nx=uy*vz-uz*vy,ny=uz*vx-ux*vz,nz=ux*vy-uy*vx;const m=Math.hypot(nx,ny,nz)||1;nx/=m;ny/=m;nz/=m;
+      const front=nz<0;
+      const lam=Math.abs(nx*L[0]+ny*L[1]+nz*L[2]);
+      // front: lit gradient colour lifted toward white for a soft, painterly read; back: same hue, deeper
+      const I=front?.66+.36*lam:.7+.25*lam, base=front?col.front:col.back;
+      const r=Math.min(255,base[0]*I)|0,g2=Math.min(255,base[1]*I)|0,bl=Math.min(255,base[2]*I)|0;
+      ctx.fillStyle=ctx.strokeStyle=`rgb(${r},${g2},${bl})`;
+      ctx.beginPath();ctx.moveTo(proj[ka],proj[ka+1]);ctx.lineTo(proj[kb],proj[kb+1]);ctx.lineTo(proj[kc],proj[kc+1]);ctx.closePath();
+      ctx.fill();ctx.lineWidth=.6;ctx.stroke();ctx.strokeStyle=col.mesh;ctx.lineWidth=.5;ctx.stroke();
+    }
+    // pins
+    // pin rail and pins
+    let x0=1e9,x1=-1e9,yr=0;for(let i=0;i<NX;i++){const p=idx(i,0);if(inv[p]===0){x0=Math.min(x0,proj[p*3]);x1=Math.max(x1,proj[p*3]);yr=proj[p*3+1]}}
+    ctx.strokeStyle=col.ink;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x0-18,yr);ctx.lineTo(x1+18,yr);ctx.stroke();
+    for(let i=0;i<NX;i++){const p=idx(i,0);if(inv[p]===0){ctx.beginPath();ctx.arc(proj[p*3],proj[p*3+1],3.2,0,7);ctx.fillStyle=col.pin;ctx.fill()}}
+    if(drag>=0){const k=drag*3;ctx.beginPath();ctx.arc(proj[k],proj[k+1],7,0,7);ctx.strokeStyle=col.pin;ctx.lineWidth=1.5;ctx.stroke()}
+  }
+  // interaction
+  function screenToWorld(sx,sy,zv){
+    const xv=(sx-ox)*zv/f, y=.95-(sy-oy)*zv/f, zz=zv-D;
+    return [xv*cy+zz*sy, y, -xv*sy+zz*cy];
+  }
+  const local=e=>{const r=cv.getBoundingClientRect();return[e.clientX-r.left,e.clientY-r.top]};
+  cv.addEventListener('pointerdown',e=>{
+    const [sx,sy]=local(e);let best=-1,bd=48*48;
+    for(let p=0;p<N;p++){if(inv[p]===0)continue;const dx=proj[p*3]-sx,dy=proj[p*3+1]-sy,d=dx*dx+dy*dy;if(d<bd){bd=d;best=p}}
+    if(best<0)return;
+    drag=best;dragZ=proj[best*3+2];target=screenToWorld(sx,sy,dragZ);cv.setPointerCapture(e.pointerId);cv.classList.add('dragging');hint.style.opacity=0;wake();
+  });
+  cv.addEventListener('pointermove',e=>{if(drag<0)return;const [sx,sy]=local(e);target=screenToWorld(sx,sy,dragZ)});
+  const end=()=>{drag=-1;cv.classList.remove('dragging')};
+  cv.addEventListener('pointerup',end);cv.addEventListener('pointercancel',end);
+
+  let running=false, visible=true, idle=0;
+  function frame(){
+    if(!running) return;
+    const t0=performance.now(); step(); step(); const ms=(performance.now()-t0)/2;
+    avg=avg?avg*.95+ms*.05:ms;
+    draw();
+    if((idle++&15)===0) document.getElementById('r-t').textContent=avg.toFixed(2)+' ms';
+    if(reduce&&drag<0&&idle>90){running=false;return}
+    requestAnimationFrame(frame);
+  }
+  function wake(){idle=0;if(!running&&visible){running=true;requestAnimationFrame(frame)}}
+  resize();readColors();
+  for(let s=0;s<240;s++)step();
+  draw();
+  new ResizeObserver(()=>{resize();draw()}).observe(stage);
+  new IntersectionObserver(es=>{visible=es[0].isIntersecting;if(visible&&!reduce)wake();else running=false}).observe(stage);
+  const re=()=>{readColors();draw()};
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change',re);
+  new MutationObserver(re).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+  if(!reduce) wake();
+})();
+</script>
+
+</body>
+</html>
