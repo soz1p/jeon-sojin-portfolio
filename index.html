@@ -577,6 +577,30 @@ section[aria-labelledby="pub-h"]{position:relative;z-index:2;background:transpar
 @media(prefers-reduced-motion:reduce){.hero-motion-grid{display:none}.hero-atmosphere .hero-bg{transform:scale(1.12)}.motion-reveal,.motion-reveal.motion-pending{opacity:1;translate:none;transition:none}#projects .report,#projects .minor>article,#projects .report-head::after,#projects .minor>article::after{transition:none}}
 @media(pointer:coarse){.hero-motion-grid{display:none}}
 
+
+/* Scroll-driven graphics: constraint-chain traces, staged content reveals and a reading rail. */
+.scroll-chain{position:absolute;top:0;left:0;right:0;height:9px;pointer-events:none;overflow:visible}
+.scroll-chain svg{display:block;width:100%;height:9px;overflow:visible}
+.sec-head.has-scroll-chain::before{opacity:.28}
+.scroll-chain .trace{stroke:var(--accent);stroke-width:1.4;stroke-linecap:round}
+.scroll-chain .node{fill:var(--accent);opacity:0}
+.scroll-chain .cursor{fill:var(--accent);stroke:#fff;stroke-width:1.5}
+.scroll-detail{transition:opacity .7s ease,translate .7s cubic-bezier(.2,.75,.2,1);transition-delay:var(--reveal-delay,0ms)}
+.scroll-detail.scroll-wait{opacity:.55;translate:0 13px}
+.scroll-detail:focus-within{opacity:1;translate:none;transition-delay:0ms}
+#projects .report .scroll-edge,#projects .minor>article .scroll-edge{position:absolute;top:18px;bottom:18px;left:-1px;width:3px;pointer-events:none;z-index:3;overflow:hidden;border-radius:3px}
+.scroll-edge i{display:block;height:100%;width:100%;background:linear-gradient(to bottom,var(--accent),#e8a0b8);transform-origin:top;transform:scaleY(var(--read-fill,0))}
+.scroll-orbit{position:fixed;right:clamp(10px,2vw,32px);top:50%;translate:0 -50%;width:32px;z-index:7;display:flex;flex-direction:column;align-items:center;gap:13px;opacity:0;pointer-events:none;transition:opacity .3s}
+.scroll-orbit.is-visible{opacity:1;pointer-events:auto}
+.scroll-orbit::before{content:"";position:absolute;top:11px;bottom:11px;left:50%;width:1px;background:var(--line-2);z-index:-1}
+.scroll-orbit a{position:relative;width:22px;height:22px;display:grid;place-items:center;text-decoration:none;border-radius:50%;background:transparent}
+.scroll-orbit a::before{content:"";width:7px;height:7px;box-shadow:0 0 0 3px #fff;border:1px solid #a1a9b3;border-radius:50%;background:#fff;transition:background .2s,scale .2s}
+.scroll-orbit a[aria-current="location"]::before{background:var(--accent);border-color:var(--accent);scale:1.35}
+.scroll-orbit a::after{content:attr(data-label);position:absolute;right:28px;top:50%;translate:0 -50%;padding:5px 9px;background:var(--ink);color:#fff;border-radius:4px;font:500 .72rem/1.4 var(--f-display);white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .18s}
+.scroll-orbit a:hover::after,.scroll-orbit a:focus-visible::after{opacity:1}
+@media(max-width:1280px){.scroll-orbit{display:none}}
+@media(prefers-reduced-motion:reduce){.scroll-chain,.scroll-edge,.scroll-orbit{display:none!important}.scroll-detail,.scroll-detail.scroll-wait{opacity:1;translate:none;transition:none}.sec-head.has-scroll-chain::before{opacity:1}}
+
 /* Bilingual portfolio */
 .lang-switch{display:inline-flex;align-items:center;gap:2px;border:1px solid var(--line-2);border-radius:3px;padding:2px;margin-left:6px;white-space:nowrap;flex:none;align-self:center}.lang-switch button{border:0;background:transparent;font:600 .72rem/1 var(--f-display);padding:6px 8px;color:var(--ink-2);cursor:pointer;border-radius:2px}.lang-switch button[aria-pressed="true"]{background:var(--ink);color:#fff}.lang-switch button:hover:not([aria-pressed="true"]){color:var(--accent-text)}
 html[lang="en"] .name .ko{font-size:clamp(2.25rem,4.4vw,3.8rem);letter-spacing:-.045em;overflow-wrap:normal;word-break:normal}html[lang="en"] .name .en{font-size:1rem}html[lang="en"] .hero-text,html[lang="en"] p,html[lang="en"] li,html[lang="en"] dd{word-break:normal;overflow-wrap:anywhere}html[lang="en"] .chip,html[lang="en"] .pi-k{white-space:normal}html[lang="en"] .tabs button{white-space:nowrap}html[lang="en"] .contact .big{word-break:normal}html[lang="en"] .bar nav{gap:2px}
@@ -2128,6 +2152,71 @@ function drawChart(){
     reduce.addEventListener('change',()=>{if(reduce.matches){io.disconnect();targets.forEach(el=>el.classList.remove('motion-pending'))}});
   }
   reduce.addEventListener('change',()=>{if(reduce.matches){tx=ty=mx=my=0;hero?.style.removeProperty('--parallax-x');hero?.style.removeProperty('--parallax-y');cards.forEach(c=>c.classList.remove('pointer-active'))}else schedule()});
+})();
+</script>
+<script id="portfolio-scroll-graphics">
+(()=>{
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)');
+  const ns='http://www.w3.org/2000/svg',clamp=v=>Math.max(0,Math.min(1,v));
+  const heads=[...document.querySelectorAll('section>.sec-head')];
+  const cards=[...document.querySelectorAll('#projects .report,#projects .minor>article')];
+  const chainData=[];
+  function svgEl(tag,attrs){const e=document.createElementNS(ns,tag);for(const [k,v] of Object.entries(attrs))e.setAttribute(k,v);return e}
+  heads.forEach(head=>{
+    const wrap=document.createElement('span');wrap.className='scroll-chain';wrap.setAttribute('aria-hidden','true');
+    const svg=svgEl('svg',{viewBox:'0 0 1000 9',preserveAspectRatio:'none'});
+    const line=svgEl('line',{x1:4,y1:4.5,x2:4,y2:4.5,class:'trace'});svg.append(line);
+    const nodes=[];for(let i=0;i<=18;i++){const x=4+i*992/18;const dot=svgEl('circle',{cx:x,cy:4.5,r:i===0?3:2,class:'node'});svg.append(dot);nodes.push(dot)}
+    const cursor=svgEl('circle',{cx:4,cy:4.5,r:3.2,class:'cursor'});svg.append(cursor);wrap.append(svg);head.append(wrap);head.classList.add('has-scroll-chain');chainData.push({head,line,nodes,cursor});
+  });
+  cards.forEach(card=>{const edge=document.createElement('span');edge.className='scroll-edge';edge.setAttribute('aria-hidden','true');edge.append(document.createElement('i'));card.append(edge)});
+  const sections=[...document.querySelectorAll('section[aria-labelledby],footer#contact')];
+  const rail=document.createElement('nav');rail.className='scroll-orbit';rail.setAttribute('aria-label','Page section navigation');rail.hidden=true;
+  const dots=sections.map((section,i)=>{
+    if(!section.id)section.id='publications';
+    const title=section.querySelector('h2')?.textContent.trim()||'Contact';
+    const a=document.createElement('a');a.href='#'+section.id;a.dataset.label=title;a.setAttribute('aria-label',title);rail.append(a);return a;
+  });document.body.append(rail);
+  const detailSelector='.pubs>.pub,.core-skills>article,.skills>.skill-group,.report .panel-grid>*,.report .stat-row>div,.report .alg-sub,.report .shots>figure,.minor .deck,.about>article,.xp>.xp-item,.history>.hist';
+  let revealObserver=null;
+  function initReveal(){
+    if(reduce.matches||!('IntersectionObserver' in window))return;
+    revealObserver=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.remove('scroll-wait');revealObserver.unobserve(entry.target)}});
+    },{threshold:0,rootMargin:'0px 0px -24px 0px'});
+    document.querySelectorAll(detailSelector).forEach(el=>{
+      // Do not dim content of initially hidden project tabs; those remain fully readable on selection.
+      if(el.closest('[hidden]')||!el.getClientRects().length)return;
+      if(el.getBoundingClientRect().top>innerHeight+28){
+        const siblings=[...el.parentElement.children];const index=siblings.indexOf(el);
+        el.style.setProperty('--reveal-delay',Math.min(index,3)*65+'ms');
+        el.classList.add('scroll-detail','scroll-wait');revealObserver.observe(el);
+      }
+    });
+  }
+  let raf=0;
+  function update(){
+    raf=0;if(reduce.matches)return;
+    const vh=innerHeight;
+    // Advance each constraint chain as its section enters the viewport; reverse when scrolling back.
+    for(const {head,line,nodes,cursor} of chainData){
+      const r=head.getBoundingClientRect();const p=clamp((vh*.89-r.top)/(vh*.50));const x=4+992*p;
+      line.setAttribute('x2',x.toFixed(2));cursor.setAttribute('cx',x.toFixed(2));cursor.style.opacity=p>0?'1':'0';
+      nodes.forEach((n,i)=>{n.style.opacity=clamp((p-i/18)*18).toFixed(2)});
+    }
+    for(const card of cards){
+      const b=card.getBoundingClientRect();const p=clamp((vh*.70-b.top)/Math.max(1,b.height));card.style.setProperty('--read-fill',p.toFixed(4));
+    }
+    let active=0;sections.forEach((sec,i)=>{if(sec.getBoundingClientRect().top<=vh*.40)active=i});
+    dots.forEach((dot,i)=>{if(i===active)dot.setAttribute('aria-current','location');else dot.removeAttribute('aria-current')});
+    const shown=scrollY>Math.min(420,vh*.55)&&innerWidth>1280;rail.hidden=!shown;rail.classList.toggle('is-visible',shown);
+  }
+  function schedule(){if(!raf&&!reduce.matches)raf=requestAnimationFrame(update)}
+  addEventListener('scroll',schedule,{passive:true});addEventListener('resize',schedule,{passive:true});
+  document.addEventListener('click',e=>{if(e.target.closest('.tabs button,.lang-switch button'))schedule()});
+  if('ResizeObserver' in window){const ro=new ResizeObserver(schedule);sections.forEach(sec=>ro.observe(sec))}
+  reduce.addEventListener('change',()=>{if(reduce.matches){if(raf)cancelAnimationFrame(raf);raf=0;rail.hidden=true;rail.classList.remove('is-visible');revealObserver?.disconnect();document.querySelectorAll('.scroll-wait').forEach(el=>el.classList.remove('scroll-wait'))}else schedule()});
+  initReveal();schedule();
 })();
 </script>
 </body>
