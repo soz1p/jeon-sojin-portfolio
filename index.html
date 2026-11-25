@@ -437,85 +437,6 @@ details.tableview .tbl-wrap{margin-top:10px}
 .contact .foot.credit{font-size:.73rem;line-height:1.6;color:#aeb5bd;font-style:normal;margin:24px 0 0;letter-spacing:.01em}
 @media(max-width:860px){.contact-grid{grid-template-columns:minmax(0,1fr);gap:36px}.contact{padding-block:48px 32px}}
 @media(max-width:480px){.contact li{grid-template-columns:48px minmax(0,1fr) auto;gap:8px}.contact .val{font-size:.84rem}.contact .copy{min-width:0;padding:6px 7px}.contact .cv-row{grid-template-columns:48px minmax(0,1fr)}.contact .cv-row .dlwrap{grid-column:2;justify-content:flex-start}.contact .big{font-size:clamp(1.3rem,5vw,1.65rem)}}
-
-/* ---------- polish: readability and rhythm ---------- */
-:root{--ink-2:#4b535b}
-p,li,dd,dt,h1,h2,h3,h4,figcaption,td,th,.fact dd,.pi-d{word-break:keep-all;overflow-wrap:break-word}
-[id]{scroll-margin-top:76px}
-
-/* reading progress + active section in the top bar */
-.bar .progress{position:absolute;left:0;right:0;bottom:-1px;height:2px;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--g3),var(--g2),var(--g1),var(--g4));pointer-events:none}
-.bar nav a:not(.nav-cv).on{color:var(--ink);box-shadow:inset 0 -2px 0 var(--accent)}
-
-/* hero buttons: natural widths instead of a stiff 2x2 grid */
-.cta{display:flex;flex-wrap:wrap;gap:10px}
-.cta .btn{justify-content:center;padding:12px 16px}
-
-/* publications: three papers on one line, like masses on a spring */
-.pubs{position:relative;padding-top:34px}
-.pubs::before{content:"";position:absolute;left:0;right:0;top:5px;height:1px;background:var(--line-2)}
-.pub{position:relative}
-.pub::before{content:"";position:absolute;top:-34px;left:0;width:11px;height:11px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 2px var(--ink)}
-.pub:last-child::before{background:var(--accent);box-shadow:none}
-.pub .t{font-size:1.06rem}
-@media (max-width:860px){
-  .pubs{padding-top:0;gap:0}
-  .pubs::before,.pub::before{display:none}
-  .pub{padding:4px 0 28px 22px;border-left:1px solid var(--line-2)}
-  .pub::after{content:"";position:absolute;left:-6px;top:6px;width:11px;height:11px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 2px var(--ink)}
-  .pub:last-child::after{background:var(--accent);box-shadow:none}
-  .pub:last-child{padding-bottom:4px}
-}
-
-/* project index */
-.pindex{display:grid;border-top:1px solid var(--ink);margin:-8px -12px 96px}
-.pindex a{display:grid;grid-template-columns:64px minmax(150px,210px) minmax(0,1fr) auto;gap:20px;align-items:baseline;padding:17px 12px;margin:0 -12px;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink);transition:background .15s}
-.pindex a:hover{background:var(--bg-2)}
-.pindex a:hover .pi-n{color:var(--accent-text)}
-.pi-y{font-family:var(--f-display);font-size:.82rem;font-weight:500;color:var(--ink-3);font-variant-numeric:tabular-nums}
-.pi-n{font-family:var(--f-display);font-weight:700;font-size:1.22rem;letter-spacing:-.02em;transition:color .15s}
-.pi-d{color:var(--ink-2);font-size:.93rem;line-height:1.6}
-.pi-k{font-size:.74rem;color:var(--ink-2);box-shadow:inset 0 0 0 1px var(--line-2);padding:3px 9px;border-radius:2px;white-space:nowrap;justify-self:end}
-@media (max-width:760px){
-  .pindex a{grid-template-columns:48px minmax(0,1fr);gap:4px 14px;padding:15px 8px;margin:0 -8px}
-  .pi-d,.pi-k{grid-column:2}
-  .pi-k{justify-self:start;margin-top:6px}
-}
-
-/* project reports */
-.report{margin-bottom:120px}
-.report-head{padding-top:32px}
-.tabs{display:flex;gap:4px;width:max-content;max-width:100%;background:var(--bg-2);padding:4px;border-radius:3px;border-bottom:0}
-.tabs button{padding:9px 14px;margin:0;border-bottom:0;border-radius:2px;color:var(--ink-2);font-size:.86rem;transition:background .15s,color .15s}
-.tabs button:hover{color:var(--ink);background:rgba(255,255,255,.6)}
-.tabs button[aria-selected="true"]{background:#fff;color:var(--ink);box-shadow:0 0 0 1px var(--line),0 1px 3px rgba(21,24,27,.06)}
-.panel{padding-top:40px}
-.stat-row{display:flex;flex-wrap:wrap;gap:20px 36px;margin:0 0 36px}
-.stat-row div{padding-top:12px;border-top:2px solid var(--ink);min-width:132px}
-.stat-row b{white-space:nowrap}
-.stat-row div:first-child{border-top-color:var(--accent)}
-.stat-row span{line-height:1.45;margin-top:4px}
-.callout{line-height:1.75}
-.facts{gap:20px}
-
-/* section intros a touch larger, body copy steadier */
-.sec-head p{font-size:1rem;color:var(--ink-2)}
-.alg-lede,.panel p{line-height:1.8}
-
-/* experience */
-.xp-item{padding:30px 0}
-.xp-body ul{gap:6px}
-.xp-body li::marker{color:var(--accent)}
-
-@media (max-width:560px){
-  .stat-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
-  .stat-row div{min-width:0}
-  .pindex{margin-inline:-8px}
-  .stat-row b{font-size:1.6rem}
-  .report{margin-bottom:88px}
-  .tabs button{padding:8px 11px;font-size:.82rem}
-}
-@media (prefers-reduced-motion: reduce){.pindex a,.pi-n,.tabs button{transition:none}}
 </style>
 
 <div id="page">
@@ -613,20 +534,13 @@ p,li,dd,dt,h1,h2,h3,h4,figcaption,td,th,.fact dd,.pi-d{word-break:keep-all;overf
       <h2 id="p-h">Projects</h2>
     </div>
 
-    <nav class="pindex" aria-label="프로젝트 목록">
-      <a href="#p-stc"><span class="pi-y">2025</span><span class="pi-n">STC</span><span class="pi-d">Skin Tension Constraint: 삼각형 면적 기반 피부 인장 제약</span><span class="pi-k">제1저자 논문</span></a>
-      <a href="#p-vdr"><span class="pi-y">2026</span><span class="pi-n">VDR</span><span class="pi-d">CT 영상 기반 변형 시뮬레이션을 위한 혼합형 프레임워크</span><span class="pi-k">석사 학위논문</span></a>
-      <a href="#p-ndr"><span class="pi-y">2024</span><span class="pi-n">NeuralDynaRender</span><span class="pi-d">NeRF로 복원한 볼륨에 PBD 변형과 CUDA 병렬 리샘플링 연결</span><span class="pi-k">캡스톤디자인 장려상</span></a>
-      <a href="#p-qtgtcg"><span class="pi-y">Study</span><span class="pi-n">QtGTCG</span><span class="pi-d">Geometric Tools for Computer Graphics 스터디를 Qt로 직접 구현한 멀티뷰 기하 뷰어</span><span class="pi-k">Qt · OpenGL</span></a>
-      <a href="#p-eos"><span class="pi-y">2024</span><span class="pi-n">Edge of Survival</span><span class="pi-d">Photon PUN 2 기반 싱글·멀티플레이 생존 시뮬레이션</span><span class="pi-k">Unity 팀 프로젝트</span></a>
-      <a href="#p-fire"><span class="pi-y">2023</span><span class="pi-n">Fire Evacuation</span><span class="pi-d">실내·야외 화재 대피 교육용 시뮬레이터</span><span class="pi-k">Unity 팀 프로젝트</span></a>
-    </nav>
+    <p class="callout" style="margin-bottom:28px"><b>Research Source Availability</b>STC, VDR, NeuralDynaRender의 연구실·공동 연구 소스코드와 원본 데이터는 비공개입니다. Research Overview에서는 공개 가능한 논문, 알고리즘 설명, 결과와 개인 기여를 제공합니다. QtGTCG와 Unity의 Source Code에서는 공개 범위를 구분한 구현 코드를 볼 수 있습니다.</p>
 
     <!-- STC -->
-    <article class="report" id="p-stc" data-report>
+    <article class="report" data-report>
       <div class="report-head">
         <div>
-          <div class="project-title-row"><div class="code-name">STC</div><a class="repo-link" href="https://github.com/soz1p/STC-Portfolio" target="_blank" rel="noopener noreferrer" aria-label="STC GitHub repository"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.49c-2.23.49-2.7-.95-2.7-.95-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82A7.7 7.7 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.49v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg><span>GitHub</span><span aria-hidden="true">↗</span></a></div>
+          <div class="project-title-row"><div class="code-name">STC</div><a class="repo-link" href="https://github.com/soz1p/STC-Showcase" target="_blank" rel="noopener noreferrer" aria-label="STC Research Overview"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.49c-2.23.49-2.7-.95-2.7-.95-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82A7.7 7.7 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.49v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg><span>Research Overview</span><span aria-hidden="true">↗</span></a></div>
           <p class="full">Skin Tension Constraint: 삼각형 면적 기반 피부 인장 제약</p>
           <div class="meta">
             <span class="chip k">2025 석사 연구</span><span class="chip k">제1저자 논문</span>
@@ -786,7 +700,7 @@ p,li,dd,dt,h1,h2,h3,h4,figcaption,td,th,.fact dd,.pi-d{word-break:keep-all;overf
           <div><b>+11.2%</b><span>방향 정렬 변형 비율 R<sub>dir</sub></span></div>
           <div><b>2.25×</b><span>국소 반응성</span></div>
         </div>
-        <p class="muted">같은 절개 시나리오에서 방향 항을 뺀 ISO-Baseline과 비교한 값입니다. 절개 형상과 실시간 성능은 그대로 두고, 절개 주변 변형의 방향 정렬과 국소 반응을 강화했습니다.</p>
+        <p class="muted">기존 제공 ASTC 원고의 예비 결과입니다. 같은 절개 시나리오에서 방향 항을 뺀 ISO-Baseline(Extended-ISO)과 비교한 값이며, 게재된 STC 논문의 수치와 구분합니다. 절개 형상과 실시간 성능은 그대로 두고, 절개 주변 변형의 방향 정렬과 국소 반응을 강화했습니다.</p>
         <div class="alg-sub">
           <h4>실제로 어떻게 쓰일 수 있나</h4>
           <ul class="uses">
@@ -800,13 +714,13 @@ p,li,dd,dt,h1,h2,h3,h4,figcaption,td,th,.fact dd,.pi-d{word-break:keep-all;overf
     </article>
 
     <!-- VDR -->
-    <article class="report" id="p-vdr" data-report>
+    <article class="report" data-report>
       <div class="report-head">
         <div>
-          <div class="project-title-row"><div class="code-name">VDR</div><a class="repo-link" href="https://github.com/soz1p/VDR-Portfolio" target="_blank" rel="noopener noreferrer" aria-label="VDR GitHub repository"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.49c-2.23.49-2.7-.95-2.7-.95-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82A7.7 7.7 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.49v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg><span>GitHub</span><span aria-hidden="true">↗</span></a></div>
+          <div class="project-title-row"><div class="code-name">VDR</div><a class="repo-link" href="https://github.com/soz1p/VDR-Showcase" target="_blank" rel="noopener noreferrer" aria-label="VDR Research Overview"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.49c-2.23.49-2.7-.95-2.7-.95-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82A7.7 7.7 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.49v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg><span>Research Overview</span><span aria-hidden="true">↗</span></a></div>
           <p class="full">CT 영상 기반 변형 시뮬레이션을 위한 혼합형 프레임워크: HP-ChainMail·PBD 활성 블록 기반 제한 보정</p>
           <div class="meta">
-            <span class="chip k">석사 학위논문 2026</span><span class="chip k">후속 논문 진행 중</span><span class="chip k">연구실 코드베이스</span>
+            <a class="chip k" href="https://dspace.hansung.ac.kr/handle/2024.oak/10820" target="_blank" rel="noopener noreferrer">Master’s Thesis 2026 ↗</a><span class="chip k">후속 논문 진행 중</span><span class="chip k">연구실 코드베이스</span>
             <span class="chip">C++</span><span class="chip">CUDA 12.6</span><span class="chip">HP-ChainMail</span><span class="chip">PBD</span><span class="chip">Qt 6</span><span class="chip">Volume rendering</span>
           </div>
         </div>
@@ -948,7 +862,7 @@ p,li,dd,dt,h1,h2,h3,h4,figcaption,td,th,.fact dd,.pi-d{word-break:keep-all;overf
               <tr><td>Medium</td><td class="r">86 / 2,560</td><td class="r">8.53</td><td class="r">1.07</td><td class="r">7.96×</td></tr>
               <tr><td>Large</td><td class="r">476 / 2,560</td><td class="r">10.04</td><td class="r">3.96</td><td class="r">2.54×</td></tr>
             </tbody>
-          </table><p class="figsrc" style="padding:8px 0 0">학위논문 표 7-5. Abdomen, Hybrid Active(M3)와 Hybrid Global(M4)</p></div>
+          </table><p class="figsrc" style="padding:8px 0 0">학위논문 표 7-5. Abdomen, Hybrid Active(M3)와 Hybrid Global(M4). 시간은 보정 반복 1회의 평균이며 가속비는 논문의 보고값입니다.</p></div>
         </div>
         <div class="alg-sub">
           <h4>ChainMail만, PBD만, 혼합형 비교</h4>
@@ -995,10 +909,10 @@ p,li,dd,dt,h1,h2,h3,h4,figcaption,td,th,.fact dd,.pi-d{word-break:keep-all;overf
     </article>
 
     <!-- NeuralDynaRender -->
-    <article class="report" id="p-ndr" data-report>
+    <article class="report" data-report>
       <div class="report-head">
         <div>
-          <div class="project-title-row"><div class="code-name long">NeuralDynaRender</div><a class="repo-link" href="https://github.com/soz1p/NeuralDynaRender-Portfolio" target="_blank" rel="noopener noreferrer" aria-label="NeuralDynaRender GitHub repository"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.49c-2.23.49-2.7-.95-2.7-.95-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82A7.7 7.7 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.49v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg><span>GitHub</span><span aria-hidden="true">↗</span></a></div>
+          <div class="project-title-row"><div class="code-name long">NeuralDynaRender</div><a class="repo-link" href="https://github.com/soz1p/NeuralDynaRender-Showcase" target="_blank" rel="noopener noreferrer" aria-label="NeuralDynaRender Research Overview"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.49c-2.23.49-2.7-.95-2.7-.95-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82A7.7 7.7 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.49v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg><span>Research Overview</span><span aria-hidden="true">↗</span></a></div>
           <p class="full">NeRF로 복원한 볼륨에 PBD 변형과 CUDA 병렬 리샘플링 연결</p>
           <div class="meta">
             <span class="chip k">2024 캡스톤디자인 장려상</span><span class="chip k">4인 팀</span><span class="chip k">공저 논문</span>
@@ -1139,10 +1053,10 @@ pOutGrid[z * 256 * 256 + y * 256 + x].w = den.w;</code></pre>
     </article>
 
     <!-- QtGTCG -->
-    <article class="report" id="p-qtgtcg" data-report>
+    <article class="report" data-report>
       <div class="report-head">
         <div>
-          <div class="project-title-row"><div class="code-name">QtGTCG</div><a class="repo-link" href="https://github.com/soz1p/QtGTCG-Portfolio" target="_blank" rel="noopener noreferrer" aria-label="QtGTCG GitHub repository"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.49c-2.23.49-2.7-.95-2.7-.95-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82A7.7 7.7 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.49v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg><span>GitHub</span><span aria-hidden="true">↗</span></a></div>
+          <div class="project-title-row"><div class="code-name">QtGTCG</div><a class="repo-link" href="https://github.com/soz1p/QtGTCG-Showcase" target="_blank" rel="noopener noreferrer" aria-label="QtGTCG Source Code"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.49c-2.23.49-2.7-.95-2.7-.95-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82A7.7 7.7 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.49v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg><span>Source Code</span><span aria-hidden="true">↗</span></a></div>
           <p class="full">Geometric Tools for Computer Graphics 스터디를 Qt로 직접 구현한 멀티뷰 기하 뷰어</p>
           <div class="meta">
             <span class="chip k">GTCG 스터디</span><span class="chip k">수학 → 구현</span>
@@ -1242,8 +1156,8 @@ pOutGrid[z * 256 * 256 + y * 256 + x].w = den.w;</code></pre>
 
     <div class="alg-sub" style="margin-bottom:24px"><h3 class="alg-title">Unity · C# 팀 프로젝트</h3><p class="alg-lede">시뮬레이션 연구 외에도 3D 환경 구성, 사용자 입력, 이벤트 처리와 UI를 연결하는 응용 소프트웨어 개발을 경험했습니다.</p></div>
     <div class="minor">
-      <article id="p-eos">
-        <div class="project-title-row"><h3>Edge of Survival</h3><a class="repo-link" href="https://github.com/soz1p/Edge-of-Survival-Portfolio" target="_blank" rel="noopener noreferrer" aria-label="Edge of Survival GitHub repository"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.49c-2.23.49-2.7-.95-2.7-.95-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82A7.7 7.7 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.49v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg><span>GitHub</span><span aria-hidden="true">↗</span></a></div>
+      <article>
+        <div class="project-title-row"><h3>Edge of Survival</h3><a class="repo-link" href="https://github.com/soz1p/Edge-of-Survival-Showcase" target="_blank" rel="noopener noreferrer" aria-label="Edge-of-Survival Source Code"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.49c-2.23.49-2.7-.95-2.7-.95-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82A7.7 7.7 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.49v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg><span>Source Code</span><span aria-hidden="true">↗</span></a></div>
         <p class="who">2024.03 · Unity 2022.3, C#, Photon PUN 2 · 2인 팀 (권상민, 전소진)</p>
         <p>열대 섬과 설원에서 위험 요소를 피해 나침반을 찾고 탈출하는 싱글·멀티플레이 생존 시뮬레이션입니다.</p>
         <dl class="facts">
@@ -1256,8 +1170,8 @@ pOutGrid[z * 256 * 256 + y * 256 + x].w = den.w;</code></pre>
           <div class="deck-dl"><a class="btn dl" href="files/edge-of-survival.pdf" target="_blank" rel="noopener" data-file="files/edge-of-survival.pdf" data-name="Edge_of_Survival_발표자료.pdf">발표자료 받기 <span>PDF · 2.9MB</span></a><span class="dl-msg" aria-live="polite"></span></div>
         </div>
       </article>
-      <article id="p-fire">
-        <div class="project-title-row"><h3>Fire Evacuation</h3><a class="repo-link" href="https://github.com/soz1p/Fire-Evacuation-Portfolio" target="_blank" rel="noopener noreferrer" aria-label="Fire Evacuation GitHub repository"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.49c-2.23.49-2.7-.95-2.7-.95-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82A7.7 7.7 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.49v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg><span>GitHub</span><span aria-hidden="true">↗</span></a></div>
+      <article>
+        <div class="project-title-row"><h3>Fire Evacuation</h3><a class="repo-link" href="https://github.com/soz1p/Fire-Evacuation-Showcase" target="_blank" rel="noopener noreferrer" aria-label="Fire-Evacuation Source Code"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.49c-2.23.49-2.7-.95-2.7-.95-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82A7.7 7.7 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.49v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg><span>Source Code</span><span aria-hidden="true">↗</span></a></div>
         <p class="who">2023.09 · 가상현실 과목 · Unity 2022.3, C# · 2인 팀 (이영재, 전소진)</p>
         <p>실내·야외 화재 상황에서 이동, 신고 및 대피 행동을 체력 변화와 연결한 교육용 대피 시뮬레이터입니다.</p>
         <dl class="facts">
@@ -1879,24 +1793,5 @@ function drawChart(){
 })();
 </script>
 
-<script id="polish-js">
-(function(){
-  var bar=document.querySelector('.bar');if(!bar)return;
-  var pr=document.createElement('div');pr.className='progress';pr.setAttribute('aria-hidden','true');bar.appendChild(pr);
-  var links=[].slice.call(document.querySelectorAll('.bar nav a[href^="#"]'));
-  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))}).filter(Boolean);
-  var raf=0;
-  function upd(){
-    raf=0;
-    var max=document.documentElement.scrollHeight-innerHeight;
-    pr.style.transform='scaleX('+(max>0?Math.min(1,scrollY/max):0)+')';
-    var cur=null,best=-Infinity;
-    secs.forEach(function(s){var t=s.getBoundingClientRect().top;if(t<innerHeight*.35&&t>best){best=t;cur=s}});
-    links.forEach(function(a){a.classList.toggle('on',!!cur&&a.getAttribute('href')==='#'+cur.id)});
-  }
-  addEventListener('scroll',function(){if(!raf)raf=requestAnimationFrame(upd)},{passive:true});
-  addEventListener('resize',upd);upd();
-})();
-</script>
 </body>
 </html>
