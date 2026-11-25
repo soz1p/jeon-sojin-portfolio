@@ -65,6 +65,7 @@ code,.code{font-family:var(--f-code);font-size:.86em;color:var(--ink)}
 .bar nav a.nav-cv{color:var(--ink);font-weight:600;box-shadow:inset 0 0 0 1px var(--ink)}
 .bar nav a.nav-cv:hover{background:var(--ink);color:#fff}
 @media (max-width:560px){.bar nav a:nth-child(n+3):not(.nav-cv){display:none}}
+@media (max-width:400px){.bar .wrap{gap:8px}.bar .me{font-size:.88rem;gap:6px}.bar .me::before{margin-right:22px}.bar nav{flex-wrap:nowrap}.bar nav a{padding:4px 6px;font-size:.72rem}}
 
 /* hero */
 .hero{position:relative;border-bottom:1px solid var(--line);overflow:hidden;background:#fff}
@@ -449,7 +450,7 @@ details.tableview .tbl-wrap{margin-top:10px}
       <a href="#about">About</a>
       <a href="#history">Experience</a>
       <a href="#contact">Contact</a>
-      <a href="files/jeon-sojin-cv.pdf" target="_blank" rel="noopener" class="nav-cv dl" data-file="files/jeon-sojin-cv.pdf" data-name="전소진_CV.pdf">CV</a>
+      <a href="files/jeon-sojin-cv.pdf" target="_blank" rel="noopener" class="nav-cv dl" data-file="files/jeon-sojin-cv.pdf" data-name="전소진_CV.pdf" download="전소진_CV.pdf">CV</a>
     </nav>
   </div>
 </header>
@@ -473,8 +474,8 @@ details.tableview .tbl-wrap{margin-top:10px}
         <div class="cta">
           <a class="btn primary" href="#projects">프로젝트 보기</a>
           <a class="btn" href="https://github.com/soz1p" target="_blank" rel="noopener">GitHub 열기</a>
-          <a class="btn dl" href="files/jeon-sojin-cv.pdf" target="_blank" rel="noopener" data-file="files/jeon-sojin-cv.pdf" data-name="전소진_CV.pdf">CV 국문 <span>PDF</span></a>
-          <a class="btn dl" href="files/jeon-sojin-cv-en.pdf" target="_blank" rel="noopener" data-file="files/jeon-sojin-cv-en.pdf" data-name="Jeon_Sojin_CV.pdf">CV English <span>PDF</span></a>
+          <a class="btn dl" href="files/jeon-sojin-cv.pdf" target="_blank" rel="noopener" data-file="files/jeon-sojin-cv.pdf" data-name="전소진_CV.pdf" download="전소진_CV.pdf">CV 국문 <span>PDF</span></a>
+          <a class="btn dl" href="files/jeon-sojin-cv-en.pdf" target="_blank" rel="noopener" data-file="files/jeon-sojin-cv-en.pdf" data-name="Jeon_Sojin_CV.pdf" download="Jeon_Sojin_CV.pdf">CV English <span>PDF</span></a>
           <span class="dl-msg" aria-live="polite"></span>
         </div>
       </div>
@@ -1162,12 +1163,11 @@ pOutGrid[z * 256 * 256 + y * 256 + x].w = den.w;</code></pre>
         <p>열대 섬과 설원에서 위험 요소를 피해 나침반을 찾고 탈출하는 싱글·멀티플레이 생존 시뮬레이션입니다.</p>
         <dl class="facts">
           <div class="fact"><dt>개인 담당 기능 · 학부 프로젝트</dt><dd><ul class="unity-contributions"><li><strong>멀티플레이 환경:</strong> Photon PUN 2 기반 네트워크 연동</li><li><strong>게임 로직:</strong> 무인도 조난 시나리오, 적 생성, 자원 수집 및 탈출 이벤트 구현</li><li><strong>UI:</strong> 체력 바, 타이머, 나침반 디자인 및 구현</li><li><strong>협업:</strong> 스토리보드, 일정 관리 및 발표자료 작성</li></ul></dd></div>
-          <div class="fact"><dt>졸업 후 공개 저장소 정비 · 2026</dt><dd>방장만 방 소유 탈출문을 생성하도록 수정하고, 로컬 소유권 검사로 다른 플레이어의 나침반 소모를 방지했습니다. 이동 속도와 중력 처리도 분리했습니다.</dd></div>
         </dl>
         <div class="deck" data-deck>
           <figure class="deck-main"><img src="img/eos-1.jpg" alt="표지 슬라이드" loading="lazy" width="1333" height="750"><figcaption>표지</figcaption></figure>
           <div class="deck-thumbs"><button type="button" class="thumb on" data-src="img/eos-1.jpg" data-cap="표지" aria-label="표지 슬라이드 보기"><img src="img/eos-1.jpg" alt="" loading="lazy"></button><button type="button" class="thumb" data-src="img/eos-15.jpg" data-cap="구현 화면: 무인도와 설원 맵" aria-label="구현 화면: 무인도와 설원 맵 슬라이드 보기"><img src="img/eos-15.jpg" alt="" loading="lazy"></button><button type="button" class="thumb" data-src="img/eos-16.jpg" data-cap="핵심 기능: 멀티플레이와 위험 요소" aria-label="핵심 기능: 멀티플레이와 위험 요소 슬라이드 보기"><img src="img/eos-16.jpg" alt="" loading="lazy"></button><button type="button" class="thumb" data-src="img/eos-17.jpg" data-cap="핵심 기능: 체력 게이지와 실패" aria-label="핵심 기능: 체력 게이지와 실패 슬라이드 보기"><img src="img/eos-17.jpg" alt="" loading="lazy"></button><button type="button" class="thumb" data-src="img/eos-18.jpg" data-cap="핵심 기능: 나침반과 탈출" aria-label="핵심 기능: 나침반과 탈출 슬라이드 보기"><img src="img/eos-18.jpg" alt="" loading="lazy"></button></div>
-          <div class="deck-dl"><a class="btn dl" href="files/edge-of-survival.pdf" target="_blank" rel="noopener" data-file="files/edge-of-survival.pdf" data-name="Edge_of_Survival_발표자료.pdf">발표자료 받기 <span>PDF · 2.9MB</span></a><span class="dl-msg" aria-live="polite"></span></div>
+          <div class="deck-dl"><a class="btn dl" href="files/edge-of-survival.pdf" target="_blank" rel="noopener" data-file="files/edge-of-survival.pdf" data-name="Edge_of_Survival_발표자료.pdf" download="Edge_of_Survival_발표자료.pdf">발표자료 받기 <span>PDF · 2.9MB</span></a><span class="dl-msg" aria-live="polite"></span></div>
         </div>
       </article>
       <article>
@@ -1176,12 +1176,11 @@ pOutGrid[z * 256 * 256 + y * 256 + x].w = den.w;</code></pre>
         <p>실내·야외 화재 상황에서 이동, 신고 및 대피 행동을 체력 변화와 연결한 교육용 대피 시뮬레이터입니다.</p>
         <dl class="facts">
           <div class="fact"><dt>개인 담당 기능 · 학부 프로젝트</dt><dd><ul class="unity-contributions"><li><strong>3D 환경:</strong> 야외 산악 지형 및 대피 시나리오 구성</li><li><strong>이벤트 로직:</strong> 화재 확산, 플레이어 높이에 따른 119 신고 지점(CallBox) 생성</li><li><strong>상태 및 장면 관리:</strong> 실내·야외 전환, 사망 시 장면 처리, 체력 감소</li><li><strong>UI:</strong> 그라데이션 체력 바, 화재 행동 강령 안내판 구현</li></ul></dd></div>
-          <div class="fact"><dt>졸업 후 공개 저장소 정비 · 2026</dt><dd>화재 오브젝트의 생성기 재귀 복제와 대피 성공 후 체력 감소 문제를 수정하고, 신고 지점 높이 및 트리거 물리 구성을 정비했습니다.</dd></div>
         </dl>
         <div class="deck" data-deck>
           <figure class="deck-main"><img src="img/fire-1.jpg" alt="표지 슬라이드" loading="lazy" width="1333" height="750"><figcaption>표지</figcaption></figure>
           <div class="deck-thumbs"><button type="button" class="thumb on" data-src="img/fire-1.jpg" data-cap="표지" aria-label="표지 슬라이드 보기"><img src="img/fire-1.jpg" alt="" loading="lazy"></button><button type="button" class="thumb" data-src="img/fire-18.jpg" data-cap="시작 화면: 실내·야외 선택" aria-label="시작 화면: 실내·야외 선택 슬라이드 보기"><img src="img/fire-18.jpg" alt="" loading="lazy"></button><button type="button" class="thumb" data-src="img/fire-19.jpg" data-cap="실내: 화재 발생과 체력 감소" aria-label="실내: 화재 발생과 체력 감소 슬라이드 보기"><img src="img/fire-19.jpg" alt="" loading="lazy"></button><button type="button" class="thumb" data-src="img/fire-23.jpg" data-cap="야외: 산불 속 대피" aria-label="야외: 산불 속 대피 슬라이드 보기"><img src="img/fire-23.jpg" alt="" loading="lazy"></button><button type="button" class="thumb" data-src="img/fire-24.jpg" data-cap="야외: 신고 후 생존" aria-label="야외: 신고 후 생존 슬라이드 보기"><img src="img/fire-24.jpg" alt="" loading="lazy"></button></div>
-          <div class="deck-dl"><a class="btn dl" href="files/fire-evacuation.pdf" target="_blank" rel="noopener" data-file="files/fire-evacuation.pdf" data-name="Fire_Evacuation_발표자료.pdf">발표자료 받기 <span>PDF · 3.0MB</span></a><span class="dl-msg" aria-live="polite"></span></div>
+          <div class="deck-dl"><a class="btn dl" href="files/fire-evacuation.pdf" target="_blank" rel="noopener" data-file="files/fire-evacuation.pdf" data-name="Fire_Evacuation_발표자료.pdf" download="Fire_Evacuation_발표자료.pdf">발표자료 받기 <span>PDF · 3.0MB</span></a><span class="dl-msg" aria-live="polite"></span></div>
         </div>
       </article>
     </div>
@@ -1287,7 +1286,7 @@ pOutGrid[z * 256 * 256 + y * 256 + x].w = den.w;</code></pre>
         <dl>
           <div class="row"><dt>2025.03 – 2026.08</dt><dd>한성대학교 일반대학원 컴퓨터공학과 석사<small>학점 4.38 / 4.5</small></dd></div>
           <div class="row"><dt>2021.03 – 2025.02</dt><dd>한성대학교 컴퓨터공학부 학사<small>학점 3.83 / 4.5</small></dd></div>
-          <div class="row"><dt>2017.03 – 2020.02</dt><dd>목동고등학교</dd></div>
+          <div class="row"><dt>2017 – 2020</dt><dd>목동고등학교</dd></div>
         </dl>
       </div>
       <div class="hist">
@@ -1316,7 +1315,7 @@ pOutGrid[z * 256 * 256 + y * 256 + x].w = den.w;</code></pre>
           <li><span>Email</span><span class="val" id="v-mail">soz1p@naver.com</span><button class="copy" data-copy="v-mail">Copy</button></li>
           <li><span>Phone</span><span class="val" id="v-tel">010-3204-2972</span><button class="copy" data-copy="v-tel">Copy</button></li>
           <li><span>GitHub</span><a class="val" id="v-gh" href="https://github.com/soz1p" target="_blank" rel="noopener">github.com/soz1p</a><button class="copy" data-copy="v-gh">Copy</button></li>
-          <li class="cv-row"><span>CV</span><span class="val">Korean · English CV</span><span class="dlwrap"><a class="copy dl" href="files/jeon-sojin-cv.pdf" target="_blank" rel="noopener" data-file="files/jeon-sojin-cv.pdf" data-name="전소진_CV.pdf">Korean</a> <a class="copy dl" href="files/jeon-sojin-cv-en.pdf" target="_blank" rel="noopener" data-file="files/jeon-sojin-cv-en.pdf" data-name="Jeon_Sojin_CV.pdf">English</a><span class="dl-msg" aria-live="polite"></span></span></li>
+          <li class="cv-row"><span>CV</span><span class="val">Korean · English CV</span><span class="dlwrap"><a class="copy dl" href="files/jeon-sojin-cv.pdf" target="_blank" rel="noopener" data-file="files/jeon-sojin-cv.pdf" data-name="전소진_CV.pdf" download="전소진_CV.pdf">Korean</a> <a class="copy dl" href="files/jeon-sojin-cv-en.pdf" target="_blank" rel="noopener" data-file="files/jeon-sojin-cv-en.pdf" data-name="Jeon_Sojin_CV.pdf" download="Jeon_Sojin_CV.pdf">English</a><span class="dl-msg" aria-live="polite"></span></span></li>
         </ul>
         <p class="foot credit">Portfolio writing and web design were assisted by Claude and ChatGPT.</p>
       </div>
