@@ -661,6 +661,70 @@ html[lang="en"] .hist .row{grid-template-columns:132px minmax(0,1fr)}
   a{text-decoration:none}
 }
 </style>
+<style id="project-css">
+/* ---------- project plates: a spec sheet pinned to a rail ----------
+   Each project hangs from a pin in the left gutter. The rail below the pin
+   fills in orange as the reader moves through the project, ending in a mass. */
+#projects{--gut:96px}
+#projects .pindex{margin:0 0 88px;border:0;border-top:1px solid var(--ink);border-radius:0;background:none;overflow:visible}
+#projects .pindex a{margin:0;padding:18px 0}
+#projects .pindex a:last-child{border-bottom:1px solid var(--line)}
+#projects .pindex a:hover{background:none}
+
+#projects .report,#projects .minor>article{background:none;border:0;border-top:1px solid var(--ink);border-radius:0;box-shadow:none;padding:44px 0 8px var(--gut);transition:none}
+#projects .report{margin:0 0 112px}
+#projects .report.pointer-active,#projects .minor>article.pointer-active{box-shadow:none;border-color:var(--ink)}
+#projects .report-head::after{display:none}
+
+/* gutter: project number, pin and rail */
+#projects .report::before,#projects .minor>article::before{content:attr(data-project-number);top:44px;left:0;right:auto;font:600 1.6rem/1 var(--f-display);letter-spacing:-.03em;color:var(--ink);font-variant-numeric:tabular-nums}
+#projects .report::after,#projects .minor>article::after{content:"";position:absolute;left:0;top:92px;bottom:8px;width:9px;opacity:1;border-radius:0;pointer-events:none;
+  background:radial-gradient(circle,var(--ink) 3.5px,transparent 4px) 0 0/9px 9px no-repeat,linear-gradient(var(--line-2),var(--line-2)) 4px 0/1px 100% no-repeat}
+#projects .report .scroll-edge,#projects .minor>article .scroll-edge{left:0;top:96.5px;bottom:8px;width:9px;border-radius:0;overflow:visible;z-index:2}
+#projects .scroll-edge i{position:absolute;left:4px;top:0;width:1px;height:calc(var(--read-fill,0) * 100%);background:var(--accent);transform:none}
+#projects .scroll-edge i::after{content:"";position:absolute;left:-3.5px;bottom:-4px;width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px #fff}
+
+/* header */
+#projects .report-head{margin:0;padding:0 0 32px;background:none;border:0;border-radius:0;gap:clamp(28px,4vw,56px)}
+#projects .report-head .code-name{font-size:clamp(2.5rem,5.2vw,3.9rem);line-height:.95}
+#projects .report-head .code-name.long{font-size:clamp(1.9rem,4.3vw,3.1rem)}
+#projects .report-head .full{font-size:1.08rem;line-height:1.55;max-width:34em;margin-top:14px}
+#projects .report-head .facts{padding:4px 0 0;background:none;border:0;border-radius:0;gap:20px}
+#projects .report-head .repo-link,#projects .minor .repo-link{background:none;border:1px solid var(--line-2);border-radius:999px;padding:5px 11px}
+#projects .report-head .repo-link:hover,#projects .minor .repo-link:hover{border-color:var(--ink);color:var(--ink)}
+
+/* tabs: a ruled strip, like the header of a data sheet */
+#projects .report>.tabs{margin:0;width:100%;max-width:100%;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);border-radius:0;background:none;padding:0;gap:clamp(18px,2.6vw,34px)}
+#projects .tabs button{min-height:0;padding:14px 0;margin:0 0 -1px;border-radius:0;background:none;box-shadow:none;border-bottom:2px solid transparent;color:var(--ink-3);font-size:.9rem;font-weight:500}
+#projects .tabs button:hover{background:none;color:var(--ink)}
+#projects .tabs button[aria-selected="true"]{background:none;box-shadow:none;color:var(--ink);font-weight:600;border-bottom-color:var(--accent)}
+#projects .tabs button .n{font-size:.72rem}
+#projects .report>.panel{padding-top:36px}
+#projects .panel .alg-sub{border-top-color:var(--line)}
+
+/* the two Unity projects share one row, each on its own shorter rail */
+#projects .minor{gap:56px}
+#projects .minor>article{--gut:60px;padding-top:44px}
+#projects .minor>article::before{font-size:1.25rem}
+#projects .minor>article::after{top:84px}
+#projects .minor>article .scroll-edge{top:88.5px}
+#projects .minor>article .project-title-row{padding-bottom:0;border-bottom:0}
+#projects .minor h3{font-size:1.65rem}
+
+@media (max-width:860px){
+  #projects .report{margin-bottom:80px}
+  #projects .minor{gap:72px}
+}
+@media (max-width:760px){
+  #projects .report,#projects .minor>article{padding:28px 0 0}
+  #projects .report::before,#projects .minor>article::before{position:static;display:block;margin-bottom:14px;font-size:1rem;color:var(--ink-3)}
+  #projects .report::after,#projects .minor>article::after,#projects .scroll-edge{display:none}
+  #projects .report-head{padding-bottom:24px}
+  #projects .tabs button{font-size:.84rem;padding:12px 0}
+  #projects .report>.panel{padding-top:26px}
+}
+@media print{#projects .report::after,#projects .minor>article::after{display:none}#projects .report,#projects .minor>article{padding-left:0}#projects .report::before,#projects .minor>article::before{position:static;display:block;margin-bottom:8px}}
+</style>
 <div id="page">
 <header class="bar">
   <div class="wrap">
