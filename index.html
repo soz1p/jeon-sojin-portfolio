@@ -419,6 +419,24 @@ details.tableview .tbl-wrap{margin-top:10px}
 .unity-contributions{margin:5px 0 0;padding-left:1.15em;display:grid;gap:5px}.unity-contributions li::marker{color:var(--accent)}.unity-contributions strong{font-weight:600}.minor .facts{flex:1}.minor .deck{margin-top:auto}
 .sec-head h2{overflow-wrap:normal}.about h3{font-family:var(--f-display);letter-spacing:-.015em}.steps .w{font-family:var(--f-display)}.bar nav a{white-space:nowrap}
 .history-category>h3{font-family:var(--f-display);font-size:1.25rem;letter-spacing:-.015em;margin-bottom:14px}.history-category .xp{margin-bottom:40px}.hist .row{grid-template-columns:minmax(102px,auto) minmax(0,1fr)}@media(max-width:420px){.hist .row{grid-template-columns:1fr}}
+
+.contact{padding-block:76px 44px}
+.contact-grid{grid-template-columns:minmax(0,6fr) minmax(0,7fr);gap:clamp(28px,5vw,72px)}
+.contact-intro{display:flex;flex-direction:column;align-items:flex-start;gap:20px;min-width:0}
+.contact-kicker{font-family:var(--f-display);font-size:.85rem;letter-spacing:.16em;text-transform:uppercase;color:#aeb5bd;font-weight:600;margin:0;display:flex;align-items:center;gap:10px}
+.contact-kicker::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none}
+.contact .big{font-size:clamp(1.6rem,2.65vw,2.55rem);line-height:1.46;letter-spacing:-.035em;font-weight:600;word-break:keep-all;margin:0}
+.contact .big::before{display:none}
+.contact-sub{font-size:.78rem;color:#aeb5bd;letter-spacing:.085em;margin:2px 0 0;line-height:1.6}
+.contact li{grid-template-columns:72px minmax(0,1fr) auto;gap:12px;padding:17px 0}
+.contact li>span:first-child{font-size:.78rem;letter-spacing:.025em;color:#aeb5bd}
+.contact .val{font-weight:500;font-size:.94rem}
+.contact .copy{border-radius:5px;min-width:56px;padding:7px 10px;font-size:.76rem;text-decoration:none}
+.contact .copy:hover{background:rgba(255,255,255,.07)}
+.contact .dlwrap{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.contact .foot.credit{font-size:.73rem;line-height:1.6;color:#aeb5bd;font-style:normal;margin:24px 0 0;letter-spacing:.01em}
+@media(max-width:860px){.contact-grid{grid-template-columns:minmax(0,1fr);gap:36px}.contact{padding-block:48px 32px}}
+@media(max-width:480px){.contact li{grid-template-columns:48px minmax(0,1fr) auto;gap:8px}.contact .val{font-size:.84rem}.contact .copy{min-width:0;padding:6px 7px}.contact .cv-row{grid-template-columns:48px minmax(0,1fr)}.contact .cv-row .dlwrap{grid-column:2;justify-content:flex-start}.contact .big{font-size:clamp(1.3rem,5vw,1.65rem)}}
 </style>
 
 <div id="page">
@@ -1290,15 +1308,15 @@ pOutGrid[z * 256 * 256 + y * 256 + x].w = den.w;</code></pre>
 
   <footer class="contact" id="contact">
     <div class="wrap contact-grid">
-      <p class="big">움직이는 것을 정확하고 빠르게 그리는 일을 함께하고싶습니다.</p>
+      <div class="contact-intro"><h2 class="contact-kicker">Contact</h2><p class="big">실시간 시뮬레이션을<br>사용자에게 보이는 경험으로<br>완성하는 개발자, 전소진입니다.</p><p class="contact-sub">Graphics · Simulation · Visualization</p></div>
       <div>
         <ul>
-          <li><span>이메일</span><span class="val" id="v-mail">soz1p@naver.com</span><button class="copy" data-copy="v-mail">복사</button></li>
-          <li><span>전화</span><span class="val" id="v-tel">010-3204-2972</span><button class="copy" data-copy="v-tel">복사</button></li>
-          <li><span>GitHub</span><a class="val" id="v-gh" href="https://github.com/soz1p" target="_blank" rel="noopener">github.com/soz1p</a><button class="copy" data-copy="v-gh">복사</button></li>
-          <li class="cv-row"><span>CV</span><span class="val">국문 · English, A4 2쪽</span><span class="dlwrap"><a class="copy dl" href="files/jeon-sojin-cv.pdf" target="_blank" rel="noopener" data-file="files/jeon-sojin-cv.pdf" data-name="전소진_CV.pdf">국문</a> <a class="copy dl" href="files/jeon-sojin-cv-en.pdf" target="_blank" rel="noopener" data-file="files/jeon-sojin-cv-en.pdf" data-name="Jeon_Sojin_CV.pdf">English</a><span class="dl-msg" aria-live="polite"></span></span></li>
+          <li><span>Email</span><span class="val" id="v-mail">soz1p@naver.com</span><button class="copy" data-copy="v-mail">Copy</button></li>
+          <li><span>Phone</span><span class="val" id="v-tel">010-3204-2972</span><button class="copy" data-copy="v-tel">Copy</button></li>
+          <li><span>GitHub</span><a class="val" id="v-gh" href="https://github.com/soz1p" target="_blank" rel="noopener">github.com/soz1p</a><button class="copy" data-copy="v-gh">Copy</button></li>
+          <li class="cv-row"><span>CV</span><span class="val">Korean · English CV</span><span class="dlwrap"><a class="copy dl" href="files/jeon-sojin-cv.pdf" target="_blank" rel="noopener" data-file="files/jeon-sojin-cv.pdf" data-name="전소진_CV.pdf">Korean</a> <a class="copy dl" href="files/jeon-sojin-cv-en.pdf" target="_blank" rel="noopener" data-file="files/jeon-sojin-cv-en.pdf" data-name="Jeon_Sojin_CV.pdf">English</a><span class="dl-msg" aria-live="polite"></span></span></li>
         </ul>
-        <p class="foot credit">This portfolio was built with the help of Claude, an AI assistant.</p>
+        <p class="foot credit">Portfolio writing and web design were assisted by Claude and ChatGPT.</p>
       </div>
     </div>
   </footer>
@@ -1495,7 +1513,7 @@ document.querySelectorAll('.copy').forEach(b=>{
   b.addEventListener('click',()=>{
     const el=document.getElementById(b.dataset.copy);
     const text=el.textContent.trim();
-    const done=()=>{b.textContent='복사됨';setTimeout(()=>b.textContent='복사',1500)};
+    const done=()=>{const label=b.textContent;b.textContent=label==='Copy'?'Copied':'복사됨';setTimeout(()=>b.textContent=label,1500)};
     const fallback=()=>{const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='선택됨';setTimeout(()=>b.textContent='복사',1500)};
     try{navigator.clipboard.writeText(text).then(done,fallback)}catch(e){fallback()}
   });
