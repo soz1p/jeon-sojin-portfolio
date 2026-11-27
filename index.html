@@ -3,6 +3,7 @@
 <head>
 <script>try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('intro')}catch(e){}</script>
 <meta charset="utf-8">
+<meta name="color-scheme" content="light dark">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>전소진 그래픽스 포트폴리오</title>
 <meta name="description" content="물리 기반 시뮬레이션(PBD), CUDA GPU 연산, 볼륨 렌더링과 Qt/OpenGL을 연구한 그래픽스 엔지니어 전소진의 포트폴리오. Graphics engineer portfolio of Jeon Sojin.">
@@ -1266,6 +1267,133 @@ html[lang="en"] .hero-msg .thesis{font-size:clamp(1.3rem,1.95vw,1.65rem);line-he
 </style>
 <style id="cta-rows-css">.hero-text>.cta{display:flex;flex-wrap:wrap}.cta-br{flex-basis:100%;height:0}</style>
 <style id="mobile-fix-css">.who-row .name{min-width:0}@media (max-width:480px){.hero-meta li{white-space:normal;line-height:1.35}html[lang="en"] .name .ko{font-size:2.3rem}}</style>
+<style id="dark-css">
+/* ---------- dark mode: follows the system setting. Deep ink-blue sheet, the same pastels used as light, not as fills ---------- */
+:root{--hero-base:#ffffff}
+@media (prefers-color-scheme:dark){
+:root{
+  --bg:#12141a; --bg-2:#1a1d25; --ink:#eceef2; --ink-2:#aeb4be; --ink-3:#7e8691;
+  --line:#2a2e38; --line-2:#3a3f4b; --accent:#ff6a35; --accent-text:#ff9a73; --accent-ink:#12141a;
+  --cloth-front:#f3ece4; --cloth-back:#9d8f93; --cloth-mesh:rgba(30,24,32,.16);
+  --project-border:#2c303b; --hero-base:#12141a;
+  color-scheme:dark;
+}
+html,body,#page{background:var(--bg);color:var(--ink)}
+.bar{background:rgba(18,20,26,.86);border-bottom-color:var(--line)}
+.bar .me,.bar nav a{color:var(--ink-2)}
+.lang-switch{border-color:var(--line-2)}
+.lang-switch button{color:var(--ink-2)}
+.lang-switch button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.nav-cv{border-color:var(--ink-2)!important;color:var(--ink)!important}
+
+/* buttons */
+.btn{background:#1c1f28;border-color:var(--line-2);color:var(--ink)}
+.btn:hover{border-color:var(--ink-2)}
+.btn.primary{background:var(--ink);color:#12141a;border-color:var(--ink)}
+.btn span{color:var(--ink-3)}
+
+/* hero */
+.portrait{box-shadow:0 0 0 1px rgba(255,255,255,.12)}
+.hero-meta li{background:rgba(26,29,37,.7);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);color:var(--ink-2)}
+.hero-text>.pipe-mini{border-top-color:rgba(255,255,255,.1)}
+.pipe-mini .pd{background:var(--bg)}
+.pipe-mini .pipe-steps b{color:var(--ink-2)}
+.stage-note,.hint{color:var(--ink-3)}
+.readout{color:var(--ink-3)}
+.readout b{color:var(--ink)}
+.hero-motion-grid{opacity:.55}
+
+/* section heads: the chain of point masses */
+.scroll-chain line,.scroll-chain path{stroke:var(--line-2)}
+.scroll-chain .node{fill:var(--ink-2)}
+.scroll-chain .cursor{stroke:var(--bg)}
+
+/* about */
+.growth{background:var(--bg-2)}
+.steps div::before{background:var(--bg-2);box-shadow:inset 0 0 0 2px var(--ink)}
+.about p{color:var(--ink-2)}
+
+/* skills: pastel tints become deep washes, core chips keep the pastel */
+.sk3 section{background:radial-gradient(120% 80% at 8% -10%,color-mix(in srgb,var(--t1) 22%,transparent) 0,transparent 62%),radial-gradient(90% 70% at 95% -20%,color-mix(in srgb,var(--t2) 16%,transparent) 0,transparent 60%),#181b23;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
+.sk3 h3{color:var(--core)}
+.sk3 li{background:color-mix(in srgb,var(--core) 9%,#1c1f28);color:color-mix(in srgb,var(--core) 78%,#fff);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--core) 26%,transparent)}
+.sk3 li.on{background:var(--core);color:var(--ct);box-shadow:none}
+.sk3-key span::before{background:#1c1f28;box-shadow:inset 0 0 0 1px #6b5a66}
+
+/* publications */
+.pub::before,.pub::after{background:var(--bg);box-shadow:inset 0 0 0 2px var(--ink)}
+.pubs::before{background:var(--line-2)}
+.pub-follow{border-top-color:var(--line-2)}
+
+/* project cards */
+.pc{background:radial-gradient(120% 70% at 10% -10%,color-mix(in srgb,var(--t1) 24%,transparent) 0,transparent 60%),radial-gradient(90% 60% at 80% -20%,color-mix(in srgb,var(--t2) 16%,transparent) 0,transparent 60%),#181b23;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
+.pc:hover{box-shadow:inset 0 0 0 1px var(--c),0 22px 44px -26px rgba(0,0,0,.8)}
+.pc-no,.pc-tag{color:color-mix(in srgb,var(--c) 60%,#fff)}
+.pc-tag{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 60%,#fff)}
+.pc-img{box-shadow:0 0 0 1px rgba(255,255,255,.08)}
+.pc-link{background:#1c1f28;box-shadow:inset 0 0 0 1px var(--line-2)}
+.pc-more{background:#232733;color:var(--ink)}
+
+/* project dialog and its write-up */
+.pmodal{background:#14171d;box-shadow:0 30px 80px -20px rgba(0,0,0,.8)}
+.pmodal::backdrop{background:rgba(5,6,9,.72)}
+.pm-close{background:var(--ink)}
+.pm-close::before,.pm-close::after{background:#12141a}
+#projects .report,#projects .minor>article{background:radial-gradient(60% 120% at 12% 0%,color-mix(in srgb,var(--pt) 16%,transparent),transparent 70%),radial-gradient(45% 90% at 46% 0%,color-mix(in srgb,var(--pt2) 12%,transparent),transparent 72%) no-repeat,#14171d;background-size:100% 420px,100% 420px,auto;background-repeat:no-repeat;border-color:transparent;border-top-color:transparent}
+#projects .report::before,#projects .minor>article::before{color:color-mix(in srgb,var(--pc) 70%,#fff)}
+#projects .report-head .fact dt{color:color-mix(in srgb,var(--pc) 70%,#fff)}
+#projects .report::after,#projects .minor>article::after{background:radial-gradient(circle,var(--pc) 3.5px,transparent 4px) 0 0/9px 9px no-repeat,linear-gradient(color-mix(in srgb,var(--pc) 40%,#2a2e38),color-mix(in srgb,var(--pc) 40%,#2a2e38)) 4px 0/1px 100% no-repeat}
+.st-k i,.st-k span{filter:brightness(1.25)}
+#projects .report-head .facts{background:rgba(26,29,37,.8);border-color:var(--line)}
+#projects .report-head .repo-link,#projects .minor .repo-link{background:#1c1f28}
+#projects .report-head .chip:not(.k){background:#1c1f28}
+.chip{border-color:var(--line-2);color:var(--ink-2)}
+.chip.k{border-color:var(--ink-2);color:var(--ink)}
+.tabs button:hover{background:rgba(255,255,255,.05)}
+.tabs button[aria-selected="true"]{background:#1f232c;box-shadow:0 0 0 1px var(--line)}
+figure img{background:#f3f4f6;border-color:var(--line)}
+.shot-diag img,.shot-flow img{background:#f3f4f6}
+.qm-win{background:#1a1d25;border-color:var(--ink-2)}
+.callout,.eq,.pseudo,pre{background:var(--bg-2)!important;color:var(--ink)}
+table th{color:var(--ink-2)}
+table td,table th{border-color:var(--line)!important}
+.study-row,.syl-row{border-color:var(--line)}
+.tet-key .k-a{background:var(--bg);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.deck-main img,.thumb img{background:#f3f4f6}
+
+/* experience */
+#history .hx-left .xp-item{background:linear-gradient(160deg,#211f33 0%,#191b23 60%)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
+#history .hx-left .xp-item:first-child{background:linear-gradient(160deg,#28244a 0%,#1b1c27 62%)!important}
+.xp-body li::marker{color:var(--accent)}
+.xp-role{color:var(--accent-text)}
+
+/* footer */
+.contact{background:linear-gradient(128deg,#241c22 0%,#1b1a27 48%,#152321 100%)!important;border-top-color:rgba(255,255,255,.06)!important;--ft-ink:#eceef2;--ft-muted:#9aa1ab;--ft-line:rgba(255,255,255,.1);color:var(--ink)}
+.contact .big{background:linear-gradient(100deg,#f2eef8 0%,#d5cdf3 60%,#f4bfcf 100%)!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important}
+.contact li{background:rgba(255,255,255,.04)!important;border-color:rgba(255,255,255,.08)!important}
+.contact li:hover{background:rgba(255,255,255,.07)!important}
+.contact .val,.contact a.val{color:var(--ink)!important}
+.contact li>span:first-child,.contact-kicker,.contact-sub{color:#9aa1ab!important}
+.contact .copy{background:transparent!important;color:var(--ink-2)!important;border-color:rgba(255,255,255,.18)!important}
+.contact .copy:hover{background:var(--ink)!important;color:#12141a!important}
+.ct-ic{background:rgba(255,255,255,.07)!important;color:#d9b6c9!important}
+#contact li:nth-child(2) .ct-ic{color:#9fd6cf!important}
+#contact li:nth-child(3) .ct-ic,#contact li:nth-child(4) .ct-ic{color:#bdb5ef!important}
+#contact li:nth-child(5) .ct-ic{color:#f2c49b!important}
+.ft-sign b{color:var(--ink)!important}
+.ft-sign span,.contact .ft-bar .foot.credit{color:#8f96a1!important}
+.ft-top{color:var(--ink)!important;border-color:rgba(255,255,255,.18)!important;background:transparent!important}
+.ft-top:hover{background:var(--ink)!important;color:#12141a!important}
+.ft-chain{background:rgba(255,255,255,.14)!important}
+.ft-chain i{background:rgba(255,255,255,.25)!important}
+
+/* cursor ring */
+.sp-ring{border-color:rgba(255,255,255,.35)}
+.sp-cursor.big .sp-ring{background:rgba(236,238,242,.92)}
+.sp-cursor.big .sp-label{color:#12141a}
+}
+</style>
+
 <div id="page">
 <header class="bar">
   <div class="wrap">
@@ -2675,7 +2803,9 @@ function drawChart(){
   const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const css=getComputedStyle(document.documentElement);
   const hex=h=>{h=h.trim();return[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)]};
-  const C=[1,2,3,4].map(n=>hex(css.getPropertyValue('--g'+n)));
+  let C,B,K;const dm=matchMedia('(prefers-color-scheme: dark)');
+  const read=()=>{const cs=getComputedStyle(document.documentElement);C=[1,2,3,4].map(n=>hex(cs.getPropertyValue('--g'+n)));B=hex(cs.getPropertyValue('--hero-base')||'#ffffff');K=dm.matches?[.68,.18]:[.5,.28]};read();
+  dm.addEventListener('change',()=>{read();paint(performance.now())});
   const GW=96, GH=48; cv.width=GW; cv.height=GH;
   const img=ctx.createImageData(GW,GH), PH=[0,1.7,3.4,5.1];
   function paint(t){
@@ -2687,8 +2817,8 @@ function drawChart(){
       let sw=0,r=0,g=0,b=0;
       for(let q=0;q<4;q++){const du=(u-cs[q][0])*1.6,dv=v-cs[q][1],w=Math.exp(-(du*du+dv*dv)/.09)+1e-4;sw+=w;r+=w*C[q][0];g+=w*C[q][1];b+=w*C[q][2]}
       // keep it pastel, and quieter behind the text on the left
-      const lift=.5+.28*Math.max(0,1-u*1.7);
-      img.data[o++]=r/sw*(1-lift)+255*lift; img.data[o++]=g/sw*(1-lift)+255*lift; img.data[o++]=b/sw*(1-lift)+255*lift; img.data[o++]=255;
+      const lift=K[0]+K[1]*Math.max(0,1-u*1.7);
+      img.data[o++]=r/sw*(1-lift)+B[0]*lift; img.data[o++]=g/sw*(1-lift)+B[1]*lift; img.data[o++]=b/sw*(1-lift)+B[2]*lift; img.data[o++]=255;
     }
     ctx.putImageData(img,0,0);
   }
