@@ -1025,6 +1025,29 @@ html[lang="en"] .contact .big br{display:none}
 .pi-row[aria-expanded="true"] .pi-x::after{transform:rotate(0)}
 .pi-row[aria-expanded="true"] .pi-n{color:var(--accent-text)}
 #projects .pindex .pi-row[aria-expanded="true"]{border-bottom-color:transparent}
+
+/* row head: the toggle link, then quick links to GitHub, then the +/- mark */
+.pi-head{display:grid;grid-template-columns:minmax(0,1fr) auto 28px;align-items:center;column-gap:14px;border-bottom:1px solid var(--line);transition:background-color .15s}
+#projects .pindex .pi-head .pi-row{border-bottom:0;padding-right:0}
+.pi-head:has(.pi-row:hover) .pi-x{box-shadow:inset 0 0 0 1px var(--ink)}
+.pi-head .pi-x{position:relative;top:auto;right:auto;margin:0;cursor:pointer}
+.pi-links{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.pi-link{display:inline-flex;align-items:center;gap:5px;font-size:.74rem;line-height:1;padding:6px 9px;border-radius:999px;color:var(--ink-2);text-decoration:none;box-shadow:inset 0 0 0 1px var(--line-2);background:#fff;white-space:nowrap;transition:color .15s,box-shadow .15s}
+.pi-link:hover,.pi-link:focus-visible{color:var(--accent-text);box-shadow:inset 0 0 0 1px var(--accent)}
+.pi-item:has(.pi-row[aria-expanded="true"]) .pi-head{border-bottom-color:transparent}
+.pi-item:has(.pi-row[aria-expanded="true"]) .pi-x{background:var(--ink);box-shadow:none;transform:rotate(180deg)}
+.pi-item:has(.pi-row[aria-expanded="true"]) .pi-x::before,.pi-item:has(.pi-row[aria-expanded="true"]) .pi-x::after{background:#fff}
+.pi-item:has(.pi-row[aria-expanded="true"]) .pi-x::after{transform:rotate(0)}
+.pl-s{display:none}
+@media (max-width:1100px){.pi-link span{display:none}.pi-link .pl-s{display:inline}}
+@media (max-width:760px){
+  .pi-head{grid-template-columns:minmax(0,1fr) 28px;row-gap:0}
+  .pi-head .pi-row{grid-column:1;grid-row:1}
+  .pi-links{grid-column:1 / -1;grid-row:2;justify-content:flex-start;padding:0 0 14px 62px}
+  .pi-head .pi-x{grid-column:2;grid-row:1}
+  .pi-link span{display:inline}.pi-link .pl-s{display:none}
+}
+@media print{.pi-head{display:none}}
 .pi-item{scroll-margin-top:84px}
 .pi-panel{padding:6px 0 44px;border-bottom:1px solid var(--line)}
 .pi-panel>.report,.pi-panel>.minor{margin-bottom:0}
@@ -1199,7 +1222,7 @@ html[lang="en"] .contact .big br{display:none}
 
     <div class="pindex" role="list" aria-label="프로젝트 목록">
       <div class="pi-item">
-        <a class="pi-row" href="#p-vdr" aria-controls="p-vdr" aria-expanded="true"><span class="pi-y">2026</span><span class="pi-n">VDR</span><span class="pi-d">CT 영상 기반 변형 시뮬레이션을 위한 혼합형 프레임워크</span><span class="pi-k">석사 학위논문</span><span class="pi-x" aria-hidden="true"></span></a>
+        <div class="pi-head"><a class="pi-row" href="#p-vdr" aria-controls="p-vdr" aria-expanded="true"><span class="pi-y">2026</span><span class="pi-n">VDR</span><span class="pi-d">CT 영상 기반 변형 시뮬레이션을 위한 혼합형 프레임워크</span><span class="pi-k">석사 학위논문</span></a><span class="pi-links"><a class="pi-link" href="https://github.com/soz1p/VDR-Showcase" target="_blank" rel="noopener noreferrer" aria-label="VDR Research Overview"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.49c-2.23.49-2.7-.95-2.7-.95-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82A7.7 7.7 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.49v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg><span>Research Overview</span><span class="pl-s">Overview</span></a><a class="pi-link" href="https://github.com/soz1p/CUDA-PBD-Sandbox" target="_blank" rel="noopener noreferrer" aria-label="VDR Demo Code"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.49c-2.23.49-2.7-.95-2.7-.95-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82A7.7 7.7 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.49v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg><span>Demo Code</span><span class="pl-s">Demo</span></a></span><span class="pi-x" aria-hidden="true"></span></div>
         <div class="pi-panel">
     <article class="report" id="p-vdr" data-report data-project-number="01">
       <div class="report-head">
@@ -1421,7 +1444,7 @@ html[lang="en"] .contact .big br{display:none}
         </div>
       </div>
       <div class="pi-item">
-        <a class="pi-row" href="#p-stc" aria-controls="p-stc" aria-expanded="true"><span class="pi-y">2025</span><span class="pi-n">STC</span><span class="pi-d">Skin Tension Constraint: 삼각형 면적 기반 피부 인장 제약</span><span class="pi-k">제1저자 논문</span><span class="pi-x" aria-hidden="true"></span></a>
+        <div class="pi-head"><a class="pi-row" href="#p-stc" aria-controls="p-stc" aria-expanded="true"><span class="pi-y">2025</span><span class="pi-n">STC</span><span class="pi-d">Skin Tension Constraint: 삼각형 면적 기반 피부 인장 제약</span><span class="pi-k">제1저자 논문</span></a><span class="pi-links"><a class="pi-link" href="https://github.com/soz1p/STC-Showcase" target="_blank" rel="noopener noreferrer" aria-label="STC Research Overview"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.49c-2.23.49-2.7-.95-2.7-.95-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82A7.7 7.7 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.49v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg><span>Research Overview</span><span class="pl-s">Overview</span></a></span><span class="pi-x" aria-hidden="true"></span></div>
         <div class="pi-panel">
     <article class="report" id="p-stc" data-report data-project-number="02">
       <div class="report-head">
@@ -1574,7 +1597,7 @@ for tet in tetrahedra:
         </div>
       </div>
       <div class="pi-item">
-        <a class="pi-row" href="#p-qtgtcg" aria-controls="p-qtgtcg" aria-expanded="true"><span class="pi-y">2024</span><span class="pi-n">QtGTCG</span><span class="pi-d">Geometric Tools for Computer Graphics 스터디를 Qt로 직접 구현한 멀티뷰 기하 뷰어</span><span class="pi-k">Qt · OpenGL</span><span class="pi-x" aria-hidden="true"></span></a>
+        <div class="pi-head"><a class="pi-row" href="#p-qtgtcg" aria-controls="p-qtgtcg" aria-expanded="true"><span class="pi-y">2024</span><span class="pi-n">QtGTCG</span><span class="pi-d">Geometric Tools for Computer Graphics 스터디를 Qt로 직접 구현한 멀티뷰 기하 뷰어</span><span class="pi-k">Qt · OpenGL</span></a><span class="pi-links"><a class="pi-link" href="https://github.com/soz1p/QtGTCG-Showcase" target="_blank" rel="noopener noreferrer" aria-label="QtGTCG Source Code"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.49c-2.23.49-2.7-.95-2.7-.95-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82A7.7 7.7 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.49v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg><span>Source Code</span><span class="pl-s">Code</span></a></span><span class="pi-x" aria-hidden="true"></span></div>
         <div class="pi-panel">
     <article class="report" id="p-qtgtcg" data-report data-project-number="03">
       <div class="report-head">
@@ -1680,7 +1703,7 @@ for tet in tetrahedra:
         </div>
       </div>
       <div class="pi-item">
-        <a class="pi-row" href="#p-ndr" aria-controls="p-ndr" aria-expanded="true"><span class="pi-y">2024</span><span class="pi-n">NeuralDynaRender</span><span class="pi-d">NeRF로 복원한 볼륨에 PBD 변형과 CUDA 병렬 리샘플링 연결</span><span class="pi-k">캡스톤디자인 장려상</span><span class="pi-x" aria-hidden="true"></span></a>
+        <div class="pi-head"><a class="pi-row" href="#p-ndr" aria-controls="p-ndr" aria-expanded="true"><span class="pi-y">2024</span><span class="pi-n">NeuralDynaRender</span><span class="pi-d">NeRF로 복원한 볼륨에 PBD 변형과 CUDA 병렬 리샘플링 연결</span><span class="pi-k">캡스톤디자인 장려상</span></a><span class="pi-links"><a class="pi-link" href="https://github.com/soz1p/NeuralDynaRender-Showcase" target="_blank" rel="noopener noreferrer" aria-label="NeuralDynaRender Research Overview"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.49c-2.23.49-2.7-.95-2.7-.95-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82A7.7 7.7 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.49v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg><span>Research Overview</span><span class="pl-s">Overview</span></a></span><span class="pi-x" aria-hidden="true"></span></div>
         <div class="pi-panel">
     <article class="report" id="p-ndr" data-report data-project-number="04">
       <div class="report-head">
@@ -1809,7 +1832,7 @@ RGBA ← 원본 볼륨을 삼선형 보간해 샘플링
         </div>
       </div>
       <div class="pi-item">
-        <a class="pi-row" href="#p-eos" aria-controls="p-eos" aria-expanded="true"><span class="pi-y">2024</span><span class="pi-n">Edge of Survival</span><span class="pi-d">Photon PUN 2 기반 싱글·멀티플레이 생존 시뮬레이션</span><span class="pi-k">Unity 팀 프로젝트</span><span class="pi-x" aria-hidden="true"></span></a>
+        <div class="pi-head"><a class="pi-row" href="#p-eos" aria-controls="p-eos" aria-expanded="true"><span class="pi-y">2024</span><span class="pi-n">Edge of Survival</span><span class="pi-d">Photon PUN 2 기반 싱글·멀티플레이 생존 시뮬레이션</span><span class="pi-k">Unity 팀 프로젝트</span></a><span class="pi-links"><a class="pi-link" href="https://github.com/soz1p/Edge-of-Survival-Showcase" target="_blank" rel="noopener noreferrer" aria-label="Edge of Survival Source Code"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.49c-2.23.49-2.7-.95-2.7-.95-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82A7.7 7.7 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.49v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg><span>Source Code</span><span class="pl-s">Code</span></a></span><span class="pi-x" aria-hidden="true"></span></div>
         <div class="pi-panel">
 <div class="minor">
       <article id="p-eos" data-project-number="05">
@@ -1827,7 +1850,7 @@ RGBA ← 원본 볼륨을 삼선형 보간해 샘플링
         </div>
       </div>
       <div class="pi-item">
-        <a class="pi-row" href="#p-fire" aria-controls="p-fire" aria-expanded="true"><span class="pi-y">2023</span><span class="pi-n">Fire Evacuation</span><span class="pi-d">실내·야외 화재 대피 교육용 시뮬레이터</span><span class="pi-k">Unity 팀 프로젝트</span><span class="pi-x" aria-hidden="true"></span></a>
+        <div class="pi-head"><a class="pi-row" href="#p-fire" aria-controls="p-fire" aria-expanded="true"><span class="pi-y">2023</span><span class="pi-n">Fire Evacuation</span><span class="pi-d">실내·야외 화재 대피 교육용 시뮬레이터</span><span class="pi-k">Unity 팀 프로젝트</span></a><span class="pi-links"><a class="pi-link" href="https://github.com/soz1p/Fire-Evacuation-Showcase" target="_blank" rel="noopener noreferrer" aria-label="Fire Evacuation Source Code"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.49c-2.23.49-2.7-.95-2.7-.95-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82A7.7 7.7 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.49v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg><span>Source Code</span><span class="pl-s">Code</span></a></span><span class="pi-x" aria-hidden="true"></span></div>
         <div class="pi-panel">
 <div class="minor">
       <article id="p-fire" data-project-number="06">
@@ -2465,7 +2488,7 @@ function drawChart(){
 (()=>{
   const list=document.querySelector('#projects .pindex');if(!list)return;
   const rows=[...list.querySelectorAll('.pi-row')];
-  const panelOf=r=>r.nextElementSibling;
+  const panelOf=r=>r.closest('.pi-item').querySelector('.pi-panel');
   function set(r,open){r.setAttribute('aria-expanded',open?'true':'false');panelOf(r).hidden=!open;
     if(open){requestAnimationFrame(()=>dispatchEvent(new Event('resize')))}}
   function openId(id,scroll){const r=rows.find(x=>x.getAttribute('href')==='#'+id);if(!r)return false;set(r,true);
@@ -2474,6 +2497,7 @@ function drawChart(){
   rows.forEach(r=>{const b=document.createElement('button');b.type='button';b.className='pi-close';b.textContent='접기';
     b.addEventListener('click',()=>{set(r,false);r.closest('.pi-item').scrollIntoView({block:'start'});r.focus({preventScroll:true})});panelOf(r).append(b)});
   rows.forEach(r=>set(r,false));
+  rows.forEach(r=>{const x=r.parentElement.querySelector('.pi-x');if(x)x.addEventListener('click',()=>r.click())});
   rows.forEach(r=>r.addEventListener('click',e=>{e.preventDefault();const open=r.getAttribute('aria-expanded')!=='true';set(r,open);
     if(open){r.closest('.pi-item').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});history.replaceState(null,'',r.getAttribute('href'))}}));
   // links to a project from elsewhere (and #p-… in the address) open it first
