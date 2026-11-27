@@ -2336,6 +2336,13 @@ const Edit=(()=>{
   const JS=document.getElementById('app-js').textContent;
   let data={text:{},media:[]};
   try{const d=JSON.parse(document.getElementById('page-data').textContent);data={text:d.text||{},media:Array.isArray(d.media)?d.media:[]}}catch(e){}
+  const LOCAL_KEY='jeon-sojin-portfolio-edits-v1';
+  // GitHub Pages is static, so keep this browser's draft overrides locally.
+  try{
+    const saved=JSON.parse(localStorage.getItem(LOCAL_KEY)||'null');
+    if(saved&&saved.text)data.text={...data.text,...saved.text};
+    if(saved&&Array.isArray(saved.media))data.media=saved.media;
+  }catch(e){}
 
   // 2. key every editable text element by a hash of its original tag+text (stable across layout changes)
   const SEL='h1,h2,h3,.en,p,li,dt,dd,td,th,.chip,.kind,.code-name,.stat-row b,.stat-row span,figcaption,.pill,.fit-row .req,.fit-row .ev,.fit-group,.steps .y,.callout,.eq > div,.contact span.val,h4,.alg-lede,.flow-v li b,.study-k,.study-v,.uses li b,.alg-full,.tet figcaption b,.skill-group b,.skill-group span,.xp-when,.xp-role,.xp-body li';
@@ -2414,12 +2421,12 @@ const Edit=(()=>{
   function drawBar(){
     bar.replaceChildren();
     if(!editing){bar.append(btn('편집','',start));return}
-    bar.append(msg,btn('취소','',cancel),btn('저장','primary',save));
+    bar.append(msg,btn('변경 내보내기','',exportChanges),btn('취소','',cancel),btn('저장','primary',save));
   }
   function start(){
     editing=true;document.documentElement.classList.add('editing');
     editable.forEach(e=>{e.contentEditable='true';e.spellcheck=false});
-    say(assets?'글자를 눌러 고치고, 점선 상자로 사진·영상을 추가하세요':'글자를 눌러 고칠 수 있습니다');
+    say(assets?'각 문단을 클릭해 수정하세요. Enter로 줄바꿈할 수 있고 사진·영상도 추가할 수 있습니다.':'각 문단을 클릭해 수정하세요. Enter로 줄바꿈할 수 있습니다. 저장은 이 브라우저에 보관됩니다.');
     renderMedia();drawBar();
   }
   function stop(){
@@ -2430,7 +2437,18 @@ const Edit=(()=>{
   function cancel(){if(snapshot)data=JSON.parse(snapshot);applyText();changed=false;stop()}
   pageEl.addEventListener('input',e=>{if(editing&&e.target.closest('[data-ek]'))dirty()});
   pageEl.addEventListener('paste',e=>{if(!editing||!e.target.closest('[data-ek]'))return;e.preventDefault();const t=(e.clipboardData||window.clipboardData).getData('text/plain');document.execCommand('insertText',false,t)});
-  pageEl.addEventListener('keydown',e=>{if(editing&&e.key==='Enter'&&e.target.closest('[data-ek]')){e.preventDefault();if(e.shiftKey)document.execCommand('insertLineBreak')}});
+  pageEl.addEventListener('keydown',e=>{
+    if(!editing||e.key!=='Enter'||!e.target.closest('[data-ek]'))return;
+    e.preventDefault();
+    const selection=window.getSelection();
+    if(!selection||!selection.rangeCount)return;
+    const range=selection.getRangeAt(0);
+    range.deleteContents();
+    const br=document.createElement('br');
+    range.insertNode(br);
+    range.setStartAfter(br);range.collapse(true);
+    selection.removeAllRanges();selection.addRange(range);
+  });
   pageEl.addEventListener('click',e=>{if(editing&&e.target.closest('a[data-ek], a [data-ek], [data-ek] a'))e.preventDefault()},true);
 
   input.addEventListener('change',async()=>{
@@ -2456,12 +2474,33 @@ const Edit=(()=>{
       +'<script type="application/json" id="page-data">'+json+'<\/script>\n'
       +'<script id="app-js">'+JS+'<\/script>\n</body></html>';
   }
-  async function save(){
-    if(busy)return;
+  function collectEdits(){
     editable.forEach(e=>{const k=e.dataset.ek,v=clean(e.innerHTML);if(v===original[k])delete data.text[k];else data.text[k]=v});
     data.media.forEach(m=>{m.caption=(m.caption||'').slice(0,300)});
+  }
+  function exportChanges(){
+    collectEdits();
+    const payload={version:1,text:data.text,media:data.media};
+    const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+    const url=URL.createObjectURL(blob),a=document.createElement('a');
+    a.href=url;a.download='jeon-sojin-portfolio-edits.json';
+    document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+    say('수정 내용을 내보냈습니다. 이 파일을 이용해 공개 사이트에도 반영할 수 있습니다.');
+  }
+  async function save(){
+    if(busy)return;
+    collectEdits();
     if(!changed&&snapshot===JSON.stringify(data)){stop();return}
     busy=true;say('저장하는 중…');
+    if(!artifact){
+      try{
+        localStorage.setItem(LOCAL_KEY,JSON.stringify(data));
+        changed=false;snapshot=JSON.stringify(data);
+        say('이 브라우저에 저장했습니다. 공개 사이트 반영은 ‘변경 내보내기’ 파일이 필요합니다.');
+      }catch(err){say('브라우저 저장공간에 저장하지 못했습니다. 변경 내보내기를 이용해 주세요.')}
+      busy=false;return;
+    }
     try{await artifact.publish(buildDoc());say('저장했습니다. 새 버전으로 다시 불러옵니다');changed=false}
     catch(err){
       const c=err&&err.code;
@@ -2475,16 +2514,20 @@ const Edit=(()=>{
   const origStart=start;
   start=function(){snapshot=JSON.stringify(data);origStart()};
 
-  // 5. show the edit button only to people who can change the page
+  // 5. Use artifact publishing when available; otherwise enable a local editor on GitHub Pages.
   (async()=>{
     try{
-      if(!window.claude||!claude.use)return;
-      artifact=await claude.use('artifact');if(!artifact)return;
-      const user=await claude.use('user');
-      if(user&&!(await user.canEdit()))return;
-      assets=await claude.use('assets');
-      drawBar();bar.hidden=false;
+      if(window.claude&&claude.use){
+        artifact=await claude.use('artifact');
+        if(artifact){
+          const user=await claude.use('user');
+          if(user&&!(await user.canEdit()))return;
+          assets=await claude.use('assets');
+          drawBar();bar.hidden=false;return;
+        }
+      }
     }catch(e){}
+    drawBar();bar.hidden=false;
   })();
   return {};
 })();
