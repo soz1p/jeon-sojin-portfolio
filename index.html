@@ -1061,22 +1061,22 @@ html[lang="en"] .contact .big br{display:none}
 </style>
 <style id="history-css">
 /* experience left, education/awards/certifications right: the whole section in one view */
-.hx-cols{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:64px;align-items:start}
+.hx-cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:start}
 .hx-cols .history-category>h3{font-size:1.1rem;margin-bottom:10px}
 .hx-cols .history-category .xp{margin-bottom:36px}
 .hx-cols .history-category:last-child .xp{margin-bottom:0}
-.hx-right .history-category{margin-top:36px}
+.hx-right .history-category+.history-category{margin-top:36px}
+#history>.history{margin-top:56px}
 .hx-right .xp-item{grid-template-columns:118px minmax(0,1fr)}
 .hx-cols .xp-item{grid-template-columns:118px minmax(0,1fr);gap:18px;padding:16px 0}
 .hx-cols .xp-when{font-size:.8rem;line-height:1.55}
 .hx-cols .xp-body h3{font-size:1rem}
 .hx-cols .xp-role{font-size:.82rem;margin:1px 0 7px}
 .hx-cols .xp-body ul{font-size:.86rem;gap:2px;line-height:1.6}
-.hx-right .history{grid-template-columns:minmax(0,1fr);gap:36px}
-.hx-right .hist h3{font-family:var(--f-display);font-size:1.1rem;font-weight:700;color:var(--ink);letter-spacing:-.015em;padding-bottom:10px;margin-bottom:0}
-.hx-right .hist .row{grid-template-columns:118px minmax(0,1fr);gap:18px;padding:12px 0;font-size:.9rem}
+#history .hist h3{font-family:var(--f-display);font-size:1.1rem;font-weight:700;color:var(--ink);letter-spacing:-.015em;padding-bottom:10px;margin-bottom:0}
+#history>.history .hist .row{grid-template-columns:118px minmax(0,1fr);gap:18px;padding:12px 0;font-size:.9rem}
 @media (max-width:960px){.hx-cols{grid-template-columns:minmax(0,1fr);gap:40px}}
-@media (max-width:600px){.hx-cols .xp-item,.hx-right .hist .row{grid-template-columns:minmax(0,1fr);gap:4px}}
+@media (max-width:600px){.hx-cols .xp-item,#history>.history .hist .row{grid-template-columns:minmax(0,1fr);gap:4px}}
 </style>
 <style id="pipe-mini-css">
 /* the data-to-visualization chain, small, under the hero thesis line */
@@ -1946,6 +1946,9 @@ RGBA ← 원본 볼륨을 삼선형 보간해 샘플링
           <ul><li>컴퓨터그래픽스와 물리 기반 시뮬레이션 연구</li><li>NeRF와 PBD를 결합한 실시간 3D 볼륨 변형 시스템 개발</li><li>CUDA 기반 병렬 리샘플링과 볼륨 렌더링 구현</li><li>4인 팀 캡스톤디자인 프로젝트 수행 (장려상)</li><li>2024 한국컴퓨터그래픽스학회 논문 작성 참여</li></ul>
         </div>
       </article></div></div>
+
+      </div>
+      <div class="hx-right">
     <div class="history-category"><h3>Work Experience</h3><div class="xp"><article class="xp-item">
         <div class="xp-when">2026.09 – 현재</div>
         <div class="xp-body">
@@ -1967,8 +1970,23 @@ RGBA ← 원본 볼륨을 삼선형 보간해 샘플링
           <ul><li>학과 행정 업무와 교육 운영 지원</li><li>실습실 PC와 장비 관리</li><li>학과 행사 준비와 운영, 교수진·재학생 업무 지원</li></ul>
         </div>
       </article></div></div>
+    <div class="history-category"><h3>Campus Activities</h3><div class="xp"><article class="xp-item">
+        <div class="xp-when">2023</div>
+        <div class="xp-body">
+          <h3>컴퓨터공학부 학술 소모임 POCS</h3><p class="xp-role">팀 프로젝트와 개발 활동</p>
+          <ul><li>4인 팀 칵테일 레시피 검색·공유 웹서비스 Cockpybara 개발, 웹 프론트엔드 담당</li><li>2023.09.25–26 한성공학경진대회 참가, 장려상 수상</li></ul>
+        </div>
+      </article>
+<article class="xp-item">
+        <div class="xp-when">2022 – 2023</div>
+        <div class="xp-body">
+          <h3>한성대학교 창의융합대학 학생회</h3><p class="xp-role">2023 사무국장</p>
+          <ul><li>학생회 행정과 사무 업무 관리</li><li>교내 행사 기획과 운영</li><li>학생회 구성원 간 협업과 업무 조율</li></ul>
+        </div>
+      </article></div></div>
+
       </div>
-      <div class="hx-right">
+    </div>
     <div class="history">
       <div class="hist">
         <h3>Education</h3>
@@ -1993,22 +2011,6 @@ RGBA ← 원본 볼륨을 삼선형 보간해 샘플링
           <div class="row"><dt>어학</dt><dd>토익 스피킹 150점<small>TOEIC Speaking · IH</small></dd></div>
         </dl>
 
-      </div>
-    </div>
-    <div class="history-category"><h3>Campus Activities</h3><div class="xp"><article class="xp-item">
-        <div class="xp-when">2023</div>
-        <div class="xp-body">
-          <h3>컴퓨터공학부 학술 소모임 POCS</h3><p class="xp-role">팀 프로젝트와 개발 활동</p>
-          <ul><li>4인 팀 칵테일 레시피 검색·공유 웹서비스 Cockpybara 개발, 웹 프론트엔드 담당</li><li>2023.09.25–26 한성공학경진대회 참가, 장려상 수상</li></ul>
-        </div>
-      </article>
-<article class="xp-item">
-        <div class="xp-when">2022 – 2023</div>
-        <div class="xp-body">
-          <h3>한성대학교 창의융합대학 학생회</h3><p class="xp-role">2023 사무국장</p>
-          <ul><li>학생회 행정과 사무 업무 관리</li><li>교내 행사 기획과 운영</li><li>학생회 구성원 간 협업과 업무 조율</li></ul>
-        </div>
-      </article></div></div>
       </div>
     </div>
   </section>
