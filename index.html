@@ -1243,6 +1243,27 @@ html[lang="en"] .hero-msg .thesis{font-size:clamp(1.3rem,1.95vw,1.65rem);line-he
 .sk3-key span.on::before{background:linear-gradient(135deg,#cfc8f3,#f6c9d8 50%,#fbdcb7);box-shadow:none}
 </style>
 <style id="pub-follow-css">.pub-follow{margin:4px 0 0;padding-top:10px;border-top:1px dashed var(--line-2);font-size:.76rem;line-height:1.6;color:var(--ink-3)}</style>
+<style id="footer-icons-css">
+/* a small pictogram at the end of each contact row says what the row does: send, call, open, download */
+#contact.contact li.contact-link-row{grid-template-columns:72px minmax(0,1fr) 36px}
+#contact.contact li.contact-copy-row{grid-template-columns:72px minmax(0,1fr) auto 36px}
+#contact.contact li.cv-row{grid-template-columns:72px minmax(0,1fr) auto 36px}
+.ct-ic{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;color:#9a6a8a;background:linear-gradient(140deg,#fbe9ef,#ece9fa);justify-self:end;text-decoration:none;transition:transform .2s ease,color .2s,background .2s}
+.contact li:nth-child(2) .ct-ic{color:#3f8c86;background:linear-gradient(140deg,#e3f4f1,#e8f1fb)}
+.contact li:nth-child(3) .ct-ic,.contact li:nth-child(4) .ct-ic{color:#6d62b8;background:linear-gradient(140deg,#ece9fa,#e6f1f6)}
+.contact li:nth-child(5) .ct-ic{color:#b8743a;background:linear-gradient(140deg,#fdeedd,#fbe7ec)}
+.contact li:hover .ct-ic{transform:translate(1px,-1px)}
+@media (max-width:480px){
+  #contact.contact li.contact-link-row{grid-template-columns:58px minmax(0,1fr) 32px}
+  #contact.contact li.contact-copy-row{grid-template-columns:58px minmax(0,1fr) auto 32px}
+  #contact.contact li.cv-row{grid-template-columns:58px minmax(0,1fr) 32px}
+  #contact.contact li.cv-row .dlwrap{grid-column:2;grid-row:2}
+  #contact.contact li.cv-row .ct-ic{grid-column:3;grid-row:1}
+  .ct-ic{width:30px;height:30px}.ct-ic svg{width:17px;height:17px}
+}
+@media (prefers-reduced-motion:reduce){.ct-ic{transition:none}.contact li:hover .ct-ic{transform:none}}
+@media print{.ct-ic{display:none}}
+</style>
 <div id="page">
 <header class="bar">
   <div class="wrap">
@@ -2204,11 +2225,11 @@ RGBA ← 원본 볼륨을 삼선형 보간해 샘플링
       <div class="contact-intro"><h2 class="contact-kicker">Contact</h2><p class="big">현실의 움직임을<br>가상의 공간에 담습니다.</p><p class="contact-sub">Graphics · Simulation · Visualization</p></div>
       <div>
         <ul>
-          <li class="contact-link-row"><span>Email</span><a class="val" id="v-mail" href="mailto:jeonsoz1p@gmail.com" aria-label="Send an email to Jeon Sojin">jeonsoz1p@gmail.com</a></li>
-          <li class="contact-copy-row"><span>Phone</span><span class="val" id="v-tel">010-3204-2972</span><button class="copy" data-copy="v-tel">Copy</button></li>
-          <li class="contact-link-row"><span>GitHub</span><a class="val" id="v-gh" href="https://github.com/soz1p" target="_blank" rel="noopener">github.com/soz1p</a></li>
-          <li class="contact-link-row"><span>LinkedIn</span><a class="val" id="v-li" href="https://www.linkedin.com/in/soz1p" target="_blank" rel="noopener">linkedin.com/in/soz1p</a></li>
-          <li class="cv-row"><span>CV</span><span class="val">Korean · English CV</span><span class="dlwrap"><a class="copy dl" href="files/jeon-sojin-cv.pdf" target="_blank" rel="noopener" data-file="files/jeon-sojin-cv.pdf" data-name="전소진_CV.pdf" download="전소진_CV.pdf">Korean</a> <a class="copy dl" href="files/jeon-sojin-cv-en.pdf" target="_blank" rel="noopener" data-file="files/jeon-sojin-cv-en.pdf" data-name="Jeon_Sojin_CV.pdf" download="Jeon_Sojin_CV.pdf">English</a><span class="dl-msg" aria-live="polite"></span></span></li>
+          <li class="contact-link-row"><span>Email</span><a class="val" id="v-mail" href="mailto:jeonsoz1p@gmail.com" aria-label="Send an email to Jeon Sojin">jeonsoz1p@gmail.com</a><a class="ct-ic" href="mailto:jeonsoz1p@gmail.com" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3 10.5 13.5"/><path d="M21 3 14.5 21l-4-7.5L3 9.5 21 3Z"/></svg></a></li>
+          <li class="contact-copy-row"><span>Phone</span><span class="val" id="v-tel">010-3204-2972</span><button class="copy" data-copy="v-tel">Copy</button><span class="ct-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3.2l1.6 4-2 1.3a11 11 0 0 0 5.9 5.9l1.3-2 4 1.6V18a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg></span></li>
+          <li class="contact-link-row"><span>GitHub</span><a class="val" id="v-gh" href="https://github.com/soz1p" target="_blank" rel="noopener">github.com/soz1p</a><a class="ct-ic" href="https://github.com/soz1p" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4 11 13"/><path d="M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"/></svg></a></li>
+          <li class="contact-link-row"><span>LinkedIn</span><a class="val" id="v-li" href="https://www.linkedin.com/in/soz1p" target="_blank" rel="noopener">linkedin.com/in/soz1p</a><a class="ct-ic" href="https://www.linkedin.com/in/soz1p" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4 11 13"/><path d="M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"/></svg></a></li>
+          <li class="cv-row"><span>CV</span><span class="val">Korean · English CV</span><span class="dlwrap"><a class="copy dl" href="files/jeon-sojin-cv.pdf" target="_blank" rel="noopener" data-file="files/jeon-sojin-cv.pdf" data-name="전소진_CV.pdf" download="전소진_CV.pdf">Korean</a> <a class="copy dl" href="files/jeon-sojin-cv-en.pdf" target="_blank" rel="noopener" data-file="files/jeon-sojin-cv-en.pdf" data-name="Jeon_Sojin_CV.pdf" download="Jeon_Sojin_CV.pdf">English</a><span class="dl-msg" aria-live="polite"></span></span><span class="ct-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="m7.5 10.5 4.5 4.5 4.5-4.5"/><path d="M5 19h14"/></svg></span></li>
         </ul>
       </div>
     </div>
