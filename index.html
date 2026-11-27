@@ -808,7 +808,13 @@ html[lang="en"] .contact .big br{display:none}
 .ft-sign{display:flex;flex-direction:column;gap:2px;line-height:1.3}
 .ft-sign b{font-family:var(--f-display);font-weight:700;font-size:1rem;letter-spacing:-.01em;color:#fff}
 .ft-sign span{font-size:.74rem;color:#8b939b}
-.contact .ft-bar .foot.credit{margin:0;text-align:center;font-family:"Archivo",system-ui,sans-serif;font-style:italic;font-size:.82rem;color:#9aa3ab}
+.contact .ft-bar .foot.credit{margin:0;text-align:center;font-family:"Archivo",system-ui,sans-serif;font-style:italic;font-size:.82rem;color:#9aa3ab;display:flex;align-items:center;justify-content:center;gap:11px}
+.ft-doodle{display:inline-block;font-family:system-ui,sans-serif;font-style:normal;font-size:1rem;line-height:1;opacity:.78;filter:grayscale(.38);transform:rotate(-8deg);transition:transform .2s,opacity .2s}
+.ft-doodle:last-child{transform:rotate(9deg)}
+.ft-bar:hover .ft-doodle{opacity:1}
+.ft-bar:hover .ft-doodle:first-child{transform:rotate(0deg) translateY(-2px)}
+.ft-bar:hover .ft-doodle:last-child{transform:rotate(0deg) translateY(-2px)}
+#editbar{display:none!important}
 .ft-top{display:inline-flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-size:.8rem;padding:8px 12px 8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.2);transition:background .2s,color .2s}
 .ft-top i{position:relative;width:9px;height:14px}
 .ft-top i::before{content:"";position:absolute;left:4px;top:0;width:1px;height:8px;background:currentColor}
@@ -2208,7 +2214,7 @@ RGBA ← 원본 볼륨을 삼선형 보간해 샘플링
     </div>
     <div class="wrap ft-bar">
       <span class="ft-sign"><b>Jeon Sojin</b><span>Graphics Engineer · Seoul</span></span>
-      <p class="foot credit">Site built with Claude Code · Content and research by Jeon Sojin</p>
+      <p class="foot credit"><span class="ft-doodle" aria-hidden="true">🪄</span><span>Site built with Claude Code · Content and research by Jeon Sojin</span><span class="ft-doodle" aria-hidden="true">✨</span></p>
       <a class="ft-top" href="#top"><span>맨 위로</span><i aria-hidden="true"></i></a>
     </div>
   </footer>
@@ -2421,18 +2427,12 @@ const Edit=(()=>{
   const msg=document.createElement('span');msg.className='msg';msg.setAttribute('aria-live','polite');
   const say=t=>{msg.textContent=t};
   function dirty(){changed=true;say('저장하지 않은 변경이 있습니다')}
+  // Public portfolio: keep the inline editor disabled.
   function drawBar(){
     bar.replaceChildren();
-    if(!editing){bar.append(btn('편집','',start));return}
-    bar.append(msg,btn('변경 내보내기','',exportChanges),btn('취소','',cancel),btn('저장','primary',save));
+    bar.hidden=true;
   }
-  function start(){
-    if(document.documentElement.lang==='en'){say('영문 버전은 번역 확인용입니다. 문구 수정은 한국어 버전에서 진행해 주세요.');return}
-    editing=true;document.documentElement.classList.add('editing');
-    editable.forEach(e=>{e.contentEditable='true';e.spellcheck=false});
-    say(assets?'각 문단을 클릭해 수정하세요. Enter로 줄바꿈할 수 있고 사진·영상도 추가할 수 있습니다.':'각 문단을 클릭해 수정하세요. Enter로 줄바꿈할 수 있습니다. 저장은 이 브라우저에 보관됩니다.');
-    renderMedia();drawBar();
-  }
+  function start(){return}
   function stop(){
     editing=false;document.documentElement.classList.remove('editing');
     editable.forEach(e=>e.removeAttribute('contenteditable'));renderMedia();drawBar();
@@ -2532,11 +2532,11 @@ const Edit=(()=>{
           const user=await claude.use('user');
           if(user&&!(await user.canEdit()))return;
           assets=await claude.use('assets');
-          drawBar();bar.hidden=false;return;
+          drawBar();return;
         }
       }
     }catch(e){}
-    drawBar();bar.hidden=false;
+    drawBar();
   })();
   return {};
 })();
