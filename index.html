@@ -1067,6 +1067,14 @@ html[lang="en"] .contact .big br{display:none}
 .hx-cols .history-category:last-child .xp{margin-bottom:0}
 .hx-right .history-category+.history-category{margin-top:36px}
 #history>.history{margin-top:56px}
+/* work (left) stretches to the height of research + campus (right): its entries share the space */
+.hx-cols{align-items:stretch}
+.hx-left{display:flex;flex-direction:column}
+.hx-left .history-category{flex:1;display:flex;flex-direction:column}
+.hx-left .xp{flex:1;display:flex;flex-direction:column;margin-bottom:0}
+.hx-left .xp-item{flex:1;align-content:center}
+@media (max-width:960px){.hx-left .xp-item{flex:none}}
+
 .hx-right .xp-item{grid-template-columns:118px minmax(0,1fr)}
 .hx-cols .xp-item{grid-template-columns:118px minmax(0,1fr);gap:18px;padding:16px 0}
 .hx-cols .xp-when{font-size:.8rem;line-height:1.55}
@@ -1932,23 +1940,6 @@ RGBA ← 원본 볼륨을 삼선형 보간해 샘플링
     </div>
     <div class="hx-cols">
       <div class="hx-left">
-    <div class="history-category"><h3>Research Experience</h3><div class="xp"><article class="xp-item">
-        <div class="xp-when">2025.03 – 2026.08</div>
-        <div class="xp-body">
-          <h3>한성대학교 컴퓨터그래픽스 연구실</h3><p class="xp-role">석사과정 · Graduate Research</p>
-          <ul><li>CUDA 기반 인터랙티브 연조직 변형 시뮬레이션과 볼륨 렌더링 연구</li><li>ChainMail과 PBD를 결합한 하이브리드 물리엔진 설계와 구현</li><li>피부 인장 제약 모델(STC) 제안과 구현</li><li>C/C++, CUDA, Qt, OpenGL 기반 3D 시뮬레이션 소프트웨어 개발</li><li>학술 논문 작성과 학회 발표</li></ul>
-        </div>
-      </article>
-<article class="xp-item">
-        <div class="xp-when">2023.08 – 2025.02</div>
-        <div class="xp-body">
-          <h3>한성대학교 컴퓨터그래픽스 연구실</h3><p class="xp-role">학부연구생 · Undergraduate Research</p>
-          <ul><li>컴퓨터그래픽스와 물리 기반 시뮬레이션 연구</li><li>NeRF와 PBD를 결합한 실시간 3D 볼륨 변형 시스템 개발</li><li>CUDA 기반 병렬 리샘플링과 볼륨 렌더링 구현</li><li>4인 팀 캡스톤디자인 프로젝트 수행 (장려상)</li><li>2024 한국컴퓨터그래픽스학회 논문 작성 참여</li></ul>
-        </div>
-      </article></div></div>
-
-      </div>
-      <div class="hx-right">
     <div class="history-category"><h3>Work Experience</h3><div class="xp"><article class="xp-item">
         <div class="xp-when">2026.09 – 현재</div>
         <div class="xp-body">
@@ -1970,6 +1961,25 @@ RGBA ← 원본 볼륨을 삼선형 보간해 샘플링
           <ul><li>학과 행정 업무와 교육 운영 지원</li><li>실습실 PC와 장비 관리</li><li>학과 행사 준비와 운영, 교수진·재학생 업무 지원</li></ul>
         </div>
       </article></div></div>
+
+
+      </div>
+      <div class="hx-right">
+    <div class="history-category"><h3>Research Experience</h3><div class="xp"><article class="xp-item">
+        <div class="xp-when">2025.03 – 2026.08</div>
+        <div class="xp-body">
+          <h3>한성대학교 컴퓨터그래픽스 연구실</h3><p class="xp-role">석사과정 · Graduate Research</p>
+          <ul><li>CUDA 기반 인터랙티브 연조직 변형 시뮬레이션과 볼륨 렌더링 연구</li><li>ChainMail과 PBD를 결합한 하이브리드 물리엔진 설계와 구현</li><li>피부 인장 제약 모델(STC) 제안과 구현</li><li>C/C++, CUDA, Qt, OpenGL 기반 3D 시뮬레이션 소프트웨어 개발</li><li>학술 논문 작성과 학회 발표</li></ul>
+        </div>
+      </article>
+<article class="xp-item">
+        <div class="xp-when">2023.08 – 2025.02</div>
+        <div class="xp-body">
+          <h3>한성대학교 컴퓨터그래픽스 연구실</h3><p class="xp-role">학부연구생 · Undergraduate Research</p>
+          <ul><li>컴퓨터그래픽스와 물리 기반 시뮬레이션 연구</li><li>NeRF와 PBD를 결합한 실시간 3D 볼륨 변형 시스템 개발</li><li>CUDA 기반 병렬 리샘플링과 볼륨 렌더링 구현</li><li>4인 팀 캡스톤디자인 프로젝트 수행 (장려상)</li><li>2024 한국컴퓨터그래픽스학회 논문 작성 참여</li></ul>
+        </div>
+      </article></div></div>
+
     <div class="history-category"><h3>Campus Activities</h3><div class="xp"><article class="xp-item">
         <div class="xp-when">2023</div>
         <div class="xp-body">
