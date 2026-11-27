@@ -995,9 +995,9 @@ html[lang="en"] .contact .big br{display:none}
   <div class="wrap">
     <a class="me" href="#top">Jeon Sojin</a>
     <nav aria-label="섹션">
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
       <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
       <a href="#history">Experience</a>
       <a href="#contact">Contact</a>
       <a href="files/jeon-sojin-cv.pdf" target="_blank" rel="noopener" class="nav-cv dl" data-file="files/jeon-sojin-cv.pdf" data-name="전소진_CV.pdf" download="전소진_CV.pdf">CV</a>
@@ -1063,6 +1063,44 @@ html[lang="en"] .contact .big br{display:none}
       </section>
     </div>
   </div>
+
+  <!-- about -->
+  <section class="wrap" id="about" aria-labelledby="a-h">
+    <div class="sec-head">
+      <h2 id="a-h">About Me</h2>
+    </div>
+    <div class="about">
+      <article class="growth">
+        <h3>My Journey</h3>
+        <p>학부연구생으로 처음 받은 과제는 일주일 동안 약 6,000줄의 연구 코드를 분석하는 일이었습니다. 기존 코드의 흐름을 이해하는 것부터 시작해, 점차 직접 문제를 정의하고 알고리즘을 설계하는 연구자로 성장했습니다.</p>
+        <div class="steps">
+          <div><span class="y">2023–2024</span><p class="w">Understand &amp; Implement</p><p>기존 그래픽스 코드를 분석하고 기하학과 선형대수를 공부했습니다. NeRF와 PBD를 결합하는 캡스톤 프로젝트에서 배운 내용을 실제 시스템에 적용했습니다.</p></div>
+          <div><span class="y">2025</span><p class="w">Design &amp; Experiment</p><p>기존 PBD의 한계를 분석하고 피부 인장 제약 STC를 제안했습니다. 알고리즘 설계부터 CUDA 구현, 실험, 제1저자 논문 작성까지 경험했습니다.</p></div>
+          <div><span class="y">2026</span><p class="w">Integrate &amp; Optimize</p><p>ChainMail과 PBD를 결합한 하이브리드 프레임워크를 설계하고 활성 블록 기반 보정과 Qt 실험 환경을 구성하며 석사 연구를 마무리했습니다.</p></div>
+        </div>
+        <p style="margin-top:6px">처음에는 주어진 코드를 이해하는 것이 목표였지만, 이제는 <strong>문제에 맞는 구조를 직접 설계하고 구현하는 것</strong>을 목표로 합니다.</p>
+      </article>
+      <article>
+        <h3>Strengths</h3>
+        <p><strong>기존 기술을 이해하고 새로운 해결책으로 연결합니다.</strong> STC와 VDR 연구에서 기존 알고리즘의 한계를 분석하고 새로운 제약 조건과 혼합형 계산 구조를 설계했습니다.</p>
+        <p><strong>맡은 일의 맥락과 결과에 책임을 갖습니다.</strong> 연구뿐 아니라 학생조교와 학생연구원 활동을 통해 여러 사람의 요구를 조율하고 프로젝트 운영을 지원하는 경험을 쌓았습니다.</p>
+      </article>
+      <article>
+        <h3>Areas for Growth</h3>
+        <p><strong>AI 모델 학습 및 시스템 통합 역량을 넓히고 싶습니다.</strong> 데이터마다 달라지는 물리 파라미터를 반복적으로 조정하면서 데이터 기반 보정의 필요성을 느꼈습니다. 물리 시뮬레이션과 AI를 연결하는 기술을 앞으로의 학습 과제로 삼고 있습니다.</p>
+        <p>연구용 구현 경험을 바탕으로 더 다양한 개발 환경에서 협업하고, 유지보수 가능한 소프트웨어를 만드는 역량도 키우고자 합니다.</p>
+      </article>
+      <article>
+        <h3>How I Learn</h3>
+        <p><strong>Understand → Implement → Verify</strong></p>
+        <p>먼저 수학적 원리와 기존 코드의 흐름을 이해하고, 직접 구현한 뒤 시각화와 실험으로 결과를 확인합니다. GTCG 스터디에서 학습한 기하 개념을 Qt 멀티뷰 뷰어로 구현한 것이 대표적인 사례입니다.</p>
+      </article>
+      <article>
+        <h3>What I Value</h3>
+        <p><strong>스스로 이해하고, 함께 성장하는 개발.</strong> 학부연구생 시절 선배에게 배운 책임감을 바탕으로, 다른 사람이 이해하고 이어갈 수 있는 코드를 작성하고 지식을 공유하는 개발자가 되고 싶습니다.</p>
+      </article>
+    </div>
+  </section>
 
   <!-- publications -->
   <section class="wrap" aria-labelledby="pub-h">
@@ -1734,44 +1772,6 @@ RGBA ← 원본 볼륨을 삼선형 보간해 샘플링
           <div class="deck-thumbs"><button type="button" class="thumb on" data-src="img/fire-1.jpg" data-cap="표지" aria-label="표지 슬라이드 보기"><img src="img/fire-1.jpg" alt="" loading="lazy"></button><button type="button" class="thumb" data-src="img/fire-18.jpg" data-cap="시작 화면: 실내·야외 선택" aria-label="시작 화면: 실내·야외 선택 슬라이드 보기"><img src="img/fire-18.jpg" alt="" loading="lazy"></button><button type="button" class="thumb" data-src="img/fire-19.jpg" data-cap="실내: 화재 발생과 체력 감소" aria-label="실내: 화재 발생과 체력 감소 슬라이드 보기"><img src="img/fire-19.jpg" alt="" loading="lazy"></button><button type="button" class="thumb" data-src="img/fire-23.jpg" data-cap="야외: 산불 속 대피" aria-label="야외: 산불 속 대피 슬라이드 보기"><img src="img/fire-23.jpg" alt="" loading="lazy"></button><button type="button" class="thumb" data-src="img/fire-24.jpg" data-cap="야외: 신고 후 생존" aria-label="야외: 신고 후 생존 슬라이드 보기"><img src="img/fire-24.jpg" alt="" loading="lazy"></button></div>
           <div class="deck-dl"><a class="btn dl" href="files/fire-evacuation.pdf" target="_blank" rel="noopener" data-file="files/fire-evacuation.pdf" data-name="Fire_Evacuation_발표자료.pdf" download="Fire_Evacuation_발표자료.pdf">발표자료 받기 <span>PDF · 3.0MB</span></a><span class="dl-msg" aria-live="polite"></span></div>
         </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- about -->
-  <section class="wrap" id="about" aria-labelledby="a-h">
-    <div class="sec-head">
-      <h2 id="a-h">About Me</h2>
-    </div>
-    <div class="about">
-      <article class="growth">
-        <h3>My Journey</h3>
-        <p>학부연구생으로 처음 받은 과제는 일주일 동안 약 6,000줄의 연구 코드를 분석하는 일이었습니다. 기존 코드의 흐름을 이해하는 것부터 시작해, 점차 직접 문제를 정의하고 알고리즘을 설계하는 연구자로 성장했습니다.</p>
-        <div class="steps">
-          <div><span class="y">2023–2024</span><p class="w">Understand &amp; Implement</p><p>기존 그래픽스 코드를 분석하고 기하학과 선형대수를 공부했습니다. NeRF와 PBD를 결합하는 캡스톤 프로젝트에서 배운 내용을 실제 시스템에 적용했습니다.</p></div>
-          <div><span class="y">2025</span><p class="w">Design &amp; Experiment</p><p>기존 PBD의 한계를 분석하고 피부 인장 제약 STC를 제안했습니다. 알고리즘 설계부터 CUDA 구현, 실험, 제1저자 논문 작성까지 경험했습니다.</p></div>
-          <div><span class="y">2026</span><p class="w">Integrate &amp; Optimize</p><p>ChainMail과 PBD를 결합한 하이브리드 프레임워크를 설계하고 활성 블록 기반 보정과 Qt 실험 환경을 구성하며 석사 연구를 마무리했습니다.</p></div>
-        </div>
-        <p style="margin-top:6px">처음에는 주어진 코드를 이해하는 것이 목표였지만, 이제는 <strong>문제에 맞는 구조를 직접 설계하고 구현하는 것</strong>을 목표로 합니다.</p>
-      </article>
-      <article>
-        <h3>Strengths</h3>
-        <p><strong>기존 기술을 이해하고 새로운 해결책으로 연결합니다.</strong> STC와 VDR 연구에서 기존 알고리즘의 한계를 분석하고 새로운 제약 조건과 혼합형 계산 구조를 설계했습니다.</p>
-        <p><strong>맡은 일의 맥락과 결과에 책임을 갖습니다.</strong> 연구뿐 아니라 학생조교와 학생연구원 활동을 통해 여러 사람의 요구를 조율하고 프로젝트 운영을 지원하는 경험을 쌓았습니다.</p>
-      </article>
-      <article>
-        <h3>Areas for Growth</h3>
-        <p><strong>AI 모델 학습 및 시스템 통합 역량을 넓히고 싶습니다.</strong> 데이터마다 달라지는 물리 파라미터를 반복적으로 조정하면서 데이터 기반 보정의 필요성을 느꼈습니다. 물리 시뮬레이션과 AI를 연결하는 기술을 앞으로의 학습 과제로 삼고 있습니다.</p>
-        <p>연구용 구현 경험을 바탕으로 더 다양한 개발 환경에서 협업하고, 유지보수 가능한 소프트웨어를 만드는 역량도 키우고자 합니다.</p>
-      </article>
-      <article>
-        <h3>How I Learn</h3>
-        <p><strong>Understand → Implement → Verify</strong></p>
-        <p>먼저 수학적 원리와 기존 코드의 흐름을 이해하고, 직접 구현한 뒤 시각화와 실험으로 결과를 확인합니다. GTCG 스터디에서 학습한 기하 개념을 Qt 멀티뷰 뷰어로 구현한 것이 대표적인 사례입니다.</p>
-      </article>
-      <article>
-        <h3>What I Value</h3>
-        <p><strong>스스로 이해하고, 함께 성장하는 개발.</strong> 학부연구생 시절 선배에게 배운 책임감을 바탕으로, 다른 사람이 이해하고 이어갈 수 있는 코드를 작성하고 지식을 공유하는 개발자가 되고 싶습니다.</p>
       </article>
     </div>
   </section>
