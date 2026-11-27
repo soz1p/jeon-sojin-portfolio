@@ -2448,6 +2448,7 @@ const Edit=(()=>{
     range.insertNode(br);
     range.setStartAfter(br);range.collapse(true);
     selection.removeAllRanges();selection.addRange(range);
+    dirty();
   });
   pageEl.addEventListener('click',e=>{if(editing&&e.target.closest('a[data-ek], a [data-ek], [data-ek] a'))e.preventDefault()},true);
 
