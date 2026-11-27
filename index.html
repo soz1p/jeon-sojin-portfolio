@@ -2197,10 +2197,10 @@ RGBA ← 원본 볼륨을 삼선형 보간해 샘플링
       <div class="contact-intro"><h2 class="contact-kicker">Contact</h2><p class="big">현실의 움직임을<br>가상의 공간에 담습니다.</p><p class="contact-sub">Graphics · Simulation · Visualization</p></div>
       <div>
         <ul>
-          <li><span>Email</span><span class="val" id="v-mail">jeonsoz1p@gmail.com</span><button class="copy" data-copy="v-mail">Copy</button></li>
-          <li><span>Phone</span><span class="val" id="v-tel">010-3204-2972</span><button class="copy" data-copy="v-tel">Copy</button></li>
-          <li><span>GitHub</span><a class="val" id="v-gh" href="https://github.com/soz1p" target="_blank" rel="noopener">github.com/soz1p</a><button class="copy" data-copy="v-gh">Copy</button></li>
-          <li><span>LinkedIn</span><a class="val" id="v-li" href="https://www.linkedin.com/in/soz1p" target="_blank" rel="noopener">linkedin.com/in/soz1p</a><button class="copy" data-copy="v-li">Copy</button></li>
+          <li class="contact-link-row"><span>Email</span><a class="val" id="v-mail" href="mailto:jeonsoz1p@gmail.com" aria-label="Send an email to Jeon Sojin">jeonsoz1p@gmail.com</a></li>
+          <li class="contact-copy-row"><span>Phone</span><span class="val" id="v-tel">010-3204-2972</span><button class="copy" data-copy="v-tel">Copy</button></li>
+          <li class="contact-link-row"><span>GitHub</span><a class="val" id="v-gh" href="https://github.com/soz1p" target="_blank" rel="noopener">github.com/soz1p</a></li>
+          <li class="contact-link-row"><span>LinkedIn</span><a class="val" id="v-li" href="https://www.linkedin.com/in/soz1p" target="_blank" rel="noopener">linkedin.com/in/soz1p</a></li>
           <li class="cv-row"><span>CV</span><span class="val">Korean · English CV</span><span class="dlwrap"><a class="copy dl" href="files/jeon-sojin-cv.pdf" target="_blank" rel="noopener" data-file="files/jeon-sojin-cv.pdf" data-name="전소진_CV.pdf" download="전소진_CV.pdf">Korean</a> <a class="copy dl" href="files/jeon-sojin-cv-en.pdf" target="_blank" rel="noopener" data-file="files/jeon-sojin-cv-en.pdf" data-name="Jeon_Sojin_CV.pdf" download="Jeon_Sojin_CV.pdf">English</a><span class="dl-msg" aria-live="polite"></span></span></li>
         </ul>
       </div>
@@ -2344,7 +2344,113 @@ const Edit=(()=>{
       +'<style id="app-css">'+CSS+'</style>\n'+PRISTINE+'\n'
       +'<div class="editbar" id="editbar" hidden></div>\n<input type="file" id="media-input" accept="image/*,video/*" multiple hidden>\n'
       +'<script type="application/json" id="page-data">'+json+'<\/script>\n'
-      +'<script id="app-js">'+JS+'<\/script>\n</body></html>';
+      +'<script id="app-js">'+JS+'<\/script>\n<style id="footer-pastel-css">
+/* ---------- Pastel contact footer ---------- */
+.contact{
+  --ft-ink:#303743;
+  --ft-muted:#737d89;
+  --ft-line:rgba(105,116,137,.19);
+  margin-top:clamp(88px,10vw,140px);
+  padding-block:clamp(76px,9vw,112px) 28px;
+  color:var(--ft-ink);
+  background:linear-gradient(128deg,#fff0e8 0%,#f4eff8 48%,#e8f5f3 100%);
+  border-top:1px solid rgba(139,126,155,.12);
+}
+.contact::after{opacity:.075;mix-blend-mode:multiply}
+.contact .ft-glow{opacity:.34;filter:blur(86px)}
+.contact .ft-glow i:nth-child(1){background:#f3b9a7;opacity:.48}
+.contact .ft-glow i:nth-child(2){background:#bdb6e4;opacity:.52}
+.contact .ft-glow i:nth-child(3){background:#a9d9d4;opacity:.48}
+.contact .ft-chain{background:rgba(111,120,139,.22)}
+.contact .ft-chain i{background:rgba(111,120,139,.26)}
+.contact .ft-chain i::before{background:#f6eeeF;box-shadow:inset 0 0 0 1.2px rgba(112,121,140,.5)}
+.contact .ft-chain i::after{background:#c9c2e8}
+.contact .ft-chain i.sm::after{background:#b9dcd7}
+.contact .ft-chain i.acc::after{background:var(--accent)}
+.contact .contact-kicker{color:#737d89}
+.contact .contact-kicker::before{background:var(--accent)}
+.contact .big{
+  color:var(--ft-ink);
+  background:linear-gradient(100deg,#303743 0%,#625a83 62%,#a96878 100%);
+  -webkit-background-clip:text;background-clip:text;
+}
+.contact-sub{color:#737d89}
+.contact ul{border:0;display:grid;gap:9px}
+.contact li{
+  border:1px solid rgba(117,126,148,.17);
+  border-radius:13px;
+  background:rgba(255,255,255,.52);
+  padding:14px 17px;
+  box-shadow:0 5px 18px rgba(86,83,115,.045);
+  backdrop-filter:blur(8px);
+  transition:background .2s,border-color .2s,transform .2s,box-shadow .2s;
+}
+.contact li.contact-link-row{grid-template-columns:72px minmax(0,1fr)}
+.contact li.contact-copy-row{grid-template-columns:72px minmax(0,1fr) auto}
+.contact li:hover{
+  background:rgba(255,255,255,.82);
+  border-color:rgba(117,126,148,.29);
+  box-shadow:0 8px 22px rgba(86,83,115,.07);
+  transform:translateY(-1px);
+}
+.contact li>span:first-child{color:#78818d}
+.contact .val{color:#303743;font-weight:500;font-size:.94rem}
+.contact a.val{text-decoration:none;transition:color .18s}
+.contact a.val:hover{color:#b65f49;text-decoration:underline;text-decoration-color:#d99a87;text-underline-offset:4px}
+.contact .copy{
+  min-width:58px;
+  border:1px solid rgba(117,126,148,.25);
+  border-radius:999px;
+  color:#535d6b;
+  background:rgba(255,255,255,.58);
+  padding:7px 12px;
+}
+.contact .copy:hover{background:#fff;color:#a65342;border-color:rgba(217,154,135,.65)}
+.contact .dlwrap{gap:7px}
+.contact .foot.credit{color:#737d89}
+.ft-bar{
+  grid-template-columns:auto minmax(0,1fr) auto;
+  gap:20px;
+  margin-top:66px;
+  padding-block:24px 12px;
+  border-top:1px solid var(--ft-line);
+}
+.ft-sign b{color:#303743}
+.ft-sign span{color:#737d89}
+.contact .ft-bar .foot.credit{color:#737d89;font-style:normal;font-size:.76rem}
+.ft-top{
+  color:#535d6b;
+  background:rgba(255,255,255,.45);
+  border-color:rgba(117,126,148,.25);
+}
+.ft-top i::after{background:#e8794a}
+.ft-top:hover{background:#fff;color:#a65342}
+@media(max-width:860px){
+  .contact{padding-block:72px 24px}
+  .ft-bar{grid-template-columns:1fr auto;gap:14px;margin-top:48px}
+  .contact .ft-bar .foot.credit{grid-column:1/-1;grid-row:2;text-align:left}
+}
+@media(max-width:560px){
+  .contact li{padding:12px 13px}
+  .contact li.contact-link-row{grid-template-columns:58px minmax(0,1fr)}
+  .contact li.contact-copy-row{grid-template-columns:58px minmax(0,1fr) auto}
+  .contact li.cv-row{grid-template-columns:58px minmax(0,1fr)}
+  .contact .val{font-size:.85rem}
+  .contact .copy{min-width:0;padding:6px 9px}
+  .contact .ft-bar{grid-template-columns:1fr auto}
+}
+@media(prefers-reduced-motion:reduce){
+  .contact li{transition:none}
+  .contact li:hover{transform:none}
+}
+@media print{
+  .contact{background:#fff!important;color:#15181b!important;border-top:1px solid #ddd}
+  .contact .big{background:none;color:#15181b;-webkit-text-fill-color:#15181b}
+  .contact li{box-shadow:none;backdrop-filter:none}
+}
+</style>
+
+</body></html>';
   }
   async function save(){
     if(busy)return;
@@ -2400,7 +2506,7 @@ document.querySelectorAll('[data-report]').forEach(rep=>{
 });
 
 /* ---------- copy ---------- */
-document.querySelectorAll('.copy').forEach(b=>{
+document.querySelectorAll('.copy[data-copy]').forEach(b=>{
   b.addEventListener('click',()=>{
     const el=document.getElementById(b.dataset.copy);
     const text=el.textContent.trim();
