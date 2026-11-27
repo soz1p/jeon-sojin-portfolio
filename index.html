@@ -1136,6 +1136,18 @@ html[lang="en"] .contact .big br{display:none}
 @media (max-width:1100px){.sk3{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:640px){.sk3{grid-template-columns:minmax(0,1fr);gap:10px}.sk3 section{padding:14px}.sk3 h3{margin-bottom:12px}.sk3-key{justify-content:flex-start;margin:0 0 12px}}
 </style>
+<style id="snap-css">
+/* section snap: when scrolling stops near a section, its heading settles just under the top bar.
+   Skills and Publications share one stop. Desktop with a mouse only; off for reduced motion. */
+@media (min-width:900px) and (hover:hover) and (prefers-reduced-motion:no-preference){
+  html{scroll-snap-type:y proximity}
+  .hero,#about>.sec-head,#skills>.sec-head,#projects>.sec-head,#history>.sec-head,#contact{scroll-snap-align:start}
+  .hero{scroll-margin-top:59px}
+  #about>.sec-head,#skills>.sec-head,#projects>.sec-head,#history>.sec-head{scroll-margin-top:84px}
+  #contact{scroll-margin-top:0}
+}
+section[aria-labelledby="pub-h"]{padding-top:48px}
+</style>
 <div id="page">
 <header class="bar">
   <div class="wrap">
